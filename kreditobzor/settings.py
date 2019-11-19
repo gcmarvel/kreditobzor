@@ -137,4 +137,4 @@ STATICFILES_FINDERS = [
     'sass_processor.finders.CssFinder',
 ]
 
-SASS_PROCESSOR_ROOT = 'static/css/'
+SASS_PROCESSOR_ROOT = 'static/'
