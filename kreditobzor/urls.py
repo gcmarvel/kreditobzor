@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.views import LoginView
 from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
 
@@ -19,6 +20,7 @@ sitemaps = {
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', LoginView.as_view(), name='login'),
     path('', homepage, name='home'),
     path('онлайн_займы/', include('mfo.urls', namespace='mfo')),
     path('кредитные_карты/', include('credit.urls')),
