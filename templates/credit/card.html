@@ -1,0 +1,104 @@
+{% load static %}
+{% load site_tags %}
+<div class="card">
+    <div class="row row-1">
+        {% if offer.special_offer is True %}
+            <div class="plank green">
+                <p>Кэшбэк до {{ offer.cashback }}%</p>
+            </div>
+        {% endif %}
+        {% if offer.rating >= 8 %}
+            <div class="plank red">
+                <p>Народный выбор</p>
+            </div>
+        {% endif %}
+        {% if offer.high_approval_rate is True %}
+            <div class="plank blue">
+                <p>Высокий % одобрения</p>
+            </div>
+        {% endif %}
+    </div>
+    <div class="row row-2">
+        <div class="col">
+            <p>{{ offer.title }}</p>
+        </div>
+        <div class="col">
+            <p>Кредитный лимит</p>
+        </div>
+        <div class="col">
+            <p>Обслуживание</p>
+        </div>
+        <div class="col">
+            <p>Процентная ставка</p>
+        </div>
+        <div class="col">
+            <h4> {% comments_count offer %} </h4>
+        </div>
+    </div>
+    <div class="row row-3">
+        <div class="col">
+            <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
+            <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}"><button>Оформить</button></a>
+            {% if user.is_authenticated %}<p class="redirects">Переходов: {{ offer.clicked }}</p>{% endif %}
+        </div>
+        <div class="col">
+            <div class="row row-1">
+                <div class="col">
+                    <h3>до {{ offer.limit }}</h3>
+                    <p>рублей</p>
+                </div>
+                <div class="col">
+                    <h3>{{ offer.maintenance }}</h3>
+                    <p>рублей</p>
+                </div>
+                <div class="col">
+                    <h3>от {{ offer.min_rate }}%</h3>
+                    <p>в год</p>
+                </div>
+                <div class="col">
+                    <a href="{% if app_name == 'Займы' %} {% url 'mfo:offer' offer.slug %} {% elif app_name == 'Кредитные карты' %} {% url 'credit:offer' offer.slug %} {% endif %}"><button>Читать отзывы</button></a>
+                </div>
+            </div>
+            <div class="row row-2">
+                <div class="col">
+                    <div class="row">
+                        <img src="{% static 'img/icon-time.png' %}" alt="открытие кредитной карты">
+                        <p>Открытие: {{ offer.issue_cost }} руб.</p>
+                    </div>
+                    <div class="row">
+                        <img src="{% static 'img/icon-person.png' %}" alt="доставка кредитной карты">
+                        <p>Доставка курьером: {% if offer.courier is True%} Да {% else %} Нет {% endif %}</p>
+                    </div>
+                    <div class="row">
+                        <img src="{% static 'img/icon-pass.png' %}" alt="какие документы нужны для кредитной карты">
+                        <p>Документы: {{ offer.documents }}</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <p>Требуемый кредитный рейтинг - {{ offer.history_rating }}</p>
+                    <br>
+                    {% if offer.special_offer is True %}
+                        <p class="green">Кэшбек</p>
+                        <p>Кэшбэк до {{ offer.cashback }}%</p>
+                    {% endif %}
+                </div>
+                <div class="col">
+                    <h3>Рейтинг - {{ offer.rating }} </h3>
+                    <div class="rating {{ offer.title }}-rating"></div>
+                        <script>
+                        $(".{{ offer.title }}-rating").starRating({
+                            starSize: 1.5,
+                            initialRating: {% star_rating offer %},
+                            readOnly: true,
+                            strokeWidth: 0,
+                            activeColor: '#fab309',
+                            hoverColor: '#feca15',
+                            ratedColor: '#facf09',
+                            starShape: 'rounded',
+                        });
+                        </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

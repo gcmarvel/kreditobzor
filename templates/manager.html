@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block filters %}
+{% endblock %}
+{% block main %}
+<div class="main-full">
+    <div class='comment-manager'>
+        <h1>МФО</h1>
+        <div class="comment-grid">
+            {% for comment in mfo_comments %}
+                <div class="manager-box">
+                    <div>
+                        <div class="row row-1">
+                            <h4>{{ comment.offer.title }} - {{ comment.author }}</h4>
+                            <p>{{ comment.date_created }}</p>
+                        </div>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                    <div class="row row-2">
+                        <a href="{% url 'mfo-delete-comment' comment.pk 'mfo' %}"><img src="{% static 'img/decline.png' %}"></a>
+                        <p>Оценка: {{ comment.rating }}</p>
+                        <a href="{% url 'mfo-accept-comment' comment.pk 'mfo' %}"><img src="{% static 'img/accept.png' %}"></a>
+                    </div>
+                    <div class="row row-1">
+                        <p>{{ comment.ip }}</p>
+                        <p>{{ comment.user_agent }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <h1>Кредитные карты</h1>
+        <div class="comment-grid">
+            {% for comment in credit_comments %}
+                <div class="manager-box">
+                    <div>
+                        <div class="row row-1">
+                            <h4>{{ comment.offer.title }} - {{ comment.author }}</h4>
+                            <p>{{ comment.date_created }}</p>
+                        </div>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                    <div class="row row-2">
+                        <a href="{% url 'mfo-delete-comment' comment.pk 'credit' %}"><img src="{% static 'img/decline.png' %}"></a>
+                        <p>Оценка: {{ comment.rating }}</p>
+                        <a href="{% url 'mfo-accept-comment' comment.pk 'credit' %}"><img src="{% static 'img/accept.png' %}"></a>
+                    </div>
+                    <div class="row row-1">
+                        <p>{{ comment.ip }}</p>
+                        <p>{{ comment.user_agent }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block sidebar %}
+{% endblock %}

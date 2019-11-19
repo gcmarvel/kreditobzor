@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+    <div class="main">
+    {% if app_name == 'Займы' %}
+        {% for offer in offers %}
+            {% include 'mfo/card.html' %}
+        {% endfor %}
+    {% elif app_name == 'Кредитные карты' %}
+        {% for offer in offers %}
+            {% include 'credit/card.html' %}
+        {% endfor %}
+    {% endif %}
+    {% if is_paginated %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page=1"><<</a>
+                <a href="?page={{ page_obj.previous_page_number }}"><</a>
+                <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+            {% endif %}
+            <span class="page-current">
+                {{ page_obj.number }}
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                <a href="?page={{ page_obj.next_page_number }}">></a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">>></a>
+            {% endif %}
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}
+{% block footer %}
+    <div class="law">
+        {% for offer in offers %}
+        <p>{{ offer.legal_info }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

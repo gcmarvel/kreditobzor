@@ -1,0 +1,79 @@
+{% load sass_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}КредитОбзор - сайт отзывов о кредитных картах, онлайн займах и других финансовых продуктах{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'css/style.scss' %}" >
+    <link rel="stylesheet" type="text/css" href="{% static 'css/star-rating-svg.css' %}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="{% static 'js/jquery.star-rating-svg.js' %}"></script>
+    {% block extra_head %}
+    {% endblock %}
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <div class="manager-button">
+            <a href="{% url 'manager' %}"><img src="{% static 'img/boss.png' %}"></a>
+        </div>
+    {% endif %}
+    <section class="header">
+        <nav>
+            <a href="{% url 'home' %}"><img src="{% static 'img/kreditobzor-logo.png' %}" alt="КредитОбзор - отзывы о займах на карту"></a>
+            <a href="{% url 'home' %}">Рейтинг</a>
+            <a href="{% url 'news' %}">Новости</a>
+            <a href="{% url 'articles' %}">Статьи</a>
+            <a href="{% url 'home' %}?h=кредитные_карты">Кредитные карты</a>
+            <a href="{% url 'home' %}?h=мфо">Онлайн Займы</a>
+        </nav>
+        <div class="header-text">
+            <h1>Народный рейтинг онлайн займов</h1>
+            <h2>Отзывы об онлайн займах, кредитных картах и других финансовых продуктах</h2>
+            <p>На нашем сайте вы можете прочитать и оставить отзыв, а также подобрать для себя подходящее финансовое
+                предложение, основываясь на оценках и комментариях пользователей сайта</p>
+        </div>
+        {% block filters %}
+            <div class="filters">
+                <p>Сортировка</p>
+                <div class="filters-list">
+                    <select onChange="window.location.href=this.value">
+                        <option value="" disabled selected>{{ app_name }}</option>
+                        <option value="?h=мфо">Займы</option>
+                        <option value="?h=кредитные_карты">Кредитные карты</option>
+                    </select>
+                    {% for key, value in filter_list.items %}
+                    <a href="/?s={{ key }}">
+                        {{ value }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endblock %}
+        <div class="girls">
+            <img src="{% static 'img/kreditobzor-promo.jpg' %}" alt="займ онлайн">
+        </div>
+    </section>
+    <section class="content">
+        {% block main %}
+        {% endblock %}
+            {% block sidebar %}
+            <div class="sidebar">
+            {% for sidebanner in sidebanners %}
+                <div class="sidebanner">
+                    <a href={% url 'ads:sidebanner_count' sidebanner.pk %}><img src="{{ sidebanner.image.url }}" alt="{{ sidebanner.title }}"></a>
+                </div>
+            {% endfor %}
+            </div>
+        {% endblock %}
+    </section>
+    <footer>
+    {% block footer %}
+    {% endblock %}
+    </footer>
+{% block extra_js %}
+{% endblock %}
+</body>
+</html>

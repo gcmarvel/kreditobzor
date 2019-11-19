@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block filters %}
+    <div class="filter-placeholder"></div>
+{% endblock %}
+{% block main %}
+<div class="main">
+    {% if app_name == 'Займы' %}
+        {% include 'mfo/detail-card.html' %}
+    {% elif app_name == 'Кредитные карты' %}
+        {% include 'credit/detail-card.html' %}
+    {% endif %}
+    <div class="comment-wrapper">
+        {% for comment in comments %}
+        <div class="comment-box">
+            <div class="row">
+                <div class="row">
+                    <h3>{{ comment.author }}</h3>
+                    <div class="{{ comment.pk }}-rating"></div>
+                    <script>
+                        var comment_id = '.{{ comment.pk }}' + '-rating';
+                        $(comment_id).starRating({
+                            starSize: 1.5,
+                            initialRating: {{ comment.rating }},
+                            strokeWidth: 0,
+                            activeColor: '#fab309',
+                            hoverColor: '#feca15',
+                            ratedColor: '#facf09',
+                            starShape: 'rounded',
+                            readOnly: true,
+                        });
+                    </script>
+                </div>
+                <p>{{ comment.date_created }}</p>
+            </div>
+            <div class="row">
+                <p>{{ comment.text }}</p>
+            </div>
+        </div>
+        {% endfor %}
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1"><<</a>
+                    <a href="?page={{ page_obj.previous_page_number }}"><</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+                {% endif %}
+                <span class="page-current">
+                    {{ page_obj.number }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                    <a href="?page={{ page_obj.next_page_number }}">></a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">>></a>
+                {% endif %}
+            </div>
+        <div class="comment-form">
+        <h3>Оставить комментарий</h3>
+            <form method="post" action="{% if app_name == 'Займы' %} {% url 'mfo:offer' offer.slug %} {% elif app_name == 'Кредитные карты' %} {% url 'credit:offer' offer.slug %} {% endif %}">
+                {% csrf_token %}
+                {{ form }}
+                <div class="row">
+                    <p>Ваша оценка:</p>
+                    <div class="newcomment-rating"></div>
+                </div>
+                <script>
+                    $(document).ready(function(){
+                        $('#form-button').attr('disabled', true);
+                    });
+                    $('.newcomment-rating').starRating({
+                        starSize: 1.5,
+                        useFullStars: true,
+                        minRating: 1,
+                        strokeWidth: 0,
+                        activeColor: '#fab309',
+                        hoverColor: '#feca15',
+                        ratedColor: '#facf09',
+                        starShape: 'rounded',
+                        disableAfterRate: false,
+                        callback: function(currentRating, $el){
+                            $('#hidden-rating').val(currentRating);
+                            $('#form-button').attr('disabled', false);
+                        }
+                    });
+                </script>
+                <input type="hidden" value="{{ offer.slug }}" name="organization">
+                <input type="hidden" name="hidden-rating" id="hidden-rating">
+                <button type="submit" id="form-button">Отправить</button>
+            </form>
+        </div>
+    </div>
+    <div class="description">
+        <p>Подробнее о компании {{ offer.title }}</p>
+        <p>{{ offer.description }}</p>
+    </div>
+    <div class="promoted">
+        <h5>Лучшие предложения</h5>
+        {% for offer in promoted_offers %}
+        {% include 'mfo/card.html' %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+    <div class="law">
+        <p>{{ offer.legal_info }}</p>
+        {% for offer in promoted_offers %}
+        <p>{{ offer.legal_info }}</p>
+        {% endfor %}
+    </div>
+    {% if messages %}
+        <div class="modal" id="modal">
+            {% for message in messages %}
+            <h3>{{ message }}</h3>
+            {% endfor %}
+            <button id="close-button">Понятно</button>
+        </div>
+        <div class="modal-overlay" id="modal-overlay"></div>
+    {% endif %}
+    <script>
+        var modal = document.querySelector("#modal");
+        var modalOverlay = document.querySelector("#modal-overlay");
+        var closeButton = document.querySelector("#close-button");
+
+        closeButton.addEventListener("click", function() {
+        modal.classList.add("closed");
+        modalOverlay.classList.add("closed");
+        });
+    </script>
+{% endblock %}

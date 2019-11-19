@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block filters %}
+    <div class="filter-placeholder"></div>
+{% endblock %}
+{% block main %}
+<div class="main-full">
+    <h3 class="news-header">{{ header }}</h3>
+    <div class="news">
+        {% for article in news %}
+            {% if header == 'Новости' %}
+            <a href="{% url 'news:news_detail' article.pk %}">
+            {% elif header == 'Статьи' %}
+            <a href="{% url 'news:article_detail' article.pk %}">
+            {% endif %}
+                <div class="news-box">
+                    <img src="{{ article.image.url }}" alt="{{ article.title }}">
+                    <p>{{ article.title }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1"><<</a>
+            <a href="?page={{ page_obj.previous_page_number }}"><</a>
+            <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+        {% endif %}
+        <span class="page-current">
+            {{ page_obj.number }}
+        </span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+            <a href="?page={{ page_obj.next_page_number }}">></a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">>></a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+{% block sidebar %}
+{% endblock %}

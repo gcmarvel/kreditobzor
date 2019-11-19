@@ -1,0 +1,93 @@
+{% load static %}
+{% load site_tags %}
+<div class="offer-card">
+    <div class="row">
+        <h3>Отзывы о компании {{ offer.title }}</h3>
+        <div class="row">
+            <div class="{{ offer.title }}-rating"></div>
+            <h3>Рейтинг - {{ offer.rating }}</h3>
+            <script>
+                $(".{{ offer.title }}-rating").starRating({
+                    starSize: 1.5,
+                    initialRating: {% star_rating offer %},
+                    readOnly: true,
+                    strokeWidth: 0,
+                    activeColor: '#fab309',
+                    hoverColor: '#feca15',
+                    ratedColor: '#facf09',
+                    starShape: 'rounded',
+                });
+            </script>
+        </div>
+    </div>
+    <div class="card">
+        <div class="row row-2">
+            <div class="d-col">
+                <p>{{ offer.title }}</p>
+            </div>
+            <div class="d-col">
+                <p>Кредитный лимит</p>
+            </div>
+            <div class="d-col">
+                <p>Обслуживание</p>
+            </div>
+            <div class="d-col">
+                <p>Процентная ставка</p>
+            </div>
+        </div>
+        <div class="row row-3">
+            <div class="d-col">
+                <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
+                <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}"><button>Оформить</button></a>
+            </div>
+            <div class="d-col">
+                <div class="row row-1">
+                    <div class="col">
+                        <h3>до {{ offer.limit }}</h3>
+                        <p>рублей</p>
+                    </div>
+                    <div class="col">
+                        <h3>{{ offer.maintenance }}</h3>
+                        <p>рублей</p>
+                    </div>
+                    <div class="col">
+                        <h3>от {{ offer.min_rate }}%</h3>
+                        <p>в год</p>
+                    </div>
+                </div>
+                <div class="row row-2">
+                    <div class="col">
+                        <div class="row">
+                            <img src="{% static 'img/icon-time.png' %}" alt="открытие кредитной карты">
+                            <p>Открытие: {{ offer.issue_cost }} руб.</p>
+                        </div>
+                        <div class="row">
+                            <img src="{% static 'img/icon-person.png' %}" alt="доставка кредитной карты">
+                            <p>Доставка курьером: {% if offer.courier is True%} Да {% else %} Нет {% endif %}</p>
+                        </div>
+                        <div class="row">
+                            <img src="{% static 'img/icon-pass.png' %}" alt="какие документы нужны для кредитной карты">
+                            <p>Документы: {{ offer.documents }}</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <p>Требуемый кредитный рейтинг - {{ offer.history_rating }}</p>
+                        <br>
+                        {% if offer.special_offer is True %}
+                            <p class="green">Кэшбек</p>
+                            <p>Кэшбэк до {{ offer.cashback }}%</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row row-3">
+                    <div class="advantages">
+                    {% if offer.advantage1 is not None %}<div><p>{{ offer.advantage1 }}</p></div>{% endif %}
+                    {% if offer.advantage2 is not None %}<div><p>{{ offer.advantage2 }}</p></div>{% endif %}
+                    {% if offer.advantage3 is not None %}<div><p>{{ offer.advantage3 }}</p></div>{% endif %}
+                    {% if offer.advantage4 is not None %}<div><p>{{ offer.advantage4 }}</p></div>{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

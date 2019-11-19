@@ -1,0 +1,34 @@
+from django.contrib import admin
+from django.core.exceptions import ObjectDoesNotExist
+
+from .models import Offer, Comment, UnverifiedComment
+
+
+class OfferAdmin(admin.ModelAdmin):
+    model = Offer
+
+    def save_model(self, request, obj, form, change):
+        pos = form.instance.default_position
+        offer_list = []
+        try:
+            cur_obj = Offer.objects.get(default_position=pos)
+            if obj != cur_obj:
+                while True:
+                    try:
+                        cur_obj = Offer.objects.get(default_position=pos)
+                        offer_list.append(cur_obj)
+                        pos += 1
+                    except ObjectDoesNotExist:
+                        break
+                for offer in offer_list:
+                    offer.default_position += 1
+                    offer.save()
+                    super().save_model(request, obj, form, change)
+            super().save_model(request, obj, form, change)
+        except ObjectDoesNotExist:
+            super().save_model(request, obj, form, change)
+
+
+admin.site.register(Offer, OfferAdmin)
+admin.site.register(Comment)
+admin.site.register(UnverifiedComment)

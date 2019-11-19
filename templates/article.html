@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block filters %}
+    <div class="filter-placeholder"></div>
+{% endblock %}
+{% block main %}
+<div class="main">
+    <div class="article">
+        <h3>{{ article.title }}</h3>
+        <div>
+            <img src="{{ article.image.url }}" alt="{{ article.title }}">
+            <p>{{ article.text | linebreaks }}</p>
+        </div>
+    </div>
+    <div class="promoted">
+        <h5>Лучшие предложения</h5>
+        {% for offer in promoted_offers %}
+        {% include 'mfo/card.html' %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
