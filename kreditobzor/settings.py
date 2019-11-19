@@ -14,6 +14,7 @@ SECRET_KEY = 'ux(li)*tegqx7#w2mc2!5qrth*)7l435d1gtm)9!39dz-k9az6'
 DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1',
+                 'www.xn--90afckdj5aclhr.xn--p1ai',
                  'frodo666.pythonanywhere.com']
 
 
