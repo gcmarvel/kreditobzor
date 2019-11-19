@@ -137,5 +137,3 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'sass_processor.finders.CssFinder',
 ]
-
-SASS_PROCESSOR_ROOT = 'static/sass'
