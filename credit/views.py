@@ -48,7 +48,7 @@ class CreditHomeView (ListView):
                 return Offer.objects.all().order_by('min_rate')
             if self.request.GET['s'] == 'кредитный_лимит':
                 return Offer.objects.all().order_by('-limit')
-            if self.request.GET['s'] == 'по величине кэшбэка':
+            if self.request.GET['s'] == 'кэшбэк':
                 return Offer.objects.all().order_by('-cashback')
             if self.request.GET['s'] == 'цена_обслуживания':
                 return Offer.objects.all().order_by('maintenance')
