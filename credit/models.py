@@ -15,7 +15,7 @@ class Offer(models.Model):
     maintenance = models.IntegerField(verbose_name='Обслуживание')
     min_rate = models.DecimalField(max_digits=4, decimal_places=2, verbose_name='Ставка')
     special_offer = models.BooleanField(verbose_name='Специальное предложение')
-    cashback = models.IntegerField(verbose_name='Кэшбэк', null=True, blank=True)
+    cashback = models.IntegerField(verbose_name='Кэшбэк', default=0)
     high_approval_rate = models.BooleanField(verbose_name='Высокий % одобрения')
     issue_cost = models.CharField(max_length=20, verbose_name='Открытие')
     courier = models.BooleanField(verbose_name='Доставка курьером')
