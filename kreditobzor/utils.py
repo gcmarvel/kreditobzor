@@ -13,6 +13,7 @@ admin.site.unregister(Site)
 def get_homepage(request):
     if 'h' not in request.session:
         request.session['h'] = 'мфо'
+        return MFOHomeView.as_view()(request)
     elif request.session['h'] == 'мфо':
         return MFOHomeView.as_view()(request)
     elif request.session['h'] == 'кредитные_карты':
