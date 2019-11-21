@@ -1,3 +1,4 @@
+/* Breakpoints */
 /* Fonts */
 @font-face {
   font-family: 'Blogger';
@@ -31,6 +32,45 @@ body {
 
 /* Main styling */
 /*Home template*/
+.nav-mobile {
+  display: none;
+  position: absolute;
+  z-index: 30;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: auto; }
+  .nav-mobile .nav-mobile-content {
+    position: relative;
+    margin-left: auto;
+    width: 60vw;
+    height: auto;
+    box-shadow: 0 1vw 2vw 0 rgba(0, 0, 0, 0.1), 0 1vw 2vw 0 rgba(0, 0, 0, 0.2);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), linear-gradient(164deg, #fab309, #facf09); }
+    .nav-mobile .nav-mobile-content span {
+      position: absolute;
+      top: 1vh;
+      right: 2vh;
+      color: white;
+      font-size: 6vh;
+      font-weight: bold;
+      cursor: pointer; }
+    .nav-mobile .nav-mobile-content .nav-text {
+      padding: 10vh 0; }
+      .nav-mobile .nav-mobile-content .nav-text a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: black solid 1px;
+        display: block;
+        text-align: center;
+        margin: 0;
+        font-size: 6vw;
+        line-height: 16vw; }
+        .nav-mobile .nav-mobile-content .nav-text a:nth-last-child(-n + 1) {
+          border-bottom: none; }
+
 .header {
   background: #d9f8fb;
   padding: 2vw 8vw;
@@ -40,13 +80,29 @@ body {
     align-items: center;
     position: relative;
     z-index: 1; }
+    @media (max-width: 639px) {
+      .header nav {
+        justify-content: space-between; } }
     .header nav img {
       width: 18vw;
       margin-right: 4vw; }
-    .header nav a {
+      @media (max-width: 639px) {
+        .header nav img {
+          width: 50vw; } }
+    .header nav p {
       font-size: 1vw;
       color: #85a3a6;
       margin-right: 3vw; }
+      @media (max-width: 639px) {
+        .header nav p {
+          display: none; } }
+    .header nav .nav-menu {
+      display: none; }
+      @media (max-width: 639px) {
+        .header nav .nav-menu {
+          display: block; }
+          .header nav .nav-menu img {
+            width: 9vw; } }
   .header .header-text {
     width: 42vw;
     position: relative;
@@ -541,5 +597,14 @@ footer {
   background: rgba(110, 110, 110, 0.8); }
   .modal-overlay.closed {
     display: none; }
+
+/* Animation */
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0; }
+  to {
+    top: 0;
+    opacity: 1; } }
 
 /*# sourceMappingURL=style.css.map */

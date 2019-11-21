@@ -1,5 +1,12 @@
-/* Fonts */
+/* Breakpoints */
 
+@mixin breakpoint {
+   @media (max-width: 639px) {
+       @content;
+   }
+}
+
+/* Fonts */
 
 @font-face {
   font-family: 'Blogger';
@@ -62,6 +69,56 @@ body {
 
 /*Home template*/
 
+.nav-mobile {
+  display: none;
+  position: absolute;
+  z-index: 30;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: auto;
+
+  .nav-mobile-content {
+    position: relative;
+    margin-left: auto;
+    width: 60vw;
+    height: auto;
+    box-shadow: 0 1vw 2vw 0 rgba(0, 0, 0, 0.1), 0 1vw 2vw 0 rgba(0, 0, 0, 0.2);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), linear-gradient(164deg, $btn-yellow, $btn-yellow-active);
+
+    span {
+      position: absolute;
+      top: 1vh;
+      right: 2vh;
+      color: white;
+      font-size: 6vh;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .nav-text {
+      padding: 10vh 0;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: black solid 1px;
+        display: block;
+        text-align: center;
+        margin: 0;
+        font-size: 6vw;
+        line-height: 16vw;
+
+        &:nth-last-child(-n + 1) {
+            border-bottom: none;
+        }
+      }
+    }
+  }
+}
+
 .header {
   background: $bg-blue;
   padding: 2vw 8vw;
@@ -73,14 +130,39 @@ body {
     position: relative;
     z-index: 1;
 
+    @include breakpoint {
+        justify-content: space-between;
+      }
+
     img {
       width: 18vw;
       margin-right: 4vw;
+
+      @include breakpoint {
+        width: 50vw;
+      }
     }
-    a {
+
+    p {
       font-size:1vw;
       color: $txt-gray;
       margin-right: 3vw;
+
+      @include breakpoint {
+        display: none;
+      }
+    }
+
+    .nav-menu {
+      display: none;
+
+      @include breakpoint {
+        display: block;
+
+        img {
+          width: 9vw;
+        }
+      }
     }
   }
 
@@ -118,32 +200,32 @@ body {
       margin-bottom: 2vw;
     }
 
-   .filters-list{
-     display: flex;
+    .filters-list {
+      display: flex;
 
-     select {
-       flex: 1;
-       background: white;
-       border: 2px solid $btn-yellow-active;
-       font-size: 0.9vw;
-       padding: 2px;
-       margin: 0 0.4vw 0 0;
-     }
+    select {
+      flex: 1;
+      background: white;
+      border: 2px solid $btn-yellow-active;
+      font-size: 0.9vw;
+      padding: 2px;
+      margin: 0 0.4vw 0 0;
+      }
 
-     a {
-       flex: 1;
-       background: $btn-yellow;
-       color: black;
-       padding: 0.8vw 1vw;
-       font-size: 0.9vw;
-       margin: 0 0.4vw;
-       text-decoration: none;
-     }
+    a {
+      flex: 1;
+      background: $btn-yellow;
+      color: black;
+      padding: 0.8vw 1vw;
+      font-size: 0.9vw;
+      margin: 0 0.4vw;
+      text-decoration: none;
+      }
 
-      a:last-child {
-       margin: 0 0 0 0.4vw;
-     }
-   }
+    a:last-child {
+      margin: 0 0 0 0.4vw;
+      }
+    }
   }
 
   .girls {
@@ -908,6 +990,11 @@ footer {
   &.closed {
     display: none;
   }
+}
 
+/* Animation */
 
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
 }
