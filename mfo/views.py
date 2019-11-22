@@ -29,12 +29,18 @@ class MFOHomeView (ListView):
                     if self.request.GET['h'] == app:
                         self.request.session['h'] = app
                         return redirect('home')
-        return super(MFOHomeView , self).dispatch(request, *args, **kwargs)
+        return super(MFOHomeView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         filter_list = {'народный_выбор': 'народный выбор', 'высокое_одобрение': 'высокий % одобрения', 'процентная_ставка': 'по процентной ставке',
                        'величина_суммы': 'по величине суммы', 'акция_займ': 'акция займ под 0%', 'самые_обсуждаемые': 'самые обсуждаемые'}
         context = super().get_context_data(**kwargs)
+        if 's' in self.request.GET:
+            for key, value in filter_list.items():
+                if self.request.GET['s'] == key:
+                    context['filter'] = value
+        else:
+            context['filter'] = 'Сортировать по ...'
         context['filter_list'] = filter_list
         context['app_name'] = 'Займы'
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)

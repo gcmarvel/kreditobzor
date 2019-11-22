@@ -28,7 +28,7 @@
                 <a href="{% url 'home' %}">Рейтинг</a>
                 <a href="{% url 'news' %}">Новости</a>
                 <a href="{% url 'articles' %}">Статьи</a>
-                <a href="{% url 'home' %}?h=кредитные_карты">Кредитные карты</p></a>
+                <a href="{% url 'home' %}?h=кредитные_карты">Кредитные карты</a>
                 <a href="{% url 'home' %}?h=мфо">Онлайн Займы</a>
             </div>
         </div>
@@ -61,10 +61,18 @@
                         <option value="?h=кредитные_карты">Кредитные карты</option>
                     </select>
                     {% for key, value in filter_list.items %}
-                    <a href="/?s={{ key }}">
+                    <a {% if filter == value %}class="active"{% endif %} href="/?s={{ key }}">
                         {{ value }}
                     </a>
                     {% endfor %}
+                    <div class="mobile-filters">
+                        <select onChange="window.location.href=this.value">
+                            <option value="" disabled selected>{{ filter }}</option>
+                            {% for key, value in filter_list.items %}
+                                <option value="/?s={{ key }}">{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
             </div>
         {% endblock %}

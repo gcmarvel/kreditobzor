@@ -39,6 +39,14 @@ $red: #f24841;
   color: $green!important;
 }
 
+.blue {
+  color: $blue!important;
+}
+
+.red {
+  color: $red!important;
+}
+
 /* Default styling */
 
 body {
@@ -49,7 +57,7 @@ body {
     font-family: $prosto_bold;
   }
 
-  p, a, select, h3, h4, h5 {
+  p, a, span, select, h3, h4, h5 {
     font-family: $blogger;
     margin:0;
     text-decoration: none;
@@ -63,6 +71,10 @@ body {
 
 .jq-star {
   margin: 0 0.3vw 0 0;
+
+  @include breakpoint {
+    margin: 0 1vw 0 0;
+  }
 }
 
 /* Main styling */
@@ -124,6 +136,10 @@ body {
   padding: 2vw 8vw;
   position: relative;
 
+  @include breakpoint {
+    padding: 2vw 4vw;
+  }
+
   nav {
     display: flex;
     align-items: center;
@@ -171,6 +187,10 @@ body {
     position: relative;
     z-index: 1;
 
+    @include breakpoint {
+      width: auto;
+    }
+
 
     h1, h2 {
       text-transform: uppercase;
@@ -178,15 +198,28 @@ body {
 
     h1 {
       font-size: 3vw;
+
+      @include breakpoint {
+      font-size: 6vw;
+      }
     }
 
     h2 {
       font-size: 1.4vw;
+
+      @include breakpoint {
+        display: none;
+        }
     }
 
     p {
       font-size: 1.4vw;
       margin: 2vw 0;
+
+      @include breakpoint {
+      font-size: 3vw;
+      width: 48vw;
+      }
     }
   }
 
@@ -198,32 +231,75 @@ body {
       font-size: 2vw;
       text-align: center;
       margin-bottom: 2vw;
+
+      @include breakpoint {
+        margin: 4vw 0;
+        font-size: 4vw;
+        text-align: left;
+      }
     }
 
     .filters-list {
       display: flex;
 
-    select {
-      flex: 1;
-      background: white;
-      border: 2px solid $btn-yellow-active;
-      font-size: 0.9vw;
-      padding: 2px;
-      margin: 0 0.4vw 0 0;
+      @include breakpoint {
+        width: 50%;
       }
 
-    a {
-      flex: 1;
-      background: $btn-yellow;
-      color: black;
-      padding: 0.8vw 1vw;
-      font-size: 0.9vw;
-      margin: 0 0.4vw;
-      text-decoration: none;
+      select {
+        flex: 1;
+        background: white;
+        border: 2px solid $btn-yellow-active;
+        font-size: 0.9vw;
+        padding: 2px;
+        margin: 0 0.4vw 0 0;
+
+        @include breakpoint {
+          margin: 0 2vw 0 0;
+          font-size: 4vw;
+          text-align: left;
+          padding: 8px;
+          }
+        }
+
+      a {
+        flex: 1;
+        background: $btn-yellow;
+        color: black;
+        padding: 0.8vw 1vw;
+        font-size: 0.9vw;
+        margin: 0 0.4vw;
+        text-decoration: none;
+
+        @include breakpoint {
+          display: none;
+          }
+
+        &.active {
+          background: $btn-yellow-active;
+          }
+        }
+
+      a:last-child {
+        margin: 0 0 0 0.4vw;
       }
 
-    a:last-child {
-      margin: 0 0 0 0.4vw;
+      .mobile-filters {
+        display: none;
+
+        @include breakpoint {
+          display: block;
+        }
+
+        select {
+          flex: 1;
+          background: white;
+          border: 2px solid $btn-yellow-active;
+          margin: 0 2vw 0 0;
+          font-size: 4vw;
+          text-align: left;
+          padding: 8px;
+        }
       }
     }
   }
@@ -236,6 +312,10 @@ body {
 
     img {
       width: 38vw;
+
+      @include breakpoint {
+        width: 50vw;
+      }
     }
   }
 }
@@ -244,14 +324,26 @@ body {
   display: flex;
   padding: 1vw 8vw;
 
+  @include breakpoint {
+    padding: 2vw 4vw;
+  }
+
   .main {
     width: 80%;
+
+    @include breakpoint {
+      width: 100%;
+    }
 
     .card {
       width: 100%;
       background: white;
       padding-bottom: 2vw;
       margin-bottom: 2vw;
+
+      @include breakpoint {
+        display:none
+      }
 
       .row-1 {
         margin-bottom: 1vw;
@@ -462,7 +554,169 @@ body {
         }
       }
     }
+
+    .mobile-card {
+      display: none;
+      background: white;
+      padding: 6vw 3vw;
+      margin: 4vw 0;
+
+      @include breakpoint {
+        display: block;
+      }
+
+      >.row{
+
+        &:nth-child(1) {
+          justify-content: space-between;
+          margin-bottom: 4vw;
+
+          >.col {
+
+            &:nth-child(1) {
+
+              p {
+                font-size: 4vw;
+              }
+
+              img {
+                width: 35vw;
+              }
+            }
+
+            &:nth-child(2) {
+              text-align: right;
+
+              p {
+                color: $txt-gray;
+                font-size: 3.5vw;
+              }
+
+              h3 {
+                font-size: 5vw;
+                margin: 4vw 0;
+              }
+
+              button {
+                margin: 6vw 0 0 auto;
+                display: block;
+                background: $btn-yellow;
+                border: none;
+                border-radius: 2px;
+                font-size: 5vw;
+                padding: 1.5vw 8vw;
+                cursor: pointer;
+
+                &:hover {
+                  background: $btn-yellow-hover;
+                }
+              }
+            }
+          }
+        }
+
+        &:nth-child(2) {
+          flex-direction: column;
+          border: $bg-gray solid 2px;
+          padding: 2vw;
+
+          .row {
+            margin-bottom: 1vw;
+            align-items: baseline;
+
+            >.col{
+
+              &:nth-child(1){
+                width: 65%;
+
+
+              }
+
+              &:nth-child(2) {
+                justify-self: left;
+              }
+            }
+
+            &:nth-child(4) {
+
+              p {
+                width: 30vw;
+                margin-right: 3vw;
+              }
+
+              h3 {
+                margin-top: auto;
+              }
+            }
+          }
+
+          p {
+            color: $txt-gray;
+            font-size: 3.5vw;
+            margin-bottom: 1vw;
+          }
+
+          h3 {
+            font-size: 5vw;
+          }
+
+          img {
+            width: 5vw;
+            margin-right: 1vw;
+          }
+        }
+
+        &:nth-child(3) {
+          flex-direction: column;
+          margin: 2vw 0;
+
+          .green-border {
+            border: 3px $green solid;
+
+              p {
+              font-size: 5vw;
+              text-align: center;
+            }
+          }
+        }
+
+        &:nth-child(4) {
+          justify-content: space-between;
+          margin-top: 6vw;
+          align-items: baseline;
+
+          p {
+            font-size: 5vw;
+            margin: 0 auto;
+          }
+
+          h4 {
+            font-size: 4.5vw;
+            color: $blue;
+            text-align: center;
+            font-weight: 200;
+          }
+
+          button {
+            margin: 1vw auto 0 auto;
+            display: block;
+            background: $btn-pink;
+            border: none;
+            color: white;
+            border-radius: 2px;
+            font-size: 5vw;
+            padding: 1.5vw 8vw;
+
+            &:hover {
+              background: $btn-pink-hover;
+            }
+          }
+        }
+      }
+    }
   }
+
+
 
   .sidebar{
     width: 20%;
@@ -470,7 +724,7 @@ body {
 }
 
 footer {
-  margin: 8vw 24vw;
+  margin: 8vw;
 
   .law {
     display: grid;
@@ -478,10 +732,15 @@ footer {
     grid-column-gap: 4vw;
     grid-template-columns: 50% 50%;
 
-    p{
+    p {
       color: $txt-gray;
       font-size: 1vw;
       line-height: 1.5vw;
+
+      @include breakpoint {
+        font-size: 3vw;
+        line-height: 4vw;
+      }
     }
   }
 }
@@ -856,6 +1115,10 @@ footer {
 .sidebar {
   margin: 0 2vw;
 
+  @include breakpoint {
+    display: none;
+  }
+
   .sidebanner {
     margin: 1vw 0;
 
@@ -882,6 +1145,12 @@ footer {
     color: white;
     margin: 0 0.3vw;
     background: $blue;
+
+    @include breakpoint {
+      font-size: 5vw;
+      padding: 1vw 2vw;
+      margin: 0 0.7vw;
+    }
 
     &:hover {
       background: #0083b2;

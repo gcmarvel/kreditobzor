@@ -33,6 +33,12 @@ class CreditHomeView (ListView):
         filter_list = {'народный_выбор': 'народный выбор', 'высокое_одобрение': 'высокий % одобрения', 'процентная_ставка': 'по процентной ставке',
                        'цена_обслуживания': 'по цене обслуживания', 'кредитный_лимит': 'по кредитному лимиту', 'кэшбэк': 'по величине кэшбэка'}
         context = super().get_context_data(**kwargs)
+        if 's' in self.request.GET:
+            for key, value in filter_list.items():
+                if self.request.GET['s'] == key:
+                    context['filter'] = value
+        else:
+            context['filter'] = 'Сортировать по ...'
         context['filter_list'] = filter_list
         context['app_name'] = 'Кредитные карты'
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
