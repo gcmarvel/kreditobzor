@@ -641,12 +641,11 @@ body {
             >.col {
 
               &:nth-child(1){
-                width: 65%;
-
-
+                width: 50%;
               }
 
               &:nth-child(2) {
+                width: 50%;
                 justify-self: left;
               }
             }

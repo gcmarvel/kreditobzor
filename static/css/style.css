@@ -392,8 +392,9 @@ body {
           margin-bottom: 1vw;
           align-items: baseline; }
           .content .main .mobile-card > .row:nth-child(2) .row > .col:nth-child(1) {
-            width: 65%; }
+            width: 50%; }
           .content .main .mobile-card > .row:nth-child(2) .row > .col:nth-child(2) {
+            width: 50%;
             justify-self: left; }
           .content .main .mobile-card > .row:nth-child(2) .row:nth-child(4) p {
             width: 30vw;
