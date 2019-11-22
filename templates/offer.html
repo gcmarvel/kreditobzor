@@ -19,9 +19,18 @@
                     <h3>{{ comment.author }}</h3>
                     <div class="{{ comment.pk }}-rating"></div>
                     <script>
+                        if ($(window).width() < 640){
+                            var starsize = 4;
+                            console.log(starsize);
+                            console.log($(window).width())
+                        } else {
+                            var starsize = 1.5;
+                            console.log(starsize);
+                            console.log($(window).width())
+                        }
                         var comment_id = '.{{ comment.pk }}' + '-rating';
                         $(comment_id).starRating({
-                            starSize: 1.5,
+                            starSize: starsize,
                             initialRating: {{ comment.rating }},
                             strokeWidth: 0,
                             activeColor: '#fab309',
@@ -64,11 +73,20 @@
                     <div class="newcomment-rating"></div>
                 </div>
                 <script>
+                    if ($(window).width() < 640){
+                        var starsize = 4;
+                        console.log(starsize);
+                        console.log($(window).width())
+                    } else {
+                        var starsize = 1.5;
+                        console.log(starsize);
+                        console.log($(window).width())
+                    }
                     $(document).ready(function(){
                         $('#form-button').attr('disabled', true);
                     });
                     $('.newcomment-rating').starRating({
-                        starSize: 1.5,
+                        starSize: starsize,
                         useFullStars: true,
                         minRating: 1,
                         strokeWidth: 0,

@@ -37,8 +37,8 @@
     </div>
     <div class="row row-3">
         <div class="col">
-            <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
-            <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}"><button>Оформить</button></a>
+            <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}" target="_blank"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
+            <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}" target="_blank"><button>Оформить</button></a>
             {% if user.is_authenticated %}<p class="redirects">Переходов: {{ offer.clicked }}</p>{% endif %}
         </div>
         <div class="col">

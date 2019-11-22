@@ -37,8 +37,8 @@
         </div>
         <div class="row row-3">
             <div class="d-col">
-                <a href="{% url 'ref_count' 'мфо' offer.pk %}"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
-                <a href="{% url 'ref_count' 'мфо' offer.pk %}"><button>Оформить</button></a>
+                <a href="{% url 'ref_count' 'мфо' offer.pk %}" target="_blank"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
+                <a href="{% url 'ref_count' 'мфо' offer.pk %}" target="_blank"><button>Оформить</button></a>
             </div>
             <div class="d-col">
                 <div class="row row-1">
@@ -88,6 +88,119 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="mobile-card nomargin">
+        <div class="row">
+            <div class="col">
+                <a href="{% url 'ref_count' 'мфо' offer.pk %}" target="_blank"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
+                {% if offer.special_offer is True %}
+                    <div class="plank green">
+                        <p>Акция займ под 0%</p>
+                    </div>
+                {% endif %}
+                {% if offer.rating >= 8 %}
+                    <div class="plank red">
+                        <p>Народный выбор</p>
+                    </div>
+                {% endif %}
+                {% if offer.high_approval_rate is True %}
+                    <div class="plank blue">
+                        <p>Высокий % одобрения</p>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <p></p>
+                <h3>Рейтинг - {{ offer.rating }} </h3>
+                <div class="rating {{ offer.title }}-rating"></div>
+                <script>
+                    $(".{{ offer.title }}-rating").starRating({
+                        starSize: 5,
+                        initialRating: {% star_rating offer %},
+                        readOnly: true,
+                        strokeWidth: 0,
+                        activeColor: '#fab309',
+                        hoverColor: '#feca15',
+                        ratedColor: '#facf09',
+                        starShape: 'rounded',
+                    });
+                </script>
+                <a href="{% url 'ref_count' 'мфо' offer.pk %}" target="_blank"><button>Оформить</button></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row">
+                <div class="col">
+                    <p>Максимальная сумма</p>
+                    <div class="row">
+                        <h3>до {{ offer.max_sum }}</h3>
+                        <p>&nbsp;рублей</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <p>Срок</p>
+                    <div class="row">
+                        <h3>до {{ offer.max_term }}</h3>
+                        <p>&nbsp;дней</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>Ставка</p>
+                    <div class="row">
+                        <h3>от {{ offer.min_rate }}%</h3>
+                        <p>&nbsp;в день</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <p>Оформление</p>
+                    <div class="row">
+                        <img src="{% static 'img/icon-time.png' %}" alt="срок рассмотрения заявки">
+                        <h3>{{ offer.approval_time }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>Идентификация</p>
+                    <div class="row">
+                        <img src="{% static 'img/icon-person.png' %}" alt="займ идентификация">
+                        <h3>{{ offer.identification }}</h3>
+                    </div>
+                </div>
+                <div class="col">
+                    <p>Документы</p>
+                    <div class="row">
+                        <img src="{% static 'img/icon-pass.png' %}" alt="какие документы нужны для займа">
+                        <h3>{{ offer.documents }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p>Требуемый кредитный рейтинг</p>
+                <h3>{{ offer.history_rating }}</h3>
+            </div>
+        </div>
+        <div class="row">
+            {% if offer.special_offer is True %}
+                <div class="green-border">
+                    <p class="green">Специальное предложение</p>
+                    <p>Первый займ - 0%</p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="advantages">
+            {% if offer.advantage1 is not None %}<div><p>{{ offer.advantage1 }}</p></div>{% endif %}
+            {% if offer.advantage2 is not None %}<div><p>{{ offer.advantage2 }}</p></div>{% endif %}
+            {% if offer.advantage3 is not None %}<div><p>{{ offer.advantage3 }}</p></div>{% endif %}
+            {% if offer.advantage4 is not None %}<div><p>{{ offer.advantage4 }}</p></div>{% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <h4>{% comments_count offer %}</h4>
         </div>
     </div>
 </div>

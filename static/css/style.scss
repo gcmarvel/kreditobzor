@@ -559,7 +559,16 @@ body {
       display: none;
       background: white;
       padding: 6vw 3vw;
-      margin: 4vw 0;
+      margin-top: 8vw;
+
+      &.nomargin {
+        margin-top: 0;
+      }
+
+      h2 {
+        font-size: 5vw;
+        text-align: center;
+      }
 
       @include breakpoint {
         display: block;
@@ -579,6 +588,10 @@ body {
                 font-size: 4vw;
               }
 
+              .redirects {
+                color: $txt-gray;
+              }
+
               img {
                 width: 35vw;
               }
@@ -591,6 +604,7 @@ body {
                 color: $txt-gray;
                 font-size: 3.5vw;
               }
+
 
               h3 {
                 font-size: 5vw;
@@ -624,7 +638,7 @@ body {
             margin-bottom: 1vw;
             align-items: baseline;
 
-            >.col{
+            >.col {
 
               &:nth-child(1){
                 width: 65%;
@@ -711,12 +725,44 @@ body {
               background: $btn-pink-hover;
             }
           }
+
+          .advantages {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            div{
+              width: 100%;
+              height: 12vw;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border: 2px solid $blue;
+              margin: 3vw auto;
+
+
+              p {
+                text-align: center;
+                font-size: 4vw;
+              }
+            }
+          }
+        }
+
+        &:nth-child(5) {
+          justify-content: center;
+          margin-top: 6vw;
+
+          h4 {
+            font-size: 4.5vw;
+            color: $blue;
+            text-align: center;
+            font-weight: 200;
+          }
         }
       }
     }
   }
-
-
 
   .sidebar{
     width: 20%;
@@ -724,7 +770,11 @@ body {
 }
 
 footer {
-  margin: 8vw;
+  margin: 8vw 24vw;
+
+  @include breakpoint {
+    margin: 8vw;
+  }
 
   .law {
     display: grid;
@@ -749,6 +799,10 @@ footer {
 
 .filter-placeholder {
   height: 4vw;
+
+  @include breakpoint {
+    height: 20vw;
+  }
 }
 
 .offer-card {
@@ -758,11 +812,25 @@ footer {
     padding: 3vw;
     justify-content: space-between;
 
+    @include breakpoint {
+        padding: 0;
+      }
+
+
     h3 {
       font-size: 1.8vw;
+
+      @include breakpoint {
+        font-size: 5vw;
+        margin: 6vw auto 0 auto;
+      }
+
     }
 
     .row {
+      @include breakpoint {
+        display: none;
+      }
 
       h3 {
         margin-left: 2vw;
@@ -913,8 +981,11 @@ footer {
                   align-items: center;
                   border: 2px solid $blue;
 
+
                   p {
+                    text-align: center;
                     font-size: 1vw;
+                    margin: 0 1vw;
                   }
                 }
               }
@@ -928,14 +999,22 @@ footer {
 
 .comment-wrapper {
   background: white;
-  padding: 3vw;
+  padding: 3vw 3vw 6vw 3vw;
 
   .comment-box {
     background: $bg-gray;
     margin: 1vw 0;
     padding: 2vw;
 
-    .row{
+    @include  breakpoint {
+      margin: 3vw 0;
+    }
+
+    .row {
+
+      @include  breakpoint {
+        display: block;
+      }
 
       &:nth-child(1) {
       margin-bottom: 1vw;
@@ -944,11 +1023,21 @@ footer {
         h3 {
           font-size: 1.5vw;
           margin-right: 2vw;
+
+          @include  breakpoint {
+            font-size: 5vw;
+            margin: 0;
+          }
         }
 
         p {
           color: $txt-gray;
           font-size: 1vw;
+
+          @include breakpoint {
+            font-size: 3vw;
+            margin: 1.5vw 0 4vw 0;
+          }
         }
       }
 
@@ -956,8 +1045,25 @@ footer {
 
         p {
           font-size: 1vw;
+
+          @include breakpoint {
+            font-size: 3.5vw;
+          }
         }
       }
+
+      >.row {
+        @include  breakpoint {
+          display: flex;
+        }
+      }
+    }
+  }
+
+  .pagination{
+
+    @include breakpoint {
+      margin: 8vw 0;
     }
   }
 
@@ -967,6 +1073,10 @@ footer {
       text-align: center;
       font-size: 1.5vw;
       margin: 2vw 0 1vw 0;
+
+      @include breakpoint {
+        font-size: 5vw;
+      }
     }
 
     form {
@@ -974,10 +1084,19 @@ footer {
       flex-direction: column;
       margin: 0 8vw;
 
+      @include breakpoint {
+        margin: 0;
+      }
+
       label {
         font-family: $blogger;
         font-size: 1vw;
         padding: 0.8vw 0;
+
+        @include breakpoint {
+          font-size: 4vw;
+          padding: 2vw 0;
+        }
       }
 
       input {
@@ -986,6 +1105,12 @@ footer {
         font-size: 1vw;
         line-height: 1.5vw;
         padding-left: 0.3vw;
+
+        @include breakpoint {
+          font-size: 4vw;
+          line-height: 6vw;
+          padding-left: 1vw;
+        }
       }
 
       textarea {
@@ -993,6 +1118,12 @@ footer {
         border: none;
         padding-left: 0.3vw;
         font-size: 1vw;
+
+        @include breakpoint {
+          padding-left: 1vw;
+          font-size: 4vw;
+          margin-bottom: 4vw;
+        }
       }
 
       .row {
@@ -1002,6 +1133,10 @@ footer {
         p {
           font-size: 1vw;
           margin-right: 1vw;
+
+          @include breakpoint {
+            font-size: 4vw;
+          }
         }
       }
 
@@ -1016,6 +1151,13 @@ footer {
         padding: 0.7vw 0;
         cursor: pointer;
 
+        @include breakpoint {
+          width: auto;
+          margin: 6vw auto 0 auto;
+          font-size: 5vw;
+          padding: 1.5vw 8vw;
+        }
+
         &:hover {
           background: $btn-yellow-hover;
         }
@@ -1027,6 +1169,11 @@ footer {
 .description {
   background: white;
   padding: 2vw 8vw 4vw 8vw;
+
+  @include breakpoint {
+    display: none;
+  }
+
   p {
     font-size: 1.2vw;
 
@@ -1042,6 +1189,11 @@ footer {
     text-align: center;
     font-size: 1.5vw;
     margin: 4vw 0;
+
+    @include breakpoint {
+      font-size: 6vw;
+      margin: 8vw 0 0 0;
+    }
   }
 }
 /*Manager Template*/
@@ -1058,6 +1210,10 @@ footer {
 
   img {
     width: 8vw;
+
+    @include breakpoint {
+      width: 20vw;
+    }
   }
 }
 
@@ -1070,10 +1226,17 @@ footer {
     width: 100%;
     font-size: 2vw;
     background: $bg-gray;
+
+    @include breakpoint {
+      font-size: 5vw;
+    }
   }
 
   p {
     font-size: 1.2vw;
+    @include breakpoint {
+        font-size: 3vw;
+      }
   }
 
   .comment-grid {
@@ -1082,6 +1245,10 @@ footer {
     grid-column-gap: 2vw;
     grid-row-gap: 3vw;
 
+    @include breakpoint {
+      display: block;
+    }
+
     .manager-box{
       background: $bg-gray;
       padding: 1vw;
@@ -1089,12 +1256,20 @@ footer {
       flex-direction: column;
       justify-content: space-between;
 
+      @include breakpoint {
+        margin: 4vw 0;
+      }
+
       .row-1 {
         justify-content: space-between;
         margin-bottom: 1vw;
 
         h4 {
           font-size: 1.2vw;
+
+          @include breakpoint {
+            font-size: 4vw;
+          }
         }
       }
 
@@ -1104,6 +1279,10 @@ footer {
 
         img {
           width: 3vw;
+
+          @include breakpoint {
+            width: 8vw;
+          }
         }
       }
     }
@@ -1163,6 +1342,11 @@ footer {
 .news-header {
   margin: 4vw 0;
   font-size: 3vw;
+
+  @include breakpoint {
+    text-align: center;
+    font-size: 6vw;
+  }
 }
 
 .news {
@@ -1173,7 +1357,15 @@ footer {
   grid-row-gap: 4vw;
   justify-items: center;
 
+  @include breakpoint {
+    display: block;
+  }
+
   .news-box{
+
+    @include  breakpoint {
+      margin-bottom: 10vw;
+    }
 
     img{
       width: 100%;
@@ -1183,6 +1375,10 @@ footer {
     p {
       font-size: 1vw;
       color: black;
+
+      @include breakpoint {
+        font-size: 4vw;
+      }
     }
   }
 }
@@ -1193,18 +1389,32 @@ footer {
     font-size: 2vw;
     font-weight: 600;
     margin: 4vw 0 2vw 0;
+
+    @include breakpoint {
+      font-size: 5vw;
+    }
   }
 
   img {
     float: left;
     width: 60%;
     margin: 0 2vw 1vw 0;
+
+    @include breakpoint {
+      float: none;
+      width: 100%;
+      margin: 2vw 0;
+    }
   }
 
   p {
     font-size: 1vw;
     float: none;
     margin-bottom: 1vw;
+
+    @include breakpoint {
+      font-size: 3vw;
+    }
   }
 }
 

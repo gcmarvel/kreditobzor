@@ -347,7 +347,12 @@ body {
       display: none;
       background: white;
       padding: 6vw 3vw;
-      margin: 4vw 0; }
+      margin-top: 8vw; }
+      .content .main .mobile-card.nomargin {
+        margin-top: 0; }
+      .content .main .mobile-card h2 {
+        font-size: 5vw;
+        text-align: center; }
       @media (max-width: 639px) {
         .content .main .mobile-card {
           display: block; } }
@@ -356,6 +361,8 @@ body {
         margin-bottom: 4vw; }
         .content .main .mobile-card > .row:nth-child(1) > .col:nth-child(1) p {
           font-size: 4vw; }
+        .content .main .mobile-card > .row:nth-child(1) > .col:nth-child(1) .redirects {
+          color: #85a3a6; }
         .content .main .mobile-card > .row:nth-child(1) > .col:nth-child(1) img {
           width: 35vw; }
         .content .main .mobile-card > .row:nth-child(1) > .col:nth-child(2) {
@@ -433,11 +440,37 @@ body {
           padding: 1.5vw 8vw; }
           .content .main .mobile-card > .row:nth-child(4) button:hover {
             background: #f7798d; }
+        .content .main .mobile-card > .row:nth-child(4) .advantages {
+          display: flex;
+          flex-direction: column;
+          width: 100%; }
+          .content .main .mobile-card > .row:nth-child(4) .advantages div {
+            width: 100%;
+            height: 12vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #00b7f4;
+            margin: 3vw auto; }
+            .content .main .mobile-card > .row:nth-child(4) .advantages div p {
+              text-align: center;
+              font-size: 4vw; }
+      .content .main .mobile-card > .row:nth-child(5) {
+        justify-content: center;
+        margin-top: 6vw; }
+        .content .main .mobile-card > .row:nth-child(5) h4 {
+          font-size: 4.5vw;
+          color: #00b7f4;
+          text-align: center;
+          font-weight: 200; }
   .content .sidebar {
     width: 20%; }
 
 footer {
-  margin: 8vw; }
+  margin: 8vw 24vw; }
+  @media (max-width: 639px) {
+    footer {
+      margin: 8vw; } }
   footer .law {
     display: grid;
     grid-row-gap: 2vw;
@@ -454,14 +487,26 @@ footer {
 /*Offer template*/
 .filter-placeholder {
   height: 4vw; }
-
+  @media (max-width: 639px) {
+    .filter-placeholder {
+      height: 20vw; } }
 .offer-card {
   background: white; }
   .offer-card > .row:nth-child(1) {
     padding: 3vw;
     justify-content: space-between; }
+    @media (max-width: 639px) {
+      .offer-card > .row:nth-child(1) {
+        padding: 0; } }
     .offer-card > .row:nth-child(1) h3 {
       font-size: 1.8vw; }
+      @media (max-width: 639px) {
+        .offer-card > .row:nth-child(1) h3 {
+          font-size: 5vw;
+          margin: 6vw auto 0 auto; } }
+    @media (max-width: 639px) {
+      .offer-card > .row:nth-child(1) .row {
+        display: none; } }
     .offer-card > .row:nth-child(1) .row h3 {
       margin-left: 2vw; }
   .offer-card .card .row-2 .d-col:nth-child(1) {
@@ -542,55 +587,103 @@ footer {
           align-items: center;
           border: 2px solid #00b7f4; }
           .offer-card .card .row-3 .d-col:nth-child(2):nth-child(2) .row-3 .advantages div p {
-            font-size: 1vw; }
+            text-align: center;
+            font-size: 1vw;
+            margin: 0 1vw; }
 
 .comment-wrapper {
   background: white;
-  padding: 3vw; }
+  padding: 3vw 3vw 6vw 3vw; }
   .comment-wrapper .comment-box {
     background: #f6f6f6;
     margin: 1vw 0;
     padding: 2vw; }
+    @media (max-width: 639px) {
+      .comment-wrapper .comment-box {
+        margin: 3vw 0; } }
+    @media (max-width: 639px) {
+      .comment-wrapper .comment-box .row {
+        display: block; } }
     .comment-wrapper .comment-box .row:nth-child(1) {
       margin-bottom: 1vw;
       justify-content: space-between; }
       .comment-wrapper .comment-box .row:nth-child(1) h3 {
         font-size: 1.5vw;
         margin-right: 2vw; }
+        @media (max-width: 639px) {
+          .comment-wrapper .comment-box .row:nth-child(1) h3 {
+            font-size: 5vw;
+            margin: 0; } }
       .comment-wrapper .comment-box .row:nth-child(1) p {
         color: #85a3a6;
         font-size: 1vw; }
+        @media (max-width: 639px) {
+          .comment-wrapper .comment-box .row:nth-child(1) p {
+            font-size: 3vw;
+            margin: 1.5vw 0 4vw 0; } }
     .comment-wrapper .comment-box .row:nth-child(2) p {
       font-size: 1vw; }
+      @media (max-width: 639px) {
+        .comment-wrapper .comment-box .row:nth-child(2) p {
+          font-size: 3.5vw; } }
+    @media (max-width: 639px) {
+      .comment-wrapper .comment-box .row > .row {
+        display: flex; } }
+  @media (max-width: 639px) {
+    .comment-wrapper .pagination {
+      margin: 8vw 0; } }
   .comment-wrapper .comment-form h3 {
     text-align: center;
     font-size: 1.5vw;
     margin: 2vw 0 1vw 0; }
+    @media (max-width: 639px) {
+      .comment-wrapper .comment-form h3 {
+        font-size: 5vw; } }
   .comment-wrapper .comment-form form {
     display: flex;
     flex-direction: column;
     margin: 0 8vw; }
+    @media (max-width: 639px) {
+      .comment-wrapper .comment-form form {
+        margin: 0; } }
     .comment-wrapper .comment-form form label {
       font-family: "Blogger", sans-serif;
       font-size: 1vw;
       padding: 0.8vw 0; }
+      @media (max-width: 639px) {
+        .comment-wrapper .comment-form form label {
+          font-size: 4vw;
+          padding: 2vw 0; } }
     .comment-wrapper .comment-form form input {
       background: #f6f6f6;
       border: none;
       font-size: 1vw;
       line-height: 1.5vw;
       padding-left: 0.3vw; }
+      @media (max-width: 639px) {
+        .comment-wrapper .comment-form form input {
+          font-size: 4vw;
+          line-height: 6vw;
+          padding-left: 1vw; } }
     .comment-wrapper .comment-form form textarea {
       background: #f6f6f6;
       border: none;
       padding-left: 0.3vw;
       font-size: 1vw; }
+      @media (max-width: 639px) {
+        .comment-wrapper .comment-form form textarea {
+          padding-left: 1vw;
+          font-size: 4vw;
+          margin-bottom: 4vw; } }
     .comment-wrapper .comment-form form .row {
       align-items: center;
       margin-top: 1vw; }
       .comment-wrapper .comment-form form .row p {
         font-size: 1vw;
         margin-right: 1vw; }
+        @media (max-width: 639px) {
+          .comment-wrapper .comment-form form .row p {
+            font-size: 4vw; } }
     .comment-wrapper .comment-form form button {
       width: 14vw;
       margin: 1vw auto 0 auto;
@@ -601,12 +694,21 @@ footer {
       font-size: 1.5vw;
       padding: 0.7vw 0;
       cursor: pointer; }
+      @media (max-width: 639px) {
+        .comment-wrapper .comment-form form button {
+          width: auto;
+          margin: 6vw auto 0 auto;
+          font-size: 5vw;
+          padding: 1.5vw 8vw; } }
       .comment-wrapper .comment-form form button:hover {
         background: #feca15; }
 
 .description {
   background: white;
   padding: 2vw 8vw 4vw 8vw; }
+  @media (max-width: 639px) {
+    .description {
+      display: none; } }
   .description p {
     font-size: 1.2vw; }
     .description p:nth-child(1) {
@@ -616,7 +718,10 @@ footer {
   text-align: center;
   font-size: 1.5vw;
   margin: 4vw 0; }
-
+  @media (max-width: 639px) {
+    .promoted h5 {
+      font-size: 6vw;
+      margin: 8vw 0 0 0; } }
 /*Manager Template*/
 .main-full {
   width: 100%; }
@@ -628,7 +733,9 @@ footer {
   z-index: 5; }
   .manager-button img {
     width: 8vw; }
-
+    @media (max-width: 639px) {
+      .manager-button img {
+        width: 20vw; } }
 .comment-manager {
   background: white;
   padding: 3vw; }
@@ -637,30 +744,47 @@ footer {
     width: 100%;
     font-size: 2vw;
     background: #f6f6f6; }
+    @media (max-width: 639px) {
+      .comment-manager h1 {
+        font-size: 5vw; } }
   .comment-manager p {
     font-size: 1.2vw; }
+    @media (max-width: 639px) {
+      .comment-manager p {
+        font-size: 3vw; } }
   .comment-manager .comment-grid {
     display: grid;
     grid-template-columns: 48% 48%;
     grid-column-gap: 2vw;
     grid-row-gap: 3vw; }
+    @media (max-width: 639px) {
+      .comment-manager .comment-grid {
+        display: block; } }
     .comment-manager .comment-grid .manager-box {
       background: #f6f6f6;
       padding: 1vw;
       display: flex;
       flex-direction: column;
       justify-content: space-between; }
+      @media (max-width: 639px) {
+        .comment-manager .comment-grid .manager-box {
+          margin: 4vw 0; } }
       .comment-manager .comment-grid .manager-box .row-1 {
         justify-content: space-between;
         margin-bottom: 1vw; }
         .comment-manager .comment-grid .manager-box .row-1 h4 {
           font-size: 1.2vw; }
+          @media (max-width: 639px) {
+            .comment-manager .comment-grid .manager-box .row-1 h4 {
+              font-size: 4vw; } }
       .comment-manager .comment-grid .manager-box .row-2 {
         justify-content: space-between;
         margin: 2vw 0; }
         .comment-manager .comment-grid .manager-box .row-2 img {
           width: 3vw; }
-
+          @media (max-width: 639px) {
+            .comment-manager .comment-grid .manager-box .row-2 img {
+              width: 8vw; } }
 /* Sidebar template */
 .sidebar {
   margin: 0 2vw; }
@@ -697,7 +821,10 @@ footer {
 .news-header {
   margin: 4vw 0;
   font-size: 3vw; }
-
+  @media (max-width: 639px) {
+    .news-header {
+      text-align: center;
+      font-size: 6vw; } }
 .news {
   display: grid;
   margin: 0 8vw 4vw 8vw;
@@ -705,28 +832,44 @@ footer {
   grid-column-gap: 4vw;
   grid-row-gap: 4vw;
   justify-items: center; }
+  @media (max-width: 639px) {
+    .news {
+      display: block; } }
+  @media (max-width: 639px) {
+    .news .news-box {
+      margin-bottom: 10vw; } }
   .news .news-box img {
     width: 100%;
     margin-bottom: 2vw; }
   .news .news-box p {
     font-size: 1vw;
     color: black; }
-
+    @media (max-width: 639px) {
+      .news .news-box p {
+        font-size: 4vw; } }
 .article h3 {
   font-size: 2vw;
   font-weight: 600;
   margin: 4vw 0 2vw 0; }
-
+  @media (max-width: 639px) {
+    .article h3 {
+      font-size: 5vw; } }
 .article img {
   float: left;
   width: 60%;
   margin: 0 2vw 1vw 0; }
-
+  @media (max-width: 639px) {
+    .article img {
+      float: none;
+      width: 100%;
+      margin: 2vw 0; } }
 .article p {
   font-size: 1vw;
   float: none;
   margin-bottom: 1vw; }
-
+  @media (max-width: 639px) {
+    .article p {
+      font-size: 3vw; } }
 /* Modal  */
 .modal {
   position: fixed;

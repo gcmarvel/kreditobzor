@@ -17,7 +17,7 @@ class CreditHomeView (ListView):
 
     model = Offer
     context_object_name = 'offers'
-    paginate_by = 6
+    paginate_by = 9
     template_name = 'home.html'
 
     def dispatch(self, request, *args, **kwargs):
