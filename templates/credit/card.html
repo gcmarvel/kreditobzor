@@ -102,3 +102,111 @@
         </div>
     </div>
 </div>
+
+<div class="mobile-card">
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}" target="_blank"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
+            {% if user.is_authenticated %}<p class="redirects">Переходов: {{ offer.clicked }}</p>{% endif %}
+            {% if offer.special_offer is True %}
+                <div class="plank green">
+                    <p>Кэшбэк до {{ offer.cashback }}%</p>
+                </div>
+            {% endif %}
+            {% if offer.rating >= 8 %}
+                <div class="plank red">
+                    <p>Народный выбор</p>
+                </div>
+            {% endif %}
+            {% if offer.high_approval_rate is True %}
+                <div class="plank blue">
+                    <p>Высокий % одобрения</p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+            <p>{{ offer.title }}</p>
+            <h3>Рейтинг - {{ offer.rating }} </h3>
+            <div class="rating {{ offer.title }}-rating"></div>
+            <script>
+                $(".{{ offer.title }}-rating").starRating({
+                    starSize: 5,
+                    initialRating: {% star_rating offer %},
+                    readOnly: true,
+                    strokeWidth: 0,
+                    activeColor: '#fab309',
+                    hoverColor: '#feca15',
+                    ratedColor: '#facf09',
+                    starShape: 'rounded',
+                });
+            </script>
+            <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}" target="_blank"><button>Оформить</button></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row">
+            <div class="col">
+                <p>Кредитный лимит</p>
+                <div class="row">
+                    <h3>до {{ offer.limit }}</h3>
+                    <p>&nbsp;рублей</p>
+                </div>
+            </div>
+            <div class="col">
+                <p>Обслуживание</p>
+                <div class="row">
+                    <h3>{{ offer.maintenance }}</h3>
+                    <p>&nbsp;рублей</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Процентная ставка</p>
+                <div class="row">
+                    <h3>от {{ offer.min_rate }}%</h3>
+                    <p>&nbsp;в год</p>
+                </div>
+            </div>
+            <div class="col">
+                <p>Открытие</p>
+                <div class="row">
+                    <img src="{% static 'img/icon-issue.jpg' %}" alt="открытие кредитной карты">
+                    <h3>{{ offer.issue_cost }} руб.</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Доставка курьером</p>
+                <div class="row">
+                    <img src="{% static 'img/icon-delivery.jpg' %}" alt="доставка кредитной карты">
+                    <h3>{% if offer.courier is True%} Да {% else %} Нет {% endif %}</h3>
+                </div>
+            </div>
+            <div class="col">
+                <p>Документы</p>
+                <div class="row">
+                    <img src="{% static 'img/icon-pass.png' %}" alt="какие документы нужны для займа">
+                    <h3>{{ offer.documents }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <p>Требуемый кредитный рейтинг</p>
+            <h3>{{ offer.history_rating }}</h3>
+        </div>
+    </div>
+    <div class="row">
+        {% if offer.special_offer is True %}
+            <div class="green-border">
+                <p class="green">Кэшбек</p>
+                <p>Кэшбэк до {{ offer.cashback }}%</p>
+            </div>
+        {% endif %}
+    </div>
+    <div class="row">
+        <h4>{% comments_count offer %}</h4>
+        <a href="{% url 'credit:offer' offer.slug %}"><button>Читать отзывы</button></a>
+    </div>
+</div>
