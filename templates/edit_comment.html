@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block filters %}
+    <div class="filter-placeholder"></div>
+{% endblock %}
+{% block main %}
+<div class="main-full">
+    <div class="comment-form">
+        <h3>Редактировать комментарий</h3>
+        <form method="post" action="{% url 'edit-comment' comment.pk app %}">
+            {% csrf_token %}
+            <label>Автор: </label>
+            <input name="author" value="{{ comment.author }}">
+            <label>Комментарий: </label>
+            <textarea name="text">{{ comment.text }}</textarea>
+            <label>Оценка: </label>
+            <input type="number" name="rating" value="{{ comment.rating }}">
+            <button type="submit" id="form-button">Отправить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block sidebar %}
+{% endblock %}

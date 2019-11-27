@@ -1,4 +1,5 @@
 from django.shortcuts import render, reverse
+from django.views.generic.edit import UpdateView
 
 from manager.utils import get_rating, get_count
 from mfo.models import Comment as MFOComments
@@ -11,7 +12,7 @@ def manager(request):
     if request.user.is_authenticated:
         mfo_comments = MFOUnverifiedComments.objects.all()
         credit_comments = CreditUnverifiedComments.objects.all()
-        context ={
+        context = {
             'mfo_comments': mfo_comments,
             'credit_comments': credit_comments,
         }
@@ -20,7 +21,7 @@ def manager(request):
         return reverse('home')
 
 
-def mfo_accept_comment(request, comment_id, app):
+def accept_comment(request, comment_id, app):
     if request.user.is_authenticated:
         if app == 'mfo':
             comment = MFOUnverifiedComments.objects.get(id=comment_id)
@@ -38,7 +39,7 @@ def mfo_accept_comment(request, comment_id, app):
         return reverse('home')
 
 
-def mfo_delete_comment(request, comment_id, app):
+def delete_comment(request, comment_id, app):
     if request.user.is_authenticated:
         if app == 'mfo':
             comment = MFOUnverifiedComments.objects.get(id=comment_id)
@@ -46,5 +47,30 @@ def mfo_delete_comment(request, comment_id, app):
             comment = CreditUnverifiedComments.objects.get(id=comment_id)
         comment.delete()
         return manager(request)
+    else:
+        return reverse('home')
+
+
+def edit_comment(request, comment_id, app):
+    if request.user.is_authenticated:
+        if app == 'mfo':
+            comment = MFOUnverifiedComments.objects.get(id=comment_id)
+        elif app == 'credit':
+            comment = CreditUnverifiedComments.objects.get(id=comment_id)
+        if request.method == "POST":
+            author = request.POST['author']
+            text = request.POST['text']
+            rating = request.POST['rating']
+            comment.author = author
+            comment.text = text
+            comment.rating = rating
+            comment.save()
+            return manager(request)
+        else:
+            context = {
+                'app': app,
+                'comment': comment,
+            }
+            return render(request, 'edit_comment.html', context)
     else:
         return reverse('home')

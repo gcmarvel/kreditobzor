@@ -18,9 +18,12 @@
                         <p>{{ comment.text }}</p>
                     </div>
                     <div class="row row-2">
-                        <a href="{% url 'mfo-delete-comment' comment.pk 'mfo' %}"><img src="{% static 'img/decline.png' %}"></a>
+                        <div class="row">
+                            <a href="{% url 'delete-comment' comment.pk 'mfo' %}"><img src="{% static 'img/decline.png' %}"></a>
+                            <a href="{% url 'edit-comment' comment.pk 'mfo' %}"><img src="{% static 'img/edit.png' %}"></a>
+                        </div>
                         <p>Оценка: {{ comment.rating }}</p>
-                        <a href="{% url 'mfo-accept-comment' comment.pk 'mfo' %}"><img src="{% static 'img/accept.png' %}"></a>
+                        <a href="{% url 'accept-comment' comment.pk 'mfo' %}"><img src="{% static 'img/accept.png' %}"></a>
                     </div>
                     <div class="row row-1">
                         <p>{{ comment.ip }}</p>
@@ -41,9 +44,12 @@
                         <p>{{ comment.text }}</p>
                     </div>
                     <div class="row row-2">
-                        <a href="{% url 'mfo-delete-comment' comment.pk 'credit' %}"><img src="{% static 'img/decline.png' %}"></a>
+                        <div class="row">
+                            <a href="{% url 'delete-comment' comment.pk 'credit' %}"><img src="{% static 'img/decline.png' %}"></a>
+                            <a href="{% url 'edit-comment' comment.pk 'credit' %}"><img src="{% static 'img/edit.png' %}"></a>
+                        </div>
                         <p>Оценка: {{ comment.rating }}</p>
-                        <a href="{% url 'mfo-accept-comment' comment.pk 'credit' %}"><img src="{% static 'img/accept.png' %}"></a>
+                        <a href="{% url 'accept-comment' comment.pk 'credit' %}"><img src="{% static 'img/accept.png' %}"></a>
                     </div>
                     <div class="row row-1">
                         <p>{{ comment.ip }}</p>

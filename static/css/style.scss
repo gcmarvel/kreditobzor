@@ -1199,6 +1199,104 @@ footer {
 
 .main-full {
   width: 100%;
+
+  .comment-form {
+
+    h3 {
+      text-align: center;
+      font-size: 1.5vw;
+      margin: 2vw 0 1vw 0;
+
+      @include breakpoint {
+        font-size: 5vw;
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      margin: 0 8vw;
+
+      @include breakpoint {
+        margin: 0;
+      }
+
+      label {
+        font-family: $blogger;
+        font-size: 1vw;
+        padding: 0 0 1vw 0;
+
+        @include breakpoint {
+          font-size: 4vw;
+          padding: 2vw 0;
+        }
+      }
+
+      input {
+        border: none;
+        font-size: 1vw;
+        line-height: 1.5vw;
+        margin: 0 0 1vw 0;
+
+        @include breakpoint {
+          font-size: 4vw;
+          line-height: 6vw;
+          padding-left: 1vw;
+        }
+      }
+
+      textarea {
+        border: none;
+        padding: 0 0 1vw 0;
+        font-size: 1vw;
+        margin: 0 0 1vw 0;
+
+
+        @include breakpoint {
+          padding-left: 1vw;
+          font-size: 4vw;
+          margin-bottom: 4vw;
+        }
+      }
+
+      .row {
+        align-items: center;
+        margin-top: 1vw;
+
+        p {
+          font-size: 1vw;
+          margin-right: 1vw;
+
+          @include breakpoint {
+            font-size: 4vw;
+          }
+        }
+      }
+
+      button {
+        width: 14vw;
+        margin: 1vw auto 0 auto;
+        display: block;
+        background: $btn-yellow;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.5vw;
+        padding: 0.7vw 0;
+        cursor: pointer;
+
+        @include breakpoint {
+          width: auto;
+          margin: 6vw auto 0 auto;
+          font-size: 5vw;
+          padding: 1.5vw 8vw;
+        }
+
+        &:hover {
+          background: $btn-yellow-hover;
+        }
+      }
+    }
+  }
 }
 
 .manager-button {
@@ -1281,6 +1379,14 @@ footer {
 
           @include breakpoint {
             width: 8vw;
+          }
+        }
+        >.row {
+          justify-content: space-between;
+          width: 6.5vw;
+
+          @include breakpoint {
+            width: 17vw;
           }
         }
       }

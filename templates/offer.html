@@ -65,7 +65,7 @@
                 {% endif %}
             </div>
         <div class="comment-form">
-        <h3>Оставить комментарий</h3>
+            <h3>Оставить комментарий</h3>
             <form method="post" action="{% if app_name == 'Займы' %} {% url 'mfo:offer' offer.slug %} {% elif app_name == 'Кредитные карты' %} {% url 'credit:offer' offer.slug %} {% endif %}">
                 {% csrf_token %}
                 {{ form }}

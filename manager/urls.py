@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.manager, name='manager'),
-    path('mfo/accept/<int:comment_id>-<str:app>', views.mfo_accept_comment, name='mfo-accept-comment'),
-    path('mfo/delete/<int:comment_id>-<str:app>', views.mfo_delete_comment, name='mfo-delete-comment'),
+    path('mfo/accept/<int:comment_id>-<str:app>', views.accept_comment, name='accept-comment'),
+    path('mfo/delete/<int:comment_id>-<str:app>', views.delete_comment, name='delete-comment'),
+    path('mfo/edit/<int:comment_id>-<str:app>', views.edit_comment, name='edit-comment'),
 ]
