@@ -37,8 +37,8 @@
         </div>
         <div class="row row-3">
             <div class="d-col">
-                <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}" target="_blank"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
-                <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}" target="_blank"><button>Оформить</button></a>
+                <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}" target="_blank" rel="nofollow"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
+                <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}" target="_blank" rel="nofollow"><button>Оформить</button></a>
             </div>
             <div class="d-col">
                 <div class="row row-1">
@@ -93,7 +93,7 @@
     <div class="mobile-card nomargin">
         <div class="row">
             <div class="col">
-                <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}" target="_blank"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
+                <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}" target="_blank" rel="nofollow"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
                 {% if offer.special_offer is True %}
                     <div class="plank green">
                         <p>Кэшбэк до {{ offer.cashback }}%</p>
@@ -127,7 +127,7 @@
                         starShape: 'rounded',
                     });
                 </script>
-                <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}" target="_blank"><button>Оформить</button></a>
+                <a href="{% url 'ref_count' 'кредитные_карты' offer.pk %}" target="_blank" rel="nofollow"><button>Оформить</button></a>
             </div>
         </div>
         <div class="row">

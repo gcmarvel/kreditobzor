@@ -37,8 +37,8 @@
     </div>
     <div class="row row-3">
         <div class="col">
-            <a href="{% url 'ref_count' 'мфо' offer.pk %}" target="_blank"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
-            <a href="{% url 'ref_count' 'мфо' offer.pk %}" target="_blank"><button>Оформить</button></a>
+            <a href="{% url 'ref_count' 'мфо' offer.pk %}" target="_blank" rel="nofollow"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
+            <a href="{% url 'ref_count' 'мфо' offer.pk %}" target="_blank" rel="nofollow"><button>Оформить</button></a>
             {% if user.is_authenticated %}<p class="redirects">Переходов: {{ offer.clicked }}</p>{% endif %}
         </div>
         <div class="col">
@@ -106,7 +106,7 @@
 <div class="mobile-card">
     <div class="row">
         <div class="col">
-            <a href="{% url 'ref_count' 'мфо' offer.pk %}" target="_blank"><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
+            <a href="{% url 'ref_count' 'мфо' offer.pk %}" target="_blank" rel=“nofollow”><img src="{{ offer.image.url }}" alt="КредитОбзор.рф - отзывы о {{ offer.title }}."></a>
             {% if user.is_authenticated %}<p class="redirects">Переходов: {{ offer.clicked }}</p>{% endif %}
             {% if offer.special_offer is True %}
                 <div class="plank green">
@@ -140,7 +140,7 @@
                     starShape: 'rounded',
                 });
             </script>
-            <a href="{% url 'ref_count' 'мфо' offer.pk %}" target="_blank"><button>Оформить</button></a>
+            <a href="{% url 'ref_count' 'мфо' offer.pk %}" target="_blank" rel=“nofollow”><button>Оформить</button></a>
         </div>
     </div>
     <div class="row">
