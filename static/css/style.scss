@@ -1237,7 +1237,7 @@ footer {
         font-size: 1vw;
         line-height: 1.5vw;
         margin: 0 0 1vw 0;
-        padding: 0.5vw 0.3vw;
+        padding-left: 0.3vw;
 
         @include breakpoint {
           font-size: 4vw;
@@ -1248,9 +1248,10 @@ footer {
 
       textarea {
         border: none;
-        padding: 0.5vw 0.3vw;
+        padding-left: 0.3vw;
         font-size: 1vw;
         margin: 0 0 1vw 0;
+        height: 20vh;
 
 
         @include breakpoint {

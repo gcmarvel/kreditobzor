@@ -754,7 +754,7 @@ footer {
       font-size: 1vw;
       line-height: 1.5vw;
       margin: 0 0 1vw 0;
-      padding: 0.5vw 0.3vw; }
+      padding-left: 0.3vw; }
       @media (max-width: 639px) {
         .main-full .comment-form form input {
           font-size: 4vw;
@@ -762,9 +762,10 @@ footer {
           padding-left: 1vw; } }
     .main-full .comment-form form textarea {
       border: none;
-      padding: 0.5vw 0.3vw;
+      padding-left: 0.3vw;
       font-size: 1vw;
-      margin: 0 0 1vw 0; }
+      margin: 0 0 1vw 0;
+      height: 20vh; }
       @media (max-width: 639px) {
         .main-full .comment-form form textarea {
           padding-left: 1vw;
