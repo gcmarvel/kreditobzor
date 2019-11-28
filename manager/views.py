@@ -61,9 +61,11 @@ def edit_comment(request, comment_id, app):
             author = request.POST['author']
             text = request.POST['text']
             rating = request.POST['rating']
+            date = request.POST['date']
             comment.author = author
             comment.text = text
             comment.rating = rating
+            comment.date_created = date
             comment.save()
             return manager(request)
         else:
