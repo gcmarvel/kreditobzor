@@ -16,7 +16,7 @@
             <label>Оценка: </label>
             <input type="number" name="rating" value="{{ comment.rating }}">
             <label>Дата: </label>
-            <input type="date" name="date" value="{{ comment.date_created }}">
+            <input type="date" name="date" value="{{ comment.date_created.date }}">
             <button type="submit" id="form-button">Отправить</button>
         </form>
     </div>
