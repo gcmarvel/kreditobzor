@@ -16,7 +16,7 @@
             <label>Оценка: </label>
             <input type="number" name="rating" value="{{ comment.rating }}">
             <label>Текущая дата: {{ comment.date_created }}. Изменить: </label>
-            <input type="datetime-local" name="date" value="{{ comment.date_created }}">
+            <input type="datetime-local" name="date" value="{{ isodate }}">
             <button type="submit" id="form-button">Отправить</button>
         </form>
     </div>

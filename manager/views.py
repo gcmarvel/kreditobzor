@@ -1,5 +1,5 @@
 from django.shortcuts import render, reverse
-from django.views.generic.edit import UpdateView
+from django.utils import timezone
 
 from manager.utils import get_rating, get_count
 from mfo.models import Comment as MFOComments
@@ -69,9 +69,11 @@ def edit_comment(request, comment_id, app):
             comment.save()
             return manager(request)
         else:
+            isodate = comment.date_created.astimezone(timezone.get_current_timezone()).strftime("%Y-%m-%dT%H:%M")
             context = {
                 'app': app,
                 'comment': comment,
+                'isodate': isodate,
             }
             return render(request, 'edit_comment.html', context)
     else:
