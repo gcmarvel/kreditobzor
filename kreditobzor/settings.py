@@ -15,7 +15,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1',
                  'www.xn--90afckdj5aclhr.xn--p1ai',
-                 'frodo666.pythonanywhere.com']
+                 'frodo666.pythonanywhere.com',
+                 ]
 
 
 # Application definition
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'sass_processor',
+    'webpush',
     'manager.apps.ManagerConfig',
     'mfo.apps.MfoConfig',
     'credit.apps.CreditConfig',
@@ -107,6 +109,14 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+WEBPUSH_SETTINGS = {
+
+   "VAPID_PUBLIC_KEY": "BOEAZbO6qED50fa-cMWR9kKkp9CE7C9JtUjWMTn3-gvAJX92gst_VrzjQmVPYfyIKIkgtnkvv33o0h9CUB9CR-M",
+   "VAPID_PRIVATE_KEY": "COv_NZC5GDyYAcPlyMo_4wGGeOa16RJrcdpUqrje2Zs",
+   "VAPID_ADMIN_EMAIL": "gcaptainmarvel@gmail.com"
+
+}
 
 
 # Internationalization

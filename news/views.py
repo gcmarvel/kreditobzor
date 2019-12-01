@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView
 
 from manager.utils import get_app_offer
-from .models import News, Article
+from .models import News, Article, Paragraph
 from ads.models import SidebarBanner
 
 
@@ -50,4 +50,5 @@ class ArticlesDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=self.object.reference_app).filter(enabled=True)
         context['promoted_offers'] = get_app_offer(self.object.reference_app).objects.filter(promoted=True)
+        context['paragraphs'] = Paragraph.objects.filter(article=self.object)
         return context

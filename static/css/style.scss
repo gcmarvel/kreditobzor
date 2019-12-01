@@ -1503,13 +1503,10 @@ footer {
   }
 
   img {
-    float: left;
-    width: 60%;
-    margin: 0 2vw 1vw 0;
+    width: 100%;
+    margin: 0 0 2vw 0;
 
     @include breakpoint {
-      float: none;
-      width: 100%;
       margin: 2vw 0;
     }
   }
@@ -1521,6 +1518,21 @@ footer {
 
     @include breakpoint {
       font-size: 3vw;
+    }
+  }
+
+  .image-header {
+
+      img {
+      float: left;
+      width: 60%;
+      margin: 0 2vw 1vw 0;
+
+      @include breakpoint {
+        float: none;
+        width: 100%;
+        margin: 2vw 0;
+      }
     }
   }
 }

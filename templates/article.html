@@ -8,10 +8,16 @@
 <div class="main">
     <div class="article">
         <h3>{{ article.title }}</h3>
-        <div>
+        <div class="article-header">
             <img src="{{ article.image.url }}" alt="{{ article.title }}">
             <p>{{ article.text | linebreaks }}</p>
         </div>
+        {% for paragraph in paragraphs %}
+        <div class="article-paragraph">
+            <img src="{{ paragraph.image.url }}" alt="">
+            <p>{{ paragraph.text | linebreaks }}</p>
+        </div>
+        {% endfor %}
     </div>
     <div class="promoted">
         <h5>Лучшие предложения</h5>

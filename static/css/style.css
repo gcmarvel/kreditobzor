@@ -934,13 +934,10 @@ footer {
     .article h3 {
       font-size: 5vw; } }
 .article img {
-  float: left;
-  width: 60%;
-  margin: 0 2vw 1vw 0; }
+  width: 100%;
+  margin: 0 0 2vw 0; }
   @media (max-width: 639px) {
     .article img {
-      float: none;
-      width: 100%;
       margin: 2vw 0; } }
 .article p {
   font-size: 1vw;
@@ -949,6 +946,15 @@ footer {
   @media (max-width: 639px) {
     .article p {
       font-size: 3vw; } }
+.article .image-header img {
+  float: left;
+  width: 60%;
+  margin: 0 2vw 1vw 0; }
+  @media (max-width: 639px) {
+    .article .image-header img {
+      float: none;
+      width: 100%;
+      margin: 2vw 0; } }
 /* Modal  */
 .modal {
   position: fixed;

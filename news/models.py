@@ -36,3 +36,13 @@ class News(models.Model):
 
     def get_absolute_url(self):
         return reverse('news:news_detail', args=[str(self.pk)])
+
+
+class Paragraph(models.Model):
+    image = models.ImageField(verbose_name='Изображение')
+    text = models.TextField(verbose_name='Текст')
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='Статья')
+
+    class Meta:
+        verbose_name = 'Параграф'
+        verbose_name_plural = 'Параграфы'
