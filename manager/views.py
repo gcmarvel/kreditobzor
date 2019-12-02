@@ -94,19 +94,9 @@ def edit_comment(request, comment_id, app):
 def send_push(request):
     if request.user.is_authenticated:
         if request.method == "POST":
-            try:
-                body = request.body
-                data = json.loads(body)
-
-                if 'head' not in data or 'body' not in data:
-                    return JsonResponse(status=400, data={"message": "Invalid data format"})
-
-                payload = {'head': data['head'], 'body': data['body']}
-                send_group_notification(group_name='push', payload=payload, ttl=1000)
-
-                return JsonResponse(status=200, data={"message": "Web push successful"})
-            except TypeError:
-                return JsonResponse(status=500, data={"message": "An error occurred"})
+            payload = {'head': request.POST['head'], 'body': request.POST['body']}
+            send_group_notification(group_name='push', payload=payload, ttl=1000)
+            return reverse('push')
         else:
             webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
             vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
