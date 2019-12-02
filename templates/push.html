@@ -36,10 +36,8 @@
 
         const head = input.value;
         const body = textarea.value;
-        const meta = document.querySelector('meta[name="user_id"]');
-        const id = meta ? meta.content : null;
 
-        if (head && body && id) {
+        if (head && body) {
             button.innerText = 'Sending...';
             button.disabled = true;
 
@@ -65,9 +63,6 @@
             let error;
             if (!head || !body){
                 error = 'Please ensure you complete the form 🙏🏾'
-            }
-            else if (!id){
-                error = "Are you sure you're logged in? 🤔. Make sure! 👍🏼"
             }
             errorMsg.innerText = error;
         }
