@@ -61,11 +61,7 @@ window.addEventListener('load', function() {
 
     // Check if push messaging is supported  
     if (!('PushManager' in window)) {
-      // Show a message and activate the button 
-      messageBox.textContent = 'Push Notification is not available in the browser';
-      subBtn.textContent = 'Subscribe to Push Messaging';
-      subBtn.disabled = false;
-      messageBox.style.display = 'block';
+      // Show a message and activate the button
       return;  
     }
 
@@ -139,8 +135,6 @@ function unsubscribe() {
           // No subscription object, so set the state
           // to allow the user to subscribe to push
           subBtn.disabled = false;
-          messageBox.textContent = 'Subscription is not available';
-          messageBox.style.display = 'block';
           return;
         }
         postSubscribeObj('unsubscribe', subscription);
