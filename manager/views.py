@@ -99,7 +99,7 @@ def send_push(request):
                 body = request.body
                 data = json.loads(body)
 
-                if 'head' not in data or 'body' not in data or 'id' not in data:
+                if 'head' not in data or 'body' not in data:
                     return JsonResponse(status=400, data={"message": "Invalid data format"})
 
                 payload = {'head': data['head'], 'body': data['body']}
