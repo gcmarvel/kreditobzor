@@ -70,7 +70,7 @@ const sendSubData = async (subscription) => {
         browser: browser,
     };
 
-    const res = await fetch('/webpush/save_information', {
+    const res = await fetch('webpush/save_information', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
