@@ -13,6 +13,10 @@
     <link rel="icon" type="image/png" href="{% static 'img/favi.png' %}">
     <script src={% static 'js/jquery.min.js' %}></script>
     <script src="{% static 'js/jquery.star-rating-svg.js' %}"></script>
+    <meta name="vapid-key" content="{{ vapid_key }}">
+    {% if user.id %}
+        <meta name="user_id" content="{{ user.id }}">
+    {% endif %}
     {% block extra_head %}
     {% endblock %}
 </head>

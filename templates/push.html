@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block extra_head %}
-    <meta name="vapid-key" content="{{ vapid_key }}">
-    {% if user.id %}
-        <meta name="user_id" content="{{ user.id }}">
-    {% endif %}
 {% endblock %}
 {% block filters %}
     <div class="filter-placeholder"></div>
