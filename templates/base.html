@@ -15,7 +15,7 @@
     <script src="{% static 'js/jquery.star-rating-svg.js' %}"></script>
     <meta name="vapid-key" content="{{ vapid_key }}">
     {% if user.id %}
-        <meta name="user_id" content="{{ user.id }}">
+        <meta name="group_name" content="push">
     {% endif %}
     {% block extra_head %}
     {% endblock %}
