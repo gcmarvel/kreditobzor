@@ -12,7 +12,7 @@ from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-from webpush import send_user_notification
+from webpush import send_group_notification
 import json
 
 
@@ -105,7 +105,7 @@ def send_push(request):
                 user_id = data['id']
                 user = get_object_or_404(User, pk=user_id)
                 payload = {'head': data['head'], 'body': data['body']}
-                send_user_notification(user=user, payload=payload, ttl=1000)
+                send_group_notification(group_name='push', payload=payload, ttl=1000)
 
                 return JsonResponse(status=200, data={"message": "Web push successful"})
             except TypeError:
