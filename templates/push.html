@@ -38,7 +38,7 @@
         const body = textarea.value;
 
         if (head && body) {
-            button.innerText = 'Sending...';
+            button.innerText = 'Отправляем...';
             button.disabled = true;
 
             const res = await fetch('send_push', {
@@ -49,13 +49,13 @@
                 }
             });
             if (res.status === 200) {
-                button.innerText = 'Send another 😃!';
+                button.innerText = 'Отправить еще';
                 button.disabled = false;
                 input.value = '';
                 textarea.value = '';
             } else {
                 errorMsg.innerText = res.message;
-                button.innerText = 'Something broke 😢..  Try again?';
+                button.innerText = 'Ошибка';
                 button.disabled = false;
             }
         }
