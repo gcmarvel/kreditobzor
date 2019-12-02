@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block filters %}
-    <div class="filter-placeholder"></div>
+    <div class="filters">
+        <p>Отправить Web-Push</p>
+        <div class="filters-manager">
+            <a href="{% url 'push' %}">
+                <img src="{% static 'img/webpush.png' %}">
+            </a>
+        </div>
+    </div>
 {% endblock %}
 {% block main %}
 <div class="main-full">

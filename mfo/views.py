@@ -75,6 +75,7 @@ class MFOOfferView (DetailView):
         context = super().get_context_data(**kwargs)
         comments = Comment.objects.filter(offer=self.object)
         paginator = Paginator(comments, self.paginate_by)
+        webpush = {"group": "push"}
 
         page = self.request.GET.get('page')
 
@@ -85,6 +86,7 @@ class MFOOfferView (DetailView):
         except EmptyPage:
             comments = paginator.page(paginator.num_pages)
 
+        context['webpush'] = webpush
         context['comments'] = comments
         context['page_obj'] = comments
         context['form'] = CommentForm

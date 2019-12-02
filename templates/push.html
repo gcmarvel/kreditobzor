@@ -11,13 +11,15 @@
 {% endblock %}
 {% block main %}
 <div class="main-full">
-    <div class="comment-manager">
-        <form id="send-push__form">
-            <h3 class="header">Send a push notification</h3>
+    <div class="comment-form">
+        <form class="comment-form" id="send-push__form">
+            <h3>Отправить ПУШ</h3>
             <p class="error"></p>
-            <input type="text" name="head" placeholder="Header: Your favorite airline 😍">
-            <textarea name="body" id="" cols="30" rows="10" placeholder="Body: Your flight has been cancelled 😱😱😱"></textarea>
-            <button>Send Me</button>
+            <label>Заголовок: </label>
+            <input type="text" name="head" >
+            <label>Текст: </label>
+            <textarea name="body" id="" cols="30" rows="10"></textarea>
+            <button>Отправить</button>
         </form>
     </div>
 </div>
@@ -25,5 +27,4 @@
 {% block sidebar %}
 {% endblock %}
 {% block extra_js %}
-    <script src="{% static '/js/registerSw.js' %}"></script>
 {% endblock %}
