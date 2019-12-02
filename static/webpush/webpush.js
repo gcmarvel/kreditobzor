@@ -169,8 +169,6 @@ function postSubscribeObj(statusType, subscription) {
           subBtn.textContent = 'Unsubscribe to Push Messaging';
           subBtn.disabled = false;
           isPushEnabled = true;
-          messageBox.textContent = 'Successfully subscribed for Push Notification';
-          messageBox.style.display = 'block';
         }
 
         // Check if the information is deleted from server
@@ -184,8 +182,6 @@ function postSubscribeObj(statusType, subscription) {
                 .then(
                   function(successful) {
                     subBtn.textContent = 'Subscribe to Push Messaging';
-                    messageBox.textContent = 'Successfully unsubscribed for Push Notification';
-                    messageBox.style.display = 'block';
                     isPushEnabled = false;
                     subBtn.disabled = false;
                   }
@@ -195,8 +191,6 @@ function postSubscribeObj(statusType, subscription) {
             .catch(
               function(error) {
                 subBtn.textContent = 'Unsubscribe to Push Messaging';
-                messageBox.textContent = 'Error during unsubscribe from Push Notification';
-                messageBox.style.display = 'block';
                 subBtn.disabled = false;
               }
             );
