@@ -49,7 +49,6 @@ class MFOHomeView (ListView):
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
         context['user'] = self.request.user
         context['vapid_key'] = vapid_key
-        context['webpush'] = webpush
         return context
 
     def get_queryset(self):
