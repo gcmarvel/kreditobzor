@@ -34,6 +34,8 @@ class MFOHomeView (ListView):
     def get_context_data(self, **kwargs):
         filter_list = {'народный_выбор': 'народный выбор', 'высокое_одобрение': 'высокий % одобрения', 'процентная_ставка': 'по процентной ставке',
                        'величина_суммы': 'по величине суммы', 'акция_займ': 'акция займ под 0%', 'самые_обсуждаемые': 'самые обсуждаемые'}
+        webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
+        vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
         context = super().get_context_data(**kwargs)
         if 's' in self.request.GET:
             for key, value in filter_list.items():
@@ -44,6 +46,8 @@ class MFOHomeView (ListView):
         context['filter_list'] = filter_list
         context['app_name'] = 'Займы'
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
+        context['user'] = self.request.user
+        context['vapid_key'] = vapid_key
         return context
 
     def get_queryset(self):
@@ -75,7 +79,6 @@ class MFOOfferView (DetailView):
         context = super().get_context_data(**kwargs)
         comments = Comment.objects.filter(offer=self.object)
         paginator = Paginator(comments, self.paginate_by)
-        webpush = {"group": "push"}
 
         page = self.request.GET.get('page')
 
@@ -86,7 +89,6 @@ class MFOOfferView (DetailView):
         except EmptyPage:
             comments = paginator.page(paginator.num_pages)
 
-        context['webpush'] = webpush
         context['comments'] = comments
         context['page_obj'] = comments
         context['form'] = CommentForm
