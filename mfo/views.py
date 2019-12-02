@@ -46,7 +46,6 @@ class MFOHomeView (ListView):
         context['filter_list'] = filter_list
         context['app_name'] = 'Займы'
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
-        context['user'] = self.request.user
         context['vapid_key'] = vapid_key
         return context
 
