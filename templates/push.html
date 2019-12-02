@@ -8,13 +8,13 @@
 {% block main %}
 <div class="main-full">
     <div class="comment-form">
-        <form class="comment-form" id="send-push__form">
+        <form class="comment-form" id="send-push__form" action="{% url 'push' %}">
             <h3>Отправить ПУШ</h3>
             <p class="error"></p>
             <label>Заголовок: </label>
-            <input type="text" name="head" >
+            <input type="text" name="push_head" >
             <label>Текст: </label>
-            <textarea name="body" id="" cols="30" rows="10"></textarea>
+            <textarea name="push_body" id="" cols="30" rows="10"></textarea>
             <button>Отправить</button>
         </form>
     </div>
@@ -23,49 +23,4 @@
 {% block sidebar %}
 {% endblock %}
 {% block extra_js %}
-    <script>
-    const pushForm = document.getElementById('send-push__form');
-    const errorMsg = document.querySelector('.error');
-
-    pushForm.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const input = this[0];
-        const textarea = this[1];
-        const button = this[2];
-        errorMsg.innerText = '';
-
-        const head = input.value;
-        const body = textarea.value;
-
-        if (head && body) {
-            button.innerText = 'Отправляем...';
-            button.disabled = true;
-
-            const res = await fetch('send_push', {
-                method: 'POST',
-                body: JSON.stringify({head, body}),
-                headers: {
-                    'content-type': 'application/json'
-                }
-            });
-            if (res.status === 200) {
-                button.innerText = 'Отправить еще';
-                button.disabled = false;
-                input.value = '';
-                textarea.value = '';
-            } else {
-                errorMsg.innerText = res.message;
-                button.innerText = 'Ошибка';
-                button.disabled = false;
-            }
-        }
-        else {
-            let error;
-            if (!head || !body){
-                error = 'Please ensure you complete the form 🙏🏾'
-            }
-            errorMsg.innerText = error;
-        }
-    });
-    </script>
 {% endblock %}
