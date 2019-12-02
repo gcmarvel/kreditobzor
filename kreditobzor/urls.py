@@ -32,6 +32,7 @@ urlpatterns = [
     path('manager/', include('manager.urls')),
     path('оформить/<str:app_name>/<int:pk>/', referrer_count, name='ref_count'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('webpush/', include('webpush.urls')),
     path('sw.js', TemplateView.as_view(template_name='sw.js', content_type='application/x-javascript')),
 ]
 

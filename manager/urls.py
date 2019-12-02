@@ -7,5 +7,4 @@ urlpatterns = [
     path('mfo/delete/<int:comment_id>-<str:app>', views.delete_comment, name='delete-comment'),
     path('mfo/edit/<int:comment_id>-<str:app>', views.edit_comment, name='edit-comment'),
     path('send_push', views.send_push, name='push'),
-    path('webpush/', include('webpush.urls')),
 ]
