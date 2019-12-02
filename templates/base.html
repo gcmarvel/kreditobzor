@@ -1,5 +1,6 @@
 {% load sass_tags %}
 {% load static %}
+{% load webpush_notifications %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -13,14 +14,12 @@
     <link rel="icon" type="image/png" href="{% static 'img/favi.png' %}">
     <script src={% static 'js/jquery.min.js' %}></script>
     <script src="{% static 'js/jquery.star-rating-svg.js' %}"></script>
-    <meta name="vapid-key" content="{{ vapid_key }}">
-    {% if user.id %}
-        <meta name="group_name" content="push">
-    {% endif %}
+    {% webpush_header %}
     {% block extra_head %}
     {% endblock %}
 </head>
-<body>
+<body onload="document.getElementById('webpush-subscribe-button').click()">
+    {% webpush_button %}
     {% if user.is_authenticated %}
         <div class="manager-button">
             <a href="{% url 'manager' %}"><img src="{% static 'img/boss.png' %}"></a>
@@ -101,24 +100,23 @@
     <footer>
     {% block footer %}
     {% endblock %}
-    <script>
-        var navModal = document.getElementById("nav-mobile");
-        var navBtn = document.getElementById("nav-menu");
-        var navClose = document.getElementById("nav-close");
+        <script>
+            var navModal = document.getElementById("nav-mobile");
+            var navBtn = document.getElementById("nav-menu");
+            var navClose = document.getElementById("nav-close");
 
-        navBtn.onclick = function() {
-          navModal.style.display = "block";};
+            navBtn.onclick = function() {
+              navModal.style.display = "block";};
 
-        navClose.onclick = function() {
-          navModal.style.display = "none";};
+            navClose.onclick = function() {
+              navModal.style.display = "none";};
 
-        window.onclick = function(event) {
-          if (event.target === navModal) {
-            navModal.style.display = "none";
-          }
-        };
-    </script>
-    <script src="{% static '/js/registerSw.js' %}"></script>
+            window.onclick = function(event) {
+              if (event.target === navModal) {
+                navModal.style.display = "none";
+              }
+            };
+        </script>
     </footer>
 {% block extra_js %}
 {% endblock %}

@@ -38,6 +38,9 @@ body {
   @media (max-width: 639px) {
     .jq-star {
       margin: 0 1vw 0 0; } }
+#webpush-subscribe-button {
+  display: none; }
+
 /* Main styling */
 /*Home template*/
 .nav-mobile {
