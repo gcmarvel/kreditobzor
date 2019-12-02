@@ -94,7 +94,7 @@ def edit_comment(request, comment_id, app):
 def send_push(request):
     if request.user.is_authenticated:
         if request.method == "POST":
-            payload = {'head': request.POST['head'], 'body': request.POST['body']}
+            payload = {'head': request.POST['head'], 'body': request.POST['body'], 'icon': 'https://i.imgur.com/dRDxiCQ.png', 'url': 'https://www.example.com'}
             send_group_notification(group_name='push', payload=payload, ttl=1000)
             return reverse('push')
         else:
