@@ -20,9 +20,12 @@ def manager(request):
     if request.user.is_authenticated:
         mfo_comments = MFOUnverifiedComments.objects.all()
         credit_comments = CreditUnverifiedComments.objects.all()
+        webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
         context = {
             'mfo_comments': mfo_comments,
             'credit_comments': credit_comments,
+            'vapid_key': webpush_settings.get('VAPID_PUBLIC_KEY'),
+            'user': request.user,
         }
         return render(request, 'manager.html', context)
     else:
