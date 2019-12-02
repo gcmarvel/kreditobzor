@@ -36,6 +36,7 @@ class MFOHomeView (ListView):
                        'величина_суммы': 'по величине суммы', 'акция_займ': 'акция займ под 0%', 'самые_обсуждаемые': 'самые обсуждаемые'}
         webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
         vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
+        webpush = {"group": 'push'}
         context = super().get_context_data(**kwargs)
         if 's' in self.request.GET:
             for key, value in filter_list.items():
@@ -48,6 +49,7 @@ class MFOHomeView (ListView):
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
         context['user'] = self.request.user
         context['vapid_key'] = vapid_key
+        context['webpush'] = webpush
         return context
 
     def get_queryset(self):
