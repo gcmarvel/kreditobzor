@@ -15,7 +15,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1',
                  'www.xn--90afckdj5aclhr.xn--p1ai',
-                 'frodo666.pythonanywhere.com',
                  ]
 
 # Application definition
@@ -111,8 +110,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 WEBPUSH_SETTINGS = {
 
-   "VAPID_PUBLIC_KEY": "BOEAZbO6qED50fa-cMWR9kKkp9CE7C9JtUjWMTn3-gvAJX92gst_VrzjQmVPYfyIKIkgtnkvv33o0h9CUB9CR-M",
-   "VAPID_PRIVATE_KEY": "COv_NZC5GDyYAcPlyMo_4wGGeOa16RJrcdpUqrje2Zs",
+   "VAPID_PUBLIC_KEY": "BPu4Iu4aF-myvorWto_1Xp04vqCgElvnhzc9g6XoZabl6kVlHNSvOR3FXe_-W68ZCggxbxfVMPlqjfGHD05jshI",
+   "VAPID_PRIVATE_KEY": "BYmR4j8O2CLJd2prTOpuUDd1KamVR7bzr2U-f-GOB8U",
    "VAPID_ADMIN_EMAIL": "gcaptainmarvel@gmail.com"
 
 }
