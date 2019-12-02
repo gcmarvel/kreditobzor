@@ -9,8 +9,7 @@ from credit.models import Comment as CreditComments
 from credit.models import UnverifiedComment as CreditUnverifiedComments
 
 from django.http.response import JsonResponse
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import User
+
 from django.views.decorators.csrf import csrf_exempt
 from webpush import send_group_notification
 import json
