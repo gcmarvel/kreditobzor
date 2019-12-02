@@ -4,7 +4,6 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView
 from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
-from django.views.generic import TemplateView
 
 from .utils import get_homepage as homepage
 from.sitemaps import StaticSitemap, MFOSitemap, CreditSitemap, NewsSitemap, ArticleSitemap
@@ -33,7 +32,6 @@ urlpatterns = [
     path('оформить/<str:app_name>/<int:pk>/', referrer_count, name='ref_count'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('webpush/', include('webpush.urls')),
-    path('sw.js', TemplateView.as_view(template_name='sw.js', content_type='application/x-javascript')),
 ]
 
 if settings.DEBUG:
