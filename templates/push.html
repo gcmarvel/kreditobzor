@@ -43,7 +43,7 @@
 
             const res = await fetch('send_push', {
                 method: 'POST',
-                body: JSON.stringify({head, body, id}),
+                body: JSON.stringify({head, body}),
                 headers: {
                     'content-type': 'application/json'
                 }
