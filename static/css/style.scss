@@ -1204,6 +1204,11 @@ footer {
     padding: 0;
     font-size: 0.9vw;
     margin: auto;
+    max-width: 25%;
+
+    img {
+      width: 100%;
+    }
   }
 }
 

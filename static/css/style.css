@@ -730,7 +730,10 @@ footer {
   .filters-manager a {
     padding: 0;
     font-size: 0.9vw;
-    margin: auto; }
+    margin: auto;
+    max-width: 25%; }
+    .filters-manager a img {
+      width: 100%; }
 
 .main-full {
   width: 100%; }
