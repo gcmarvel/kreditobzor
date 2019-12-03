@@ -8,10 +8,7 @@ from mfo.models import UnverifiedComment as MFOUnverifiedComments
 from credit.models import Comment as CreditComments
 from credit.models import UnverifiedComment as CreditUnverifiedComments
 
-from django.http.response import JsonResponse
-
 from django.views.decorators.csrf import csrf_exempt
-import json
 
 
 def manager(request):

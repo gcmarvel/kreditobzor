@@ -16,7 +16,7 @@
     {% block extra_head %}
     {% endblock %}
 </head>
-<body onload="document.getElementById('webpush-subscribe-button').click()">
+<body>
     {% if user.is_authenticated %}
         <div class="manager-button">
             <a href="{% url 'manager' %}"><img src="{% static 'img/boss.png' %}"></a>
