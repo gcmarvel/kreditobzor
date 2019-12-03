@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'sass_processor',
-    'webpush',
     'manager.apps.ManagerConfig',
     'mfo.apps.MfoConfig',
     'credit.apps.CreditConfig',
@@ -108,12 +107,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-WEBPUSH_SETTINGS = {
-
-   "VAPID_PUBLIC_KEY": "BPu4Iu4aF-myvorWto_1Xp04vqCgElvnhzc9g6XoZabl6kVlHNSvOR3FXe_-W68ZCggxbxfVMPlqjfGHD05jshI",
-   "VAPID_PRIVATE_KEY": "BYmR4j8O2CLJd2prTOpuUDd1KamVR7bzr2U-f-GOB8U",
-   "VAPID_ADMIN_EMAIL": "gcaptainmarvel@gmail.com"
-
+NOTIFICATION_KEY = {
+'BBUu0gcd9pE-C9k3uGbssazXMYYXN0xaMfVSy28vYKYIth-Uu8u1JWfcvXEZ3c_K5-VjSnyM5xxalgjpk6oz-Iw'
 }
 
 

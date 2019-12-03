@@ -1,6 +1,5 @@
 {% load sass_tags %}
 {% load static %}
-{% load webpush_notifications %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -14,12 +13,10 @@
     <link rel="icon" type="image/png" href="{% static 'img/favi.png' %}">
     <script src={% static 'js/jquery.min.js' %}></script>
     <script src="{% static 'js/jquery.star-rating-svg.js' %}"></script>
-    {% webpush_header %}
     {% block extra_head %}
     {% endblock %}
 </head>
 <body onload="document.getElementById('webpush-subscribe-button').click()">
-    {% webpush_button %}
     {% if user.is_authenticated %}
         <div class="manager-button">
             <a href="{% url 'manager' %}"><img src="{% static 'img/boss.png' %}"></a>
@@ -116,6 +113,35 @@
                 navModal.style.display = "none";
               }
             };
+
+            function checkWorkerAndPushManager () {
+                if (!('serviceWorker' in navigator)) {
+                    console.log('Workers are not supported.');
+                    return;
+                }
+                if (!('PushManager' in window)) {
+                    console.log('Push notifications are not supported.');
+                    return;
+                }
+            }
+
+            function registerWorker () {
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker.register('/static/js/sw.js').then(function (registration) {
+                        console.log('ServiceWorker registration successful');
+                    }, function (err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                        return;
+                    });
+                });
+                return true;
+            }
+
+            var supported = checkWorkerAndPushManager();
+
+            if (supported){
+                    var worker = registerWorker ();
+            }
         </script>
     </footer>
 {% block extra_js %}

@@ -11,7 +11,6 @@ from credit.models import UnverifiedComment as CreditUnverifiedComments
 from django.http.response import JsonResponse
 
 from django.views.decorators.csrf import csrf_exempt
-from webpush import send_group_notification
 import json
 
 
@@ -95,7 +94,6 @@ def send_push(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             payload = {'head': request.POST['push_head'], 'body': request.POST['push_body'], 'icon': 'https://i.imgur.com/dRDxiCQ.png', 'url': 'https://www.example.com'}
-            send_group_notification(group_name='push', payload=payload, ttl=1000)
             return reverse('push')
         else:
             webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
