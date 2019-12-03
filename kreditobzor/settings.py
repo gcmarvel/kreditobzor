@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'sass_processor',
+    'push_notifications',
     'manager.apps.ManagerConfig',
     'mfo.apps.MfoConfig',
     'credit.apps.CreditConfig',
@@ -107,8 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-NOTIFICATION_KEY = {
-'BBUu0gcd9pE-C9k3uGbssazXMYYXN0xaMfVSy28vYKYIth-Uu8u1JWfcvXEZ3c_K5-VjSnyM5xxalgjpk6oz-Iw'
+PUSH_NOTIFICATIONS_SETTINGS = {
+        "WP_PRIVATE_KEY": os.path.join(BASE_DIR, "private_key.pem"),
+        "WP_CLAIMS": {'sub': "mailto: gcaptainmarvel@gmail.com"}
 }
 
 
