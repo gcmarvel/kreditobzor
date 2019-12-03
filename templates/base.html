@@ -132,40 +132,38 @@
 
 
             // In your ready listener
-            if ('serviceWorker' in navigator) {
-              // The service worker has to store in the root of the app
-              // http://stackoverflow.com/questions/29874068/navigator-serviceworker-is-never-ready
-              navigator.serviceWorker.register('{% static 'js/sw.js' %}').then(function (reg) {
-                reg.pushManager.subscribe({
-                  userVisibleOnly: true,
-                  applicationServerKey: urlBase64ToUint8Array(applicationServerKey)
-                }).then(function (sub) {
-                  var endpointParts = sub.endpoint.split('/');
-                  var registration_id = endpointParts[endpointParts.length - 1];
-                  var data = {
-                    'p256dh': btoa(String.fromCharCode.apply(null, new Uint8Array(sub.getKey('p256dh')))),
-                    'auth': btoa(String.fromCharCode.apply(null, new Uint8Array(sub.getKey('auth')))),
-                    'registration_id': registration_id
-                  };
-                  requestPOSTToServer(data);
-                })
-              }).catch(function (err) {
-                console.log(':^(', err);
-              });
-            }
+                if ('serviceWorker' in navigator) {
+                    // The service worker has to store in the root of the app
+                    // http://stackoverflow.com/questions/29874068/navigator-serviceworker-is-never-ready
+                    navigator.serviceWorker.register('{% static 'js/sw.js' %}').then(function (reg) {
+                        reg.pushManager.subscribe({
+                            userVisibleOnly: true,
+                            applicationServerKey: urlBase64ToUint8Array(applicationServerKey)
+                        }).then(function (sub) {
+                            var endpointParts = sub.endpoint.split('/');
+                            var registration_id = endpointParts[endpointParts.length - 1];
+                            var data = {
+                                'p256dh': btoa(String.fromCharCode.apply(null, new Uint8Array(sub.getKey('p256dh')))),
+                                'auth': btoa(String.fromCharCode.apply(null, new Uint8Array(sub.getKey('auth')))),
+                                'registration_id': registration_id
+                            };
+                            requestPOSTToServer(data);
+                        })
+                    }).catch(function (err) {
+                        console.log(':^(', err);
+                    });
+                }
 
-            function requestPOSTToServer(data) {
-                $.post('{% url 'subscription' %}', {
-                    'name': 'WebPush',
-                    'browser': 'CHROME',
-                    'p256dh': data.p256dh,
-                    'auth': data.auth,
-                    'registration_id': data.registration_id,
-                    }
-                )
-            }
-
-
+                function requestPOSTToServer(data) {
+                    $.post('{% url 'subscription' %}', {
+                        'name': 'WebPush',
+                        'browser': 'CHROME',
+                        'p256dh': data.p256dh,
+                        'auth': data.auth,
+                        'registration_id': data.registration_id,
+                        }
+                    )
+                }
         </script>
     </footer>
 {% block extra_js %}

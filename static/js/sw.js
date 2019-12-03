@@ -9,9 +9,6 @@ var getNotificationOptions = function (message, message_tag, url) {
                 body: message,
                 tag: message_tag,
                 vibrate: [200, 100, 200, 100, 200, 100, 200],
-                data: {
-                        url: url,
-                }
         };
         return options;
 };
@@ -33,7 +30,7 @@ self.addEventListener('push', function(event) {
                 var title = "";
                 var message = event.data.text();
                 var message_tag = "";
-                var url = "";
+                var url = 'https://www.кредитобзор.рф';
         }
         self.registration.showNotification(getTitle(title), getNotificationOptions(message, message_tag, url));
 });
