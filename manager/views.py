@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http.response import JsonResponse
+from django.http.response import HttpResponse
 from django.utils import timezone
 
 from django.conf import settings
@@ -11,7 +11,10 @@ from credit.models import UnverifiedComment as CreditUnverifiedComments
 
 from django.views.decorators.csrf import csrf_exempt
 
+
+import json
 from push_notifications.models import WebPushDevice
+from push_notifications.webpush import WebPushError
 
 
 def manager(request):
@@ -93,9 +96,22 @@ def send_push(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             if 'push_body' in request.POST:
-                print(request.POST['push_body'])
                 for device in WebPushDevice.objects.all():
-                    device.send_message(request.POST['push_body'])
+                    try:
+                        device.send_message(json.dumps({'message': request.POST['push_body'], 'title': request.POST['push_head']}))
+                    except WebPushError:
+                        try:
+                            device.browser = "FIREFOX"
+                            device.save()
+                            device.send_message(json.dumps({'message': request.POST['push_body'], 'title': request.POST['push_head']}))
+                        except WebPushError:
+                            try:
+                                device.browser = "OPERA"
+                                device.save()
+                                device.send_message(json.dumps({'message': request.POST['push_body'], 'title': request.POST['push_head'], 'url': 'https://www.кредитобзор.рф'}))
+                            except WebPushError:
+                                device.delete()
+                                pass
                 return render(request, 'push.html')
             return render(request, 'push.html')
         else:
@@ -107,7 +123,9 @@ def send_push(request):
 @csrf_exempt
 def subscription(request):
     if request.method == "POST":
-        subscription = WebPushDevice(name=request.POST['name'], p256dh=request.POST['p256dh'], auth=request.POST['auth'], registration_id=request.POST['registration_id'])
-        subscription.save()
-        return redirect('home')
+        if 's' not in request.session:
+            request.session['s'] = 'subscribed'
+            browser = request.POST['browser']
+            WebPushDevice.objects.get_or_create(name=request.POST['name'], browser=browser, p256dh=request.POST['p256dh'], auth=request.POST['auth'], registration_id=request.POST['registration_id'])
+        return HttpResponse('200')
 

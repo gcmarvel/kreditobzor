@@ -1,15 +1,17 @@
 var getTitle = function (title) {
         if (title === "") {
-                title = "TITLE DEFAULT";
+                title = "КРЕДИТОБЗОР";
         }
         return title;
 };
-var getNotificationOptions = function (message, message_tag) {
+var getNotificationOptions = function (message, message_tag, url) {
         var options = {
                 body: message,
-                icon: '/img/icon_120.png',
                 tag: message_tag,
-                vibrate: [200, 100, 200, 100, 200, 100, 200]
+                vibrate: [200, 100, 200, 100, 200, 100, 200],
+                data: {
+                        url: url,
+                }
         };
         return options;
 };
@@ -25,11 +27,13 @@ self.addEventListener('push', function(event) {
                 var title = response_json.title;
                 var message = response_json.message;
                 var message_tag = response_json.tag;
+                var url = response_json.url;
         } catch (err) {
                 // Push is a simple text
                 var title = "";
                 var message = event.data.text();
                 var message_tag = "";
+                var url = "";
         }
-        self.registration.showNotification(getTitle(title), getNotificationOptions(message, message_tag));
+        self.registration.showNotification(getTitle(title), getNotificationOptions(message, message_tag, url));
 });
