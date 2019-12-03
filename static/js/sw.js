@@ -34,3 +34,10 @@ self.addEventListener('push', function(event) {
         }
         self.registration.showNotification(getTitle(title), getNotificationOptions(message, message_tag, url));
 });
+
+self.addEventListener('notificationclick', function(event) {
+ event.notification.close();
+ event.waitUntil(
+   clients.openWindow('https://www.кредитобзор.рф')
+ );
+});
