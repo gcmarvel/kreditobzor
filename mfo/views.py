@@ -11,6 +11,8 @@ from .models import Offer, Comment, UnverifiedComment
 from ads.models import SidebarBanner
 from manager.forms import CommentForm
 
+from push_notifications.models import WebPushDevice
+
 app_list = settings.APP_LIST
 app_name = 'мфо'
 

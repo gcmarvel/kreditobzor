@@ -8,13 +8,14 @@
 {% block main %}
 <div class="main-full">
     <div class="comment-form">
-        <form class="comment-form" id="send-push__form" action="{% url 'push' %}">
+        <form class="comment-form" method="post" action="{% url 'push' %}">
+            {% csrf_token %}
             <h3>Отправить ПУШ</h3>
             <p class="error"></p>
             <label>Заголовок: </label>
             <input type="text" name="push_head" >
             <label>Текст: </label>
-            <textarea name="push_body" id="" cols="30" rows="10"></textarea>
+            <textarea name="push_body" id="push_body" cols="30" rows="10"></textarea>
             <button>Отправить</button>
         </form>
     </div>

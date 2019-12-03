@@ -1,4 +1,5 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, redirect
+from django.http.response import JsonResponse
 from django.utils import timezone
 
 from django.conf import settings
@@ -9,6 +10,8 @@ from credit.models import Comment as CreditComments
 from credit.models import UnverifiedComment as CreditUnverifiedComments
 
 from django.views.decorators.csrf import csrf_exempt
+
+from push_notifications.models import WebPushDevice
 
 
 def manager(request):
@@ -24,7 +27,7 @@ def manager(request):
         }
         return render(request, 'manager.html', context)
     else:
-        return reverse('home')
+        return redirect('home')
 
 
 def accept_comment(request, comment_id, app):
@@ -42,7 +45,7 @@ def accept_comment(request, comment_id, app):
         comment.offer.save()
         return manager(request)
     else:
-        return reverse('home')
+        return redirect('home')
 
 
 def delete_comment(request, comment_id, app):
@@ -54,7 +57,7 @@ def delete_comment(request, comment_id, app):
         comment.delete()
         return manager(request)
     else:
-        return reverse('home')
+        return redirect('home')
 
 
 def edit_comment(request, comment_id, app):
@@ -83,20 +86,28 @@ def edit_comment(request, comment_id, app):
             }
             return render(request, 'edit_comment.html', context)
     else:
-        return reverse('home')
+        return redirect('home')
 
 
-@csrf_exempt
 def send_push(request):
     if request.user.is_authenticated:
         if request.method == "POST":
-            payload = {'head': request.POST['push_head'], 'body': request.POST['push_body'], 'icon': 'https://i.imgur.com/dRDxiCQ.png', 'url': 'https://www.example.com'}
-            return reverse('push')
+            if 'push_body' in request.POST:
+                print(request.POST['push_body'])
+                for device in WebPushDevice.objects.all():
+                    device.send_message(request.POST['push_body'])
+                return render(request, 'push.html')
+            return render(request, 'push.html')
         else:
-            webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
-            vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
-            user = request.user
-            return render(request, 'push.html', {user: user, 'vapid_key': vapid_key})
+            return render(request, 'push.html')
     else:
-        return reverse('home')
+        return redirect('home')
+
+
+@csrf_exempt
+def subscription(request):
+    if request.method == "POST":
+        subscription = WebPushDevice(name=request.POST['name'], p256dh=request.POST['p256dh'], auth=request.POST['auth'], registration_id=request.POST['registration_id'])
+        subscription.save()
+        return redirect('home')
 

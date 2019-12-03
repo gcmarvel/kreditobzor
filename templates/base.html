@@ -153,12 +153,13 @@
 
             var applicationServerKey = "BBUu0gcd9pE-C9k3uGbssazXMYYXN0xaMfVSy28vYKYIth-Uu8u1JWfcvXEZ3c_K5-VjSnyM5xxalgjpk6oz-Iw";
 
+
             // In your ready listener
             if ('serviceWorker' in navigator) {
               // The service worker has to store in the root of the app
               // http://stackoverflow.com/questions/29874068/navigator-serviceworker-is-never-ready
               var browser = loadVersionBrowser('chrome');
-              navigator.serviceWorker.register('navigatorPush.service.js?version=1.0.0').then(function (reg) {
+              navigator.serviceWorker.register('{% static 'js/sw.js' %}').then(function (reg) {
                 reg.pushManager.subscribe({
                   userVisibleOnly: true,
                   applicationServerKey: urlBase64ToUint8Array(applicationServerKey)
@@ -172,11 +173,21 @@
                     'name': 'XXXXX',
                     'registration_id': registration_id
                   };
-                  console.log(data);
+                  requestPOSTToServer(data);
                 })
               }).catch(function (err) {
                 console.log(':^(', err);
               });
+            }
+
+            function requestPOSTToServer(data) {
+                $.post('{% url 'subscription' %}', {
+                    'name': 'WebPush',
+                    'p256dh': data.p256dh,
+                    'auth': data.auth,
+                    'registration_id': data.registration_id,
+                    }
+                )
             }
 
 
