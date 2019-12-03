@@ -7,6 +7,7 @@ var getTitle = function (title) {
 var getNotificationOptions = function (message, message_tag, url) {
         var options = {
                 body: message,
+                icon: "https://www.xn--90afckdj5aclhr.xn--p1ai/static/img/menubutton.png",
                 tag: message_tag,
                 vibrate: [200, 100, 200, 100, 200, 100, 200],
         };
