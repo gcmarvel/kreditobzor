@@ -114,21 +114,24 @@
               }
             };
 
+            
             function checkWorkerAndPushManager () {
                 if (!('serviceWorker' in navigator)) {
                     console.log('Workers are not supported.');
                     return;
                 }
-                if (!('PushManager' in window)) {
+                else if (!('PushManager' in window)) {
                     console.log('Push notifications are not supported.');
                     return;
+                }
+                else {
+                    return true;
                 }
             }
 
             function registerWorker () {
                 window.addEventListener('load', function () {
                     navigator.serviceWorker.register('/static/js/sw.js').then(function (registration) {
-                        console.log('ServiceWorker registration successful');
                     }, function (err) {
                         console.log('ServiceWorker registration failed: ', err);
                         return;
@@ -140,7 +143,7 @@
             var supported = checkWorkerAndPushManager();
 
             if (supported){
-                    var worker = registerWorker ();
+                var worker = registerWorker ();
             }
         </script>
     </footer>
