@@ -37,9 +37,8 @@ self.addEventListener('push', function(event) {
 });
 
 self.addEventListener('notificationclick', function(event) {
-var response_json = event.data.json();
  event.notification.close();
  event.waitUntil(
-   clients.openWindow(response_json.url)
+   clients.openWindow('https://www.кредитобзор.рф')
  );
 });
