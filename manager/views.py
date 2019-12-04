@@ -98,17 +98,17 @@ def send_push(request):
             if 'push_body' in request.POST:
                 for device in WebPushDevice.objects.all():
                     try:
-                        device.send_message(json.dumps({'message': request.POST['push_body'], 'title': request.POST['push_head']}))
+                        device.send_message(json.dumps({'message': request.POST['push_body'], 'title': request.POST['push_head'], 'tag': request.POST['push_url']}))
                     except WebPushError:
                         try:
                             device.browser = "FIREFOX"
                             device.save()
-                            device.send_message(json.dumps({'message': request.POST['push_body'], 'title': request.POST['push_head']}))
+                            device.send_message(json.dumps({'message': request.POST['push_body'], 'title': request.POST['push_head'], 'tag': request.POST['push_url']}))
                         except WebPushError:
                             try:
                                 device.browser = "OPERA"
                                 device.save()
-                                device.send_message(json.dumps({'message': request.POST['push_body'], 'title': request.POST['push_head'], 'tag': 'https://www.кредитобзор.рф'}))
+                                device.send_message(json.dumps({'message': request.POST['push_body'], 'title': request.POST['push_head'], 'tag': request.POST['push_url']}))
                             except WebPushError:
                                 device.delete()
                                 pass

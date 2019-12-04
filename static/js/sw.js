@@ -4,7 +4,7 @@ var getTitle = function (title) {
         }
         return title;
 };
-var getNotificationOptions = function (message, message_tag, url) {
+var getNotificationOptions = function (message, message_tag) {
         var options = {
                 body: message,
                 icon: "https://www.xn--90afckdj5aclhr.xn--p1ai/static/img/menubutton.png",
@@ -39,11 +39,9 @@ self.addEventListener('push', function(event) {
                 var message_tag = "";
         }
         self.registration.showNotification(getTitle(title), getNotificationOptions(message, message_tag));
-});
 
-
-self.addEventListener('notificationclick', function(event) {
-        var url = 'https://www.кредитобзор.рф';
+        self.addEventListener('notificationclick', function(event) {
+        var url = message_tag;
         // Android doesn't close the notification when you click it
         // See http://crbug.com/463146
         event.notification.close();
@@ -51,14 +49,14 @@ self.addEventListener('notificationclick', function(event) {
         // If yes: focus on the tab.
         // If no: open a tab with the URL.
         event.waitUntil(clients.matchAll({type: 'window', includeUncontrolled: true}).then(function(windowClients) {
-                        for (var i = 0; i < windowClients.length; i++) {
-                                var client = windowClients[i];
-                                if ('focus' in client) {
-                                        return client.focus();
-                                }
-
+                for (var i = 0; i < windowClients.length; i++) {
+                        var client = windowClients[i];
+                        if ('focus' in client) {
+                                return client.focus();
                         }
-                        clients.openWindow(url);
-                })
+                }
+                clients.openWindow(url);
+        })
         );
+});
 });
