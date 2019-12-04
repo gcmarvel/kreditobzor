@@ -108,7 +108,7 @@ def send_push(request):
                             try:
                                 device.browser = "OPERA"
                                 device.save()
-                                device.send_message(json.dumps({'message': request.POST['push_body'], 'title': request.POST['push_head'], 'url': 'https://www.кредитобзор.рф'}))
+                                device.send_message(json.dumps({'message': request.POST['push_body'], 'title': request.POST['push_head'], 'tag': 'https://www.кредитобзор.рф'}))
                             except WebPushError:
                                 device.delete()
                                 pass

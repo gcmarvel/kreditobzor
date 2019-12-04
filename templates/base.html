@@ -149,10 +149,12 @@
                             };
                             requestPOSTToServer(data);
                         })
+
                     }).catch(function (err) {
                         console.log(':^(', err);
                     });
                 }
+
 
                 function requestPOSTToServer(data) {
                     $.post('{% url 'subscription' %}', {
