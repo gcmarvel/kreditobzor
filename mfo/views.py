@@ -1,3 +1,5 @@
+import urllib.parse
+
 from django.shortcuts import redirect, reverse
 from django.contrib import messages
 from django.conf import settings
@@ -10,8 +12,7 @@ from manager.utils import get_rating, get_count
 from .models import Offer, Comment, UnverifiedComment
 from ads.models import SidebarBanner
 from manager.forms import CommentForm
-
-from push_notifications.models import WebPushDevice
+from manager.models import TeaserClick
 
 app_list = settings.APP_LIST
 app_name = 'мфо'
@@ -36,7 +37,6 @@ class MFOHomeView (ListView):
     def get_context_data(self, **kwargs):
         filter_list = {'народный_выбор': 'народный выбор', 'высокое_одобрение': 'высокий % одобрения', 'процентная_ставка': 'по процентной ставке',
                        'величина_суммы': 'по величине суммы', 'акция_займ': 'акция займ под 0%', 'самые_обсуждаемые': 'самые обсуждаемые'}
-        webpush = {"group": 'push'}
         context = super().get_context_data(**kwargs)
         if 's' in self.request.GET:
             for key, value in filter_list.items():
@@ -47,7 +47,6 @@ class MFOHomeView (ListView):
         context['filter_list'] = filter_list
         context['app_name'] = 'Займы'
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
-        context['webpush'] = webpush
         return context
 
     def get_queryset(self):
@@ -79,6 +78,29 @@ class MFOOfferView (DetailView):
         context = super().get_context_data(**kwargs)
         comments = Comment.objects.filter(offer=self.object)
         paginator = Paginator(comments, self.paginate_by)
+
+        if 'r' in self.request.GET:
+            click = TeaserClick()
+            click.link = urllib.parse.unquote(self.request.get_full_path())
+            click.banner = self.request.GET.get('r')
+            x_forwarded_for = self.request.META.get('HTTP_X_FORWARDED_FOR')
+            if x_forwarded_for:
+                ip = x_forwarded_for.split(',')[0]
+            else:
+                ip = self.request.META.get('REMOTE_ADDR')
+            click.ip = ip
+            user_agent = parse(self.request.META.get('HTTP_USER_AGENT', ''))
+            click.useragent = str(user_agent)
+            referer = self.request.META.get('HTTP_REFERER')
+            if not referer:
+                referer = 'Нет реферера'
+            click.referer = referer
+            if 'r_c' not in self.request.session:
+                self.request.session['r_c'] = '1'
+            else:
+                self.request.session['r_c'] = str(int(self.request.session['r_c'])+1)
+            click.cookie_counter = int(self.request.session['r_c'])
+            click.save()
 
         page = self.request.GET.get('page')
 

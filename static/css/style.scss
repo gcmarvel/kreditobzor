@@ -306,6 +306,28 @@ body {
         }
       }
     }
+    .referals {
+      display: flex;
+      justify-content: center;
+
+      a {
+        background-color: $btn-yellow;
+        text-align: center;
+        font-size: 1.5vw;
+        margin-top: 2vw;
+        padding: 1vw 2vw;
+      }
+    }
+    .back-button {
+      margin-top: 4vw;
+
+      a {
+        background-color: $btn-yellow;
+        text-align: center;
+        font-size: 1.5vw;
+        padding: 1vw 2vw;
+      }
+    }
   }
 
   .girls {

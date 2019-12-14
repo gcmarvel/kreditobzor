@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block filters %}
+    <div class="filters">
+        <div class="filter-placeholder">
+        </div>
+    </div>
+{% endblock %}
+{% block main %}
+<div class="main-full">
+    <div class='comment-manager'>
+        <h1>Рефералы</h1>
+        <div class="comment-grid">
+            {% for referal in referals %}
+                <div class="manager-box">
+                    <p>Полная ссылка: {{ referal.link }}</p>
+                    <p>Время: {{ referal.timestamp }}</p>
+                    <p>IP: {{ referal.ip }}</p>
+                    <p>Юзер-агент: {{ referal.useragent }}</p>
+                    <p>Реферер: {{ referal.referer }}</p>
+                    <p>Идентификатор: {{ referal.banner }}</p>
+                    <p>Количество переходов по куки: {{ referal.cookie_counter }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block sidebar %}
+{% endblock %}

@@ -16,7 +16,7 @@ class Offer(models.Model):
     min_rate = models.DecimalField(max_digits=4, decimal_places=2, verbose_name='Ставка')
     special_offer = models.BooleanField(verbose_name='Специальное предложение')
     high_approval_rate = models.BooleanField(verbose_name='Высокий % одобрения')
-    approval_time = models.CharField(max_length=20, verbose_name='Одобрение')
+    approval = models.CharField(max_length=20, verbose_name='Одобрение')
     identification = models.CharField(max_length=50, verbose_name='Идентификация')
     documents = models.CharField(max_length=50, verbose_name='Документы')
     history_rating = models.IntegerField(verbose_name='Кредитный рейтинг')
@@ -26,7 +26,7 @@ class Offer(models.Model):
     advantage4 = models.CharField(max_length=200, blank=True, null=True, verbose_name='Преимущество 4')
     legal_info = models.TextField(max_length=2000, verbose_name='Юридическая информация')
     promoted = models.BooleanField(verbose_name='Продвигаемое')
-    rating = models.DecimalField(max_digits=3, decimal_places=1, verbose_name='rating', default=0)
+    rating = models.DecimalField(max_digits=3, decimal_places=1, verbose_name='Рейтинг', default=0)
     count = models.IntegerField(verbose_name='Количество отзывов', default=0)
     clicked = models.IntegerField(verbose_name='Переходов', default=0)
 

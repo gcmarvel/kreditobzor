@@ -59,7 +59,7 @@
                     <div class="col">
                         <div class="row">
                             <img src="{% static 'img/icon-time.png' %}" alt="срок рассмотрения заявки">
-                            <p>Оформление: {{ offer.approval_time }}</p>
+                            <p>Одобрение: {{ offer.approval }}</p>
                         </div>
                         <div class="row">
                             <img src="{% static 'img/icon-person.png' %}" alt="займ идентификация">
@@ -155,10 +155,10 @@
                     </div>
                 </div>
                 <div class="col">
-                    <p>Оформление</p>
+                    <p>Одобрение</p>
                     <div class="row">
                         <img src="{% static 'img/icon-time.png' %}" alt="срок рассмотрения заявки">
-                        <h3>{{ offer.approval_time }}</h3>
+                        <h3>{{ offer.approval }}</h3>
                     </div>
                 </div>
             </div>

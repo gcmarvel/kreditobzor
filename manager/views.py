@@ -8,6 +8,7 @@ from mfo.models import Comment as MFOComments
 from mfo.models import UnverifiedComment as MFOUnverifiedComments
 from credit.models import Comment as CreditComments
 from credit.models import UnverifiedComment as CreditUnverifiedComments
+from .models import TeaserClick
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -116,6 +117,17 @@ def send_push(request):
             return render(request, 'push.html')
         else:
             return render(request, 'push.html')
+    else:
+        return redirect('home')
+
+
+def referals(request):
+    if request.user.is_authenticated:
+        referals = TeaserClick.objects.all()
+        context = {
+            'referals': referals,
+        }
+        return render(request, 'referals.html', context)
     else:
         return redirect('home')
 

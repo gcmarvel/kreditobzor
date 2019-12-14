@@ -201,6 +201,22 @@ body {
           font-size: 4vw;
           text-align: left;
           padding: 8px; }
+    .header .filters .referals {
+      display: flex;
+      justify-content: center; }
+      .header .filters .referals a {
+        background-color: #fab309;
+        text-align: center;
+        font-size: 1.5vw;
+        margin-top: 2vw;
+        padding: 1vw 2vw; }
+    .header .filters .back-button {
+      margin-top: 4vw; }
+      .header .filters .back-button a {
+        background-color: #fab309;
+        text-align: center;
+        font-size: 1.5vw;
+        padding: 1vw 2vw; }
   .header .girls {
     position: absolute;
     right: 8vw;
