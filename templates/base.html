@@ -3,17 +3,18 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}КредитОбзор - сайт отзывов о кредитных картах, онлайн займах и других финансовых продуктах{% endblock %}</title>
-    <meta name="description" content="{% block description %}{% endblock %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="yandex-verification" content="fb17d5c655bbacc6" />
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'css/style.scss' %}" >
-    <link rel="stylesheet" type="text/css" href="{% static 'css/star-rating-svg.css' %}">
-    <link rel="icon" type="image/png" href="{% static 'img/favi.png' %}">
-    <script src={% static 'js/jquery.min.js' %}></script>
-    <script src="{% static 'js/jquery.star-rating-svg.js' %}"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154623264-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154623264-1');
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -27,8 +28,21 @@
             webvisor:true
        });
     </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/56674468" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+    <noscript><div><img src="https://mc.yandex.ru/watch/56674468" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+    <meta charset="UTF-8">
+    <title>{% block title %}КредитОбзор - сайт отзывов о кредитных картах, онлайн займах и других финансовых продуктах{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="yandex-verification" content="fb17d5c655bbacc6" />
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'css/style.scss' %}" >
+    <link rel="stylesheet" type="text/css" href="{% static 'css/star-rating-svg.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favi.png' %}">
+    <script src={% static 'js/jquery.min.js' %}></script>
+    <script src="{% static 'js/jquery.star-rating-svg.js' %}"></script>
+
     {% block extra_head %}
     {% endblock %}
 </head>
