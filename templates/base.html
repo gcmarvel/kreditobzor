@@ -8,13 +8,27 @@
     <meta name="description" content="{% block description %}{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="google-site-verification" content="e4jEJSNfc_tb07U2HW4kWcI3-kT_K_okHzUBws6T1-E" />
     <meta name="yandex-verification" content="fb17d5c655bbacc6" />
     <link rel="stylesheet" type="text/css" href="{% sass_src 'css/style.scss' %}" >
     <link rel="stylesheet" type="text/css" href="{% static 'css/star-rating-svg.css' %}">
     <link rel="icon" type="image/png" href="{% static 'img/favi.png' %}">
     <script src={% static 'js/jquery.min.js' %}></script>
     <script src="{% static 'js/jquery.star-rating-svg.js' %}"></script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(56674468, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+<noscript><div><img src="https://mc.yandex.ru/watch/56674468" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
     {% block extra_head %}
     {% endblock %}
 </head>
