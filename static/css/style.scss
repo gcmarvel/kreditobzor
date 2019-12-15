@@ -317,6 +317,11 @@ body {
         margin-top: 2vw;
         padding: 1vw 2vw;
         color: black;
+
+        @include breakpoint {
+          font-size: 3vw;
+          padding: 1.5vw 3vw;
+        }
       }
     }
     .back-button {
@@ -327,6 +332,11 @@ body {
         text-align: center;
         font-size: 1.5vw;
         padding: 1vw 2vw;
+
+        @include breakpoint {
+          font-size: 3vw;
+          padding: 1.5vw 3vw;
+        }
       }
     }
   }

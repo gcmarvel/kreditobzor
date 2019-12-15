@@ -211,6 +211,10 @@ body {
         margin-top: 2vw;
         padding: 1vw 2vw;
         color: black; }
+        @media (max-width: 639px) {
+          .header .filters .referals a {
+            font-size: 3vw;
+            padding: 1.5vw 3vw; } }
     .header .filters .back-button {
       margin-top: 4vw; }
       .header .filters .back-button a {
@@ -218,6 +222,10 @@ body {
         text-align: center;
         font-size: 1.5vw;
         padding: 1vw 2vw; }
+        @media (max-width: 639px) {
+          .header .filters .back-button a {
+            font-size: 3vw;
+            padding: 1.5vw 3vw; } }
   .header .girls {
     position: absolute;
     right: 8vw;
