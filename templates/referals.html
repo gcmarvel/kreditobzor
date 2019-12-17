@@ -31,9 +31,16 @@
     <div class='comment-manager'>
         <h1>Статистика</h1>
         <div class="comment-grid">
-            {% for key, value in referals_stat.items %}
-                <p>{{ key }}: {{ value }}</p>
-            {% endfor %}
+            <div class="manager-box">
+                {% for key, value in referals_stat.items %}
+                    <p>{{ key }}: {{ value }}</p>
+                {% endfor %}
+            </div>
+            <div class="manager-box">
+                {% for key, value in referals_list.items %}
+                    <p>{{ key }}: {{ value }}</p>
+                {% endfor %}
+            </div>
         </div>
         <h1>Рефералы</h1>
         <div class="comment-grid">

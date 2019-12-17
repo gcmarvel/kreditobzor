@@ -139,30 +139,38 @@ def referals(request):
         if 's' in request.GET:
             if request.GET['s'] == 'ip':
                 ip_list = []
+                referals_list = {}
                 for referal in referals_date:
                     ip_list.append(referal.ip)
+                    referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.ip})
                 referals_stat = dict(Counter(ip_list))
             elif request.GET['s'] == 'ua':
                 ua_list = []
+                referals_list = {}
                 for referal in referals_date:
                     ua_list.append(referal.useragent)
+                    referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.useragent})
                 referals_stat = dict(Counter(ua_list))
             else:
                 netloc_list = []
+                referals_list = {}
                 for referal in referals_date:
                     netloc_list.append(urlparse(referal.referer)[1])
+                    referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.referer})
                 referals_stat = dict(Counter(netloc_list))
         else:
             netloc_list = []
+            referals_list = {}
             for referal in referals_date:
                 netloc_list.append(urlparse(referal.referer)[1])
+                referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.referer})
             referals_stat = dict(Counter(netloc_list))
 
         context = {
             'referals': referals,
             'filter_list': filter_list,
             'referals_stat': referals_stat,
-            'referals_date': referals_date,
+            'referals_list': referals_list,
         }
         return render(request, 'referals.html', context)
     else:
