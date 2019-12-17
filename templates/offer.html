@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block description %}{{ app_name }} {{ offer.title }}: отзывы, условия обслуживания, юридическая информация.{% endblock %}
 {% block title %}КредитОбзор | Отзывы о компании {{ offer.title }}{% endblock %}
 {% block filters %}
     <div class="filters">
