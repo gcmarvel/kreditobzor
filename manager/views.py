@@ -171,7 +171,8 @@ def referals(request):
                 if urlparse(referal.referer)[1] == '':
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): 'Нет реферера'})
                 else:
-                    referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): urlparse(referal.referer)[1]})            referals_stat = dict(Counter(netloc_list))
+                    referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): urlparse(referal.referer)[1]})
+            referals_stat = dict(Counter(netloc_list))
 
         context = {
             'referals': referals,
