@@ -4,7 +4,7 @@ from django.contrib import admin
 from mfo.views import MFOHomeView
 from credit.views import CreditHomeView
 
-admin.site.unregister(Site)
+#admin.site.unregister(Site)
 
 
 def get_homepage(request):
