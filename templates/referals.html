@@ -2,13 +2,39 @@
 {% load static %}
 {% block filters %}
     <div class="filters">
-        <div class="filter-placeholder">
+        <p>Сортировка</p>
+        <div class="filters-list">
+            <select onChange="window.location.href=this.value">
+                <option value="" disabled selected>Выберите период</option>
+                <option value="?r_m_d=1">За 1 день</option>
+                <option value="?r_m_d=7">За 7 дней</option>
+                <option value="?r_m_d=7">За 30 дней</option>
+            </select>
+            {% for key, value in filter_list.items %}
+            <a {% if filter == value %}class="active"{% endif %} href="?s={{ key }}">
+                {{ value }}
+            </a>
+            {% endfor %}
+            <div class="mobile-filters">
+                <select onChange="window.location.href=this.value">
+                    <option value="" disabled selected>{{ filter }}</option>
+                    {% for key, value in filter_list.items %}
+                        <option value="?s={{ key }}">{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
     </div>
 {% endblock %}
 {% block main %}
 <div class="main-full">
     <div class='comment-manager'>
+        <h1>Статистика</h1>
+        <div class="comment-grid">
+            {% for key, value in referals_stat.items %}
+                <p>{{ key }}: {{ value }}</p>
+            {% endfor %}
+        </div>
         <h1>Рефералы</h1>
         <div class="comment-grid">
             {% for referal in referals %}

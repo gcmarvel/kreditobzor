@@ -12,10 +12,13 @@ from .models import TeaserClick
 
 from django.views.decorators.csrf import csrf_exempt
 
-
 import json
 from push_notifications.models import WebPushDevice
 from push_notifications.webpush import WebPushError
+
+import datetime
+from urllib.parse import urlparse
+from collections import Counter
 
 
 def manager(request):
@@ -124,8 +127,42 @@ def send_push(request):
 def referals(request):
     if request.user.is_authenticated:
         referals = TeaserClick.objects.all()
+        filter_list = {'netloc': 'Площадки', 'ip': 'IP', 'ua': 'Юзер агент'}
+
+        if 'r_m_d' not in request.session:
+            request.session['r_m_d'] = '7'
+        if 'r_m_d' in request.GET:
+            request.session['r_m_d'] = request.GET['r_m_d']
+
+        referals_date = TeaserClick.objects.filter(timestamp__lte=datetime.datetime.now(), timestamp__gt=datetime.datetime.now() - datetime.timedelta(days=int(request.session['r_m_d'])))
+
+        if 's' in request.GET:
+            if request.GET['s'] == 'ip':
+                ip_list = []
+                for referal in referals_date:
+                    ip_list.append(referal.ip)
+                referals_stat = dict(Counter(ip_list))
+            elif request.GET['s'] == 'ua':
+                ua_list = []
+                for referal in referals_date:
+                    ua_list.append(referal.useragent)
+                referals_stat = dict(Counter(ua_list))
+            else:
+                netloc_list = []
+                for referal in referals_date:
+                    netloc_list.append(urlparse(referal.referer)[1])
+                referals_stat = dict(Counter(netloc_list))
+        else:
+            netloc_list = []
+            for referal in referals_date:
+                netloc_list.append(urlparse(referal.referer)[1])
+            referals_stat = dict(Counter(netloc_list))
+
         context = {
             'referals': referals,
+            'filter_list': filter_list,
+            'referals_stat': referals_stat,
+            'referals_date': referals_date,
         }
         return render(request, 'referals.html', context)
     else:
