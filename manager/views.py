@@ -155,7 +155,7 @@ def referals(request):
                 netloc_list = []
                 referals_list = {}
                 for referal in referals_date:
-                    if not any(urlparse(referal.referer)[1] in ('', 'clickscloud.net', 'cloudfastads.ru', 'clients.clickscloud.net')):
+                    if urlparse(referal.referer)[1] not in ('', 'clickscloud.net', 'cloudfastads.ru', 'clients.clickscloud.net'):
                         netloc_list.append(urlparse(referal.referer)[1])
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.referer})
                 referals_stat = dict(Counter(netloc_list))
@@ -163,7 +163,7 @@ def referals(request):
             netloc_list = []
             referals_list = {}
             for referal in referals_date:
-                if not any(urlparse(referal.referer)[1] in ('', 'clickscloud.net', 'cloudfastads.ru', 'clients.clickscloud.net')):
+                if urlparse(referal.referer)[1]  not in ('', 'clickscloud.net', 'cloudfastads.ru', 'clients.clickscloud.net'):
                     netloc_list.append(urlparse(referal.referer)[1])
                 referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.referer})
             referals_stat = dict(Counter(netloc_list))
