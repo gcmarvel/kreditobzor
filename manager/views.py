@@ -143,14 +143,14 @@ def referals(request):
                 for referal in referals_date:
                     ip_list.append(referal.ip)
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.ip})
-                referals_stat = dict(Counter(ip_list))
+                referals_stat = dict(Counter(ip_list).most_common())
             elif request.GET['s'] == 'ua':
                 ua_list = []
                 referals_list = {}
                 for referal in referals_date:
                     ua_list.append(referal.useragent)
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.useragent})
-                referals_stat = dict(Counter(ua_list))
+                referals_stat = dict(Counter(ua_list).most_common())
             else:
                 netloc_list = []
                 referals_list = {}
@@ -161,7 +161,7 @@ def referals(request):
                         referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): 'Нет реферера'})
                     else:
                         referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): urlparse(referal.referer)[1]})
-                referals_stat = dict(Counter(netloc_list))
+                referals_stat = dict(Counter(netloc_list).most_common())
         else:
             netloc_list = []
             referals_list = {}
@@ -172,7 +172,7 @@ def referals(request):
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): 'Нет реферера'})
                 else:
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): urlparse(referal.referer)[1]})
-            referals_stat = dict(Counter(netloc_list))
+            referals_stat = dict(Counter(netloc_list).most_common())
 
         context = {
             'referals': referals,
