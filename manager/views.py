@@ -163,7 +163,8 @@ def referals(request):
             netloc_list = []
             referals_list = {}
             for referal in referals_date:
-                netloc_list.append(urlparse(referal.referer)[1])
+                if not any(s in urlparse(referal.referer)[1] for s in ('', 'clickscloud.net', 'cloudfastads.ru', 'clients.clickscloud.net')):
+                    netloc_list.append(urlparse(referal.referer)[1])
                 referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.referer})
             referals_stat = dict(Counter(netloc_list))
 
