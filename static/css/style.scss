@@ -1406,6 +1406,7 @@ footer {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      word-wrap: break-word;
 
       @include breakpoint {
         margin: 4vw 0;
