@@ -17,7 +17,7 @@
             {% endfor %}
             <div class="mobile-filters">
                 <select onChange="window.location.href=this.value">
-                    <option value="" disabled selected>{{ filter }}</option>
+                    <option value="" disabled selected>Выберите фильтр</option>
                     {% for key, value in filter_list.items %}
                         <option value="?s={{ key }}">{{ value }}</option>
                     {% endfor %}
