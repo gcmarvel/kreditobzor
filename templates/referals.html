@@ -56,24 +56,24 @@
                 </div>
             {% endfor %}
         </div>
-        {% if referals_page.has_other_pages %}
-            <div class="pagination">
-                {% if referals_page.has_previous %}
-                    <a href="?page=1"><<</a>
-                    <a href="?page={{ referals_page.previous_page_number }}"><</a>
-                    <a href="?page={{ referals_page.previous_page_number }}">{{ referals_page.previous_page_number }}</a>
-                {% endif %}
-                <span class="page-current">
-                    {{ referals_page.number }}
-                </span>
-                {% if referals_page.has_next %}
-                    <a href="?page={{ referals_page.next_page_number }}">{{ referals_page.next_page_number }}</a>
-                    <a href="?page={{ referals_page.next_page_number }}">></a>
-                    <a href="?page={{ referals_page.paginator.num_pages }}">>></a>
-                {% endif %}
-            </div>
+    </div>
+    {% if referals_page.has_other_pages %}
+    <div class="pagination">
+        {% if referals_page.has_previous %}
+            <a href="?page=1"><<</a>
+            <a href="?page={{ referals_page.previous_page_number }}"><</a>
+            <a href="?page={{ referals_page.previous_page_number }}">{{ referals_page.previous_page_number }}</a>
+        {% endif %}
+        <span class="page-current">
+            {{ referals_page.number }}
+        </span>
+        {% if referals_page.has_next %}
+            <a href="?page={{ referals_page.next_page_number }}">{{ referals_page.next_page_number }}</a>
+            <a href="?page={{ referals_page.next_page_number }}">></a>
+            <a href="?page={{ referals_page.paginator.num_pages }}">>></a>
         {% endif %}
     </div>
+    {% endif %}
 </div>
 {% endblock %}
 {% block sidebar %}

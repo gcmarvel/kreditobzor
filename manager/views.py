@@ -175,7 +175,7 @@ def referals(request):
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): urlparse(referal.referer)[1]})
             referals_stat = dict(Counter(netloc_list).most_common())
 
-        paginator = Paginator(referals, 10)
+        paginator = Paginator(referals, 100)
         page = request.GET.get('page')
         try:
             referals_page = paginator.page(page)
@@ -185,7 +185,6 @@ def referals(request):
             referals_page = paginator.page(paginator.num_pages)
 
         context = {
-            'referals': referals,
             'filter_list': filter_list,
             'referals_stat': referals_stat,
             'referals_list': referals_list,
