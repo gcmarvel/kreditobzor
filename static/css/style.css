@@ -876,7 +876,8 @@ footer {
       padding: 1vw;
       display: flex;
       flex-direction: column;
-      justify-content: space-between; }
+      justify-content: space-between;
+      word-wrap: break-word; }
       @media (max-width: 639px) {
         .comment-manager .comment-grid .manager-box {
           margin: 4vw 0; } }
