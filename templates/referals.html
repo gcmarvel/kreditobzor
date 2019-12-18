@@ -56,6 +56,30 @@
                 </div>
             {% endfor %}
         </div>
+        {% if referals_page.has_other_pages %}
+            <div class="pagination">
+            {% for num in referals_page.paginator.page_range %}
+                {% if referals_page.number == num %}
+                    <a style="background: #ded9d9" href="?page={{ num }}">{{ num }}</a>
+                {% elif num > referals_page.number|add:'-3' and num < referals_page.number|add:'3' %}
+                    <a href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+                {% if referals_page.has_previous %}
+                    <a href="?page=1"><<</a>
+                    <a href="?page={{ referals_page.previous_page_number }}"><</a>
+                    <a href="?page={{ referals_page.previous_page_number }}">{{ referals_page.previous_page_number }}</a>
+                {% endif %}
+                <span class="page-current">
+                    {{ referals_page.number }}
+                </span>
+                {% if referals_page.has_next %}
+                    <a href="?page={{ referals_page.next_page_number }}">{{ referals_page.next_page_number }}</a>
+                    <a href="?page={{ referals_page.next_page_number }}">></a>
+                    <a href="?page={{ referals_page.paginator.num_pages }}">>></a>
+                {% endif %}
+            </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django.utils import timezone
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from django.conf import settings
 from manager.utils import get_rating, get_count
@@ -174,11 +175,21 @@ def referals(request):
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): urlparse(referal.referer)[1]})
             referals_stat = dict(Counter(netloc_list).most_common())
 
+        paginator = Paginator(referals, 10)
+        page = request.GET.get('page')
+        try:
+            referals_page = paginator.page(page)
+        except PageNotAnInteger:
+            referals_page = paginator.page(1)
+        except EmptyPage:
+            referals_page = paginator.page(paginator.num_pages)
+
         context = {
             'referals': referals,
             'filter_list': filter_list,
             'referals_stat': referals_stat,
             'referals_list': referals_list,
+            'referals_page': referals_page,
         }
         return render(request, 'referals.html', context)
     else:
