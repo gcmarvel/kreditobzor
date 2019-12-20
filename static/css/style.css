@@ -221,7 +221,8 @@ body {
         background-color: #fab309;
         text-align: center;
         font-size: 1.5vw;
-        padding: 1vw 2vw; }
+        padding: 1vw 2vw;
+        color: black; }
         @media (max-width: 639px) {
           .header .filters .back-button a {
             font-size: 3vw;

@@ -5,7 +5,7 @@ from django.utils import timezone
 
 
 class TeaserClick (models.Model):
-    link = models.URLField(verbose_name='Сссылка')
+    link = models.URLField(verbose_name='Ссылка')
     banner = models.CharField(max_length=100, verbose_name='Баннер')
     ip = models.GenericIPAddressField(verbose_name='IP')
     useragent = models.CharField(max_length=250, verbose_name='User agent')
@@ -20,3 +20,17 @@ class TeaserClick (models.Model):
 
     def __str__(self):
         return self.timestamp.strftime("%Y-%m-%d %H:%M:%S") + ' ' + urlparse(self.referer)[1]
+
+
+class TeaserLead (models.Model):
+    timestamp = models.DateTimeField(default=timezone.now, verbose_name='Время')
+    offer = models.CharField(max_length=100, verbose_name='Оффер')
+    ip = models.GenericIPAddressField(verbose_name='IP')
+
+    class Meta:
+        ordering = ('-timestamp',)
+        verbose_name = 'Тизерный лид'
+        verbose_name_plural = 'Тизерные лиды'
+
+    def __str__(self):
+        return self.timestamp.strftime("%Y-%m-%d %H:%M:%S") + ' ' + self.offer

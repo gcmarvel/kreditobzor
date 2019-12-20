@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 
 from mfo.models import Offer as MFOOffer
 from credit.models import Offer as CreditOffer
-from manager.models import TeaserClick
+from manager.models import TeaserClick, TeaserLead
 
 
 def get_rating(offer):
@@ -68,5 +68,15 @@ def referrer_count(request, app_name, pk):
         click.cookie_counter = int(request.session['r_c'])
         click.save()
 
+    if 'r_c' in request.session:
+        lead = TeaserLead()
+        lead.offer = offer.title
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        lead.ip = ip
+        lead.save()
 
     return HttpResponseRedirect(offer.link)

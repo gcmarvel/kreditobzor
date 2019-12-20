@@ -42,6 +42,16 @@
                 {% endfor %}
             </div>
         </div>
+        <h1>Лиды с рефералов</h1>
+        <div class="comment-grid">
+            {% for lead in referals_lead %}
+                <div class="manager-box">
+                    <p>Время перехода: {{ lead.timestamp }}</p>
+                    <p>Оффер: {{ lead.offer }}</p>
+                    <p>IP: {{ lead.ip }}</p>
+                </div>
+            {% endfor %}
+        </div>
         <h1>Рефералы</h1>
         <div class="comment-grid">
             {% for referal in referals_page %}

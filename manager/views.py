@@ -9,7 +9,7 @@ from mfo.models import Comment as MFOComments
 from mfo.models import UnverifiedComment as MFOUnverifiedComments
 from credit.models import Comment as CreditComments
 from credit.models import UnverifiedComment as CreditUnverifiedComments
-from .models import TeaserClick
+from .models import TeaserClick, TeaserLead
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -136,6 +136,8 @@ def referals(request):
             request.session['r_m_d'] = request.GET['r_m_d']
 
         referals_date = TeaserClick.objects.filter(timestamp__lte=datetime.datetime.now(), timestamp__gt=datetime.datetime.now() - datetime.timedelta(days=int(request.session['r_m_d'])))
+        referals_lead = TeaserLead.objects.filter(timestamp__lte=datetime.datetime.now(), timestamp__gt=datetime.datetime.now() - datetime.timedelta(days=int(request.session['r_m_d'])))
+
 
         if 's' in request.GET:
             if request.GET['s'] == 'ip':
@@ -175,6 +177,7 @@ def referals(request):
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): urlparse(referal.referer)[1]})
             referals_stat = dict(Counter(netloc_list).most_common())
 
+
         paginator = Paginator(referals, 100)
         page = request.GET.get('page')
         try:
@@ -188,6 +191,7 @@ def referals(request):
             'filter_list': filter_list,
             'referals_stat': referals_stat,
             'referals_list': referals_list,
+            'referals_lead': referals_lead,
             'referals_page': referals_page,
         }
         return render(request, 'referals.html', context)
