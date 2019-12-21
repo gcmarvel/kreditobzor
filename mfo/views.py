@@ -52,6 +52,7 @@ class MFOHomeView (ListView):
             if not referer:
                 referer = 'Нет реферера'
             click.referer = referer
+            self.request.session['r'] = self.request.GET.get('r')
             if 'r_c' not in self.request.session:
                 self.request.session['r_c'] = '1'
             else:
@@ -119,6 +120,7 @@ class MFOOfferView (DetailView):
             if not referer:
                 referer = 'Нет реферера'
             click.referer = referer
+            self.request.session['r'] = self.request.GET.get('r')
             if 'r_c' not in self.request.session:
                 self.request.session['r_c'] = '1'
             else:

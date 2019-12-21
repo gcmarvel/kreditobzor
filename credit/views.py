@@ -5,6 +5,7 @@ from django.conf import settings
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from user_agents import parse
 
 from manager.utils import get_rating, get_count
 from .models import Offer, Comment, UnverifiedComment
@@ -50,6 +51,7 @@ class CreditHomeView (ListView):
             if not referer:
                 referer = 'Нет реферера'
             click.referer = referer
+            self.request.session['r'] = self.request.GET.get('r')
             if 'r_c' not in self.request.session:
                 self.request.session['r_c'] = '1'
             else:
@@ -116,6 +118,7 @@ class CreditOfferView (DetailView):
             if not referer:
                 referer = 'Нет реферера'
             click.referer = referer
+            self.request.session['r'] = self.request.GET.get('r')
             if 'r_c' not in self.request.session:
                 self.request.session['r_c'] = '1'
             else:

@@ -25,6 +25,7 @@ class TeaserClick (models.Model):
 class TeaserLead (models.Model):
     timestamp = models.DateTimeField(default=timezone.now, verbose_name='Время')
     offer = models.CharField(max_length=100, verbose_name='Оффер')
+    banner = models.CharField(max_length=1000, verbose_name='Идентификатор')
     ip = models.GenericIPAddressField(verbose_name='IP')
 
     class Meta:

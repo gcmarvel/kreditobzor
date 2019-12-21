@@ -61,6 +61,7 @@ def referrer_count(request, app_name, pk):
         if not referer:
             referer = 'Нет реферера'
         click.referer = referer
+        request.session['r'] = request.GET.get('r')
         if 'r_c' not in request.session:
             request.session['r_c'] = '1'
         else:
@@ -71,6 +72,10 @@ def referrer_count(request, app_name, pk):
     if 'r_c' in request.session:
         lead = TeaserLead()
         lead.offer = offer.title
+        if 'r' in request.session:
+            lead.banner = request.session['r']
+        else:
+            lead.banner = 'Отсутствует'
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded_for:
             ip = x_forwarded_for.split(',')[0]
