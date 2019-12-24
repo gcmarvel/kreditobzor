@@ -12,6 +12,10 @@ class TeaserClick (models.Model):
     timestamp = models.DateTimeField(default=timezone.now, verbose_name='Время')
     referer = models.CharField(max_length=500, verbose_name='Реферер')
     cookie_counter = models.IntegerField(verbose_name='Переходов по куки')
+    geo = models.CharField(max_length=100, default='Нет информации', verbose_name='ГЕО')
+    age = models.CharField(max_length=100, default='Нет информации', verbose_name='Возраст')
+    gender = models.CharField(max_length=100, default='Нет информации ', verbose_name='Пол')
+    search = models.CharField(max_length=1000, default='Нет информации ', verbose_name='Поисковая фраза')
 
     class Meta:
         ordering = ('-timestamp',)
