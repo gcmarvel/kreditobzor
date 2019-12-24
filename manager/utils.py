@@ -76,7 +76,7 @@ def referrer(self):
             if gender == 'm':
                 click.gender = 'Мужской'
         if 'search' in self.request.GET:
-            click.searh = self.request.GET.get('search')
+            click.search = self.request.GET.get('search')
         click.save()
 
 
