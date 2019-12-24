@@ -1,5 +1,3 @@
-import urllib.parse
-
 from django.shortcuts import redirect, reverse
 from django.contrib import messages
 from django.conf import settings

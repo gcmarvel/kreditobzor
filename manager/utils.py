@@ -88,7 +88,7 @@ def referrer_count(request, app_name, pk):
 
     if 'r' in request.GET:
         click = TeaserClick()
-        click.link = urllib.parse.unquote(request.get_full_path()) + ' / ' + offer.title
+        click.link = urllib.parse.unquote(request.get_full_path())
         click.banner = request.GET.get('r')
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded_for:
@@ -108,6 +108,21 @@ def referrer_count(request, app_name, pk):
         else:
             request.session['r_c'] = str(int(request.session['r_c']) + 1)
         click.cookie_counter = int(request.session['r_c'])
+        if 'geo' in request.GET:
+            geo = request.GET.get('geo')
+            if geo in regions:
+                geo = regions[geo]
+            click.geo = geo
+        if 'age' in request.GET:
+            click.age = request.GET.get('age')
+        if 'gender' in request.GET:
+            gender = request.GET.get('gender')
+            if gender == 'f':
+                click.gender = 'Женский'
+            if gender == 'm':
+                click.gender = 'Мужской'
+        if 'search' in request.GET:
+            click.searh = request.GET.get('search')
         click.save()
 
     if 'r_c' in request.session:
