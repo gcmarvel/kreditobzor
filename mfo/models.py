@@ -5,6 +5,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Offer(models.Model):
+    active = models.BooleanField(default=True, verbose_name="Активный")
     slug = models.SlugField(allow_unicode=True, unique=True, verbose_name='URL')
     title = models.CharField(max_length=100, verbose_name='Название')
     image = models.ImageField(verbose_name='Логотип')

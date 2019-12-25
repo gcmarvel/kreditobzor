@@ -52,19 +52,19 @@ class MFOHomeView (ListView):
     def get_queryset(self):
         if 's' in self.request.GET:
             if self.request.GET['s'] == 'народный_выбор':
-                return Offer.objects.all().order_by('-rating')
+                return Offer.objects.filter(active=True).order_by('-rating')
             if self.request.GET['s'] == 'высокое_одобрение':
-                return Offer.objects.all().order_by('-high_approval_rate')
+                return Offer.objects.filter(active=True).order_by('-high_approval_rate')
             if self.request.GET['s'] == 'процентная_ставка':
-                return Offer.objects.all().order_by('min_rate')
+                return Offer.objects.filter(active=True).order_by('min_rate')
             if self.request.GET['s'] == 'величина_суммы':
-                return Offer.objects.all().order_by('-max_sum')
+                return Offer.objects.filter(active=True).order_by('-max_sum')
             if self.request.GET['s'] == 'акция_займ':
-                return Offer.objects.all().order_by('-special_offer')
+                return Offer.objects.filter(active=True).order_by('-special_offer')
             if self.request.GET['s'] == 'самые_обсуждаемые':
-                return Offer.objects.all().order_by('-count')
+                return Offer.objects.filter(active=True).order_by('-count')
         else:
-            return Offer.objects.all()
+            return Offer.objects.filter(active=True)
 
 
 class MFOOfferView (DetailView):
@@ -95,7 +95,7 @@ class MFOOfferView (DetailView):
         context['form'] = CommentForm
         context['app_name'] = 'Займы'
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
-        context['promoted_offers'] = Offer.objects.filter(promoted=True)
+        context['promoted_offers'] = Offer.objects.filter(active=True, promoted=True)
         return context
 
     def post(self, request, **kwargs):

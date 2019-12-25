@@ -37,7 +37,7 @@ class NewsDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=self.object.reference_app).filter(enabled=True)
-        context['promoted_offers'] = get_app_offer(self.object.reference_app).objects.filter(promoted=True)
+        context['promoted_offers'] = get_app_offer(self.object.reference_app).objects.filter(active=True, promoted=True)
         return context
 
 
@@ -49,6 +49,6 @@ class ArticlesDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=self.object.reference_app).filter(enabled=True)
-        context['promoted_offers'] = get_app_offer(self.object.reference_app).objects.filter(promoted=True)
+        context['promoted_offers'] = get_app_offer(self.object.reference_app).objects.filter(active=True, promoted=True)
         context['paragraphs'] = Paragraph.objects.filter(article=self.object)
         return context

@@ -50,17 +50,17 @@ class CreditHomeView (ListView):
     def get_queryset(self):
         if 's' in self.request.GET:
             if self.request.GET['s'] == 'народный_выбор':
-                return Offer.objects.all().order_by('-rating')
+                return Offer.objects.filter(active=True).order_by('-rating')
             if self.request.GET['s'] == 'высокое_одобрение':
-                return Offer.objects.all().order_by('-high_approval_rate')
+                return Offer.objects.filter(active=True).order_by('-high_approval_rate')
             if self.request.GET['s'] == 'процентная_ставка':
-                return Offer.objects.all().order_by('min_rate')
+                return Offer.objects.filter(active=True).order_by('min_rate')
             if self.request.GET['s'] == 'кредитный_лимит':
-                return Offer.objects.all().order_by('-limit')
+                return Offer.objects.filter(active=True).order_by('-limit')
             if self.request.GET['s'] == 'кэшбэк':
-                return Offer.objects.all().order_by('-cashback')
+                return Offer.objects.filter(active=True).order_by('-cashback')
             if self.request.GET['s'] == 'цена_обслуживания':
-                return Offer.objects.all().order_by('maintenance')
+                return Offer.objects.filter(active=True).order_by('maintenance')
         else:
             return Offer.objects.all()
 
@@ -93,7 +93,7 @@ class CreditOfferView (DetailView):
         context['form'] = CommentForm
         context['app_name'] = 'Кредитные карты'
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
-        context['promoted_offers'] = Offer.objects.filter(promoted=True)
+        context['promoted_offers'] = Offer.objects.filter(active=True, promoted=True)
         return context
 
     def post(self, request, **kwargs):
