@@ -30,6 +30,7 @@ class Offer(models.Model):
     rating = models.DecimalField(max_digits=3, decimal_places=1, verbose_name='rating', default=0)
     count = models.IntegerField(verbose_name='Количество отзывов', default=0)
     clicked = models.IntegerField(verbose_name='Переходов', default=0)
+    addition = models.TextField(max_length=4000, verbose_name='Дополнительный текст', blank=True, null=True)
 
     class Meta:
         ordering = ('default_position',)

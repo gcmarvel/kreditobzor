@@ -302,14 +302,14 @@ body {
         .content .main .card .row-3 .col:nth-child(1) img {
           width: 70%; }
         .content .main .card .row-3 .col:nth-child(1) button {
-          width: 60%;
+          width: 80%;
           margin: 1vw auto 0 auto;
           display: block;
           background: #fab309;
           border: none;
           border-radius: 2px;
-          font-size: 1vw;
-          padding: 0.4vw 0;
+          font-size: 1.2vw;
+          padding: 0.6vw 0;
           cursor: pointer; }
           .content .main .card .row-3 .col:nth-child(1) button:hover {
             background: #feca15; }
@@ -326,15 +326,15 @@ body {
           font-size: 2vw;
           text-align: center; }
         .content .main .card .row-3 .col:nth-child(2) .row-1 button {
-          width: 60%;
+          width: 80%;
           margin: 1vw auto 0 auto;
           display: block;
           background: #f75e82;
           border: none;
           color: white;
           border-radius: 2px;
-          font-size: 1vw;
-          padding: 0.4vw 0; }
+          font-size: 1.2vw;
+          padding: 0.6vw 0; }
           .content .main .card .row-3 .col:nth-child(2) .row-1 button:hover {
             background: #f7798d; }
         .content .main .card .row-3 .col:nth-child(2) .row-1 .col {
@@ -376,6 +376,12 @@ body {
               display: flex;
               justify-content: center;
               margin-top: 1vw; }
+      .content .main .card .row-4 {
+        margin-top: 2vw; }
+        .content .main .card .row-4 .addition {
+          margin-right: 3vw; }
+          .content .main .card .row-4 .addition p {
+            font-size: 1.2vw; }
     .content .main .mobile-card {
       display: none;
       background: white;
@@ -490,9 +496,14 @@ body {
               text-align: center;
               font-size: 4vw; }
       .content .main .mobile-card > .row:nth-child(5) {
+        margin-top: 2vw; }
+        .content .main .mobile-card > .row:nth-child(5) .addition p {
+          text-align: center;
+          font-size: 3.5vw; }
+      .content .main .mobile-card > .row:nth-child(6) {
         justify-content: center;
         margin-top: 6vw; }
-        .content .main .mobile-card > .row:nth-child(5) h4 {
+        .content .main .mobile-card > .row:nth-child(6) h4 {
           font-size: 4.5vw;
           color: #00b7f4;
           text-align: center;
@@ -563,8 +574,8 @@ footer {
       background: #fab309;
       border: none;
       border-radius: 2px;
-      font-size: 1vw;
-      padding: 0.4vw 0;
+      font-size: 1.5vw;
+      padding: 0.8vw 0;
       cursor: pointer; }
       .offer-card .card .row-3 .d-col:nth-child(1) button:hover {
         background: #feca15; }

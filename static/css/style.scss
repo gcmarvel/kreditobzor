@@ -470,14 +470,14 @@ body {
             }
 
             button {
-              width: 60%;
+              width: 80%;
               margin: 1vw auto 0 auto;
               display: block;
               background: $btn-yellow;
               border: none;
               border-radius: 2px;
-              font-size: 1vw;
-              padding: 0.4vw 0;
+              font-size: 1.2vw;
+              padding: 0.6vw 0;
               cursor: pointer;
 
               &:hover {
@@ -508,15 +508,15 @@ body {
               }
 
               button {
-                width: 60%;
+                width: 80%;
                 margin: 1vw auto 0 auto;
                 display: block;
                 background: $btn-pink;
                 border: none;
                 color: white;
                 border-radius: 2px;
-                font-size: 1vw;
-                padding: 0.4vw 0;
+                font-size: 1.2vw;
+                padding: 0.6vw 0;
 
                 &:hover {
                   background: $btn-pink-hover;
@@ -598,6 +598,17 @@ body {
           }
         }
       }
+      .row-4{
+        margin-top: 2vw;
+
+        .addition {
+          margin-right: 3vw;
+
+          p {
+            font-size: 1.2vw;
+          }
+        }
+      }
     }
 
     .mobile-card {
@@ -619,7 +630,7 @@ body {
         display: block;
       }
 
-      >.row{
+      >.row {
 
         &:nth-child(1) {
           justify-content: space-between;
@@ -794,6 +805,17 @@ body {
         }
 
         &:nth-child(5) {
+        margin-top: 2vw;
+
+        .addition {
+          p {
+            text-align: center;
+            font-size: 3.5vw;
+          }
+        }
+      }
+
+        &:nth-child(6) {
           justify-content: center;
           margin-top: 6vw;
 
@@ -925,8 +947,8 @@ footer {
             background: $btn-yellow;
             border: none;
             border-radius: 2px;
-            font-size: 1vw;
-            padding: 0.4vw 0;
+            font-size: 1.5vw;
+            padding: 0.8vw 0;
             cursor: pointer;
 
             &:hover {
