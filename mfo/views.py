@@ -35,6 +35,13 @@ class MFOHomeView (ListView):
 
         referrer(self)
 
+        quizonstart = ''
+
+        if 'qz' not in self.request.session:
+            self.request.session['qz'] = 'y'
+        else:
+            quizonstart = 'n'
+
         filter_list = {'народный_выбор': 'народный выбор', 'высокое_одобрение': 'высокий % одобрения', 'процентная_ставка': 'по процентной ставке',
                        'величина_суммы': 'по величине суммы', 'акция_займ': 'акция займ под 0%', 'самые_обсуждаемые': 'самые обсуждаемые'}
         context = super().get_context_data(**kwargs)
@@ -47,6 +54,7 @@ class MFOHomeView (ListView):
         context['filter_list'] = filter_list
         context['app_name'] = 'Займы'
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
+        context['qz'] = quizonstart
         return context
 
     def get_queryset(self):

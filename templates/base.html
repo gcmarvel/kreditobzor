@@ -118,6 +118,11 @@
         {% endblock %}
             {% block sidebar %}
             <div class="sidebar">
+                {% if app_name == 'Займы' %}
+                <div class="quiz-banner">
+                    <img src="{% static 'img/quiz.jpg' %}" alt="заполнить анкету на кредит" id="open-quiz">
+                </div>
+                {% endif %}
             {% for sidebanner in sidebanners %}
                 <div class="sidebanner">
                     <a href={% url 'ads:sidebanner_count' sidebanner.pk %}><img src="{{ sidebanner.image.url }}" alt="{{ sidebanner.title }}"></a>
