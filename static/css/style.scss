@@ -2175,8 +2175,8 @@ footer {
     display: grid;
     margin-top: 1vw;
     grid-template-columns: 30vw 30vw 30vw;
-    grid-template-rows: 12vw 12vw;
-    grid-row-gap: 3vw;
+    grid-template-rows: 10vw 10vw;
+    grid-row-gap: 1vw;
 
     .results-box {
       display: none;
@@ -2200,7 +2200,7 @@ footer {
         border: none;
         border-radius: 4px;
         font-size: 2vw;
-        padding: 0.7vw 1.5vw;
+        padding: 0.5vw 1.2vw;
         cursor: pointer;
         background-color: $btn-yellow;
 
