@@ -1093,7 +1093,7 @@ footer {
       align-items: center; }
       .quiz > .row:nth-child(2) .row h3 {
         padding-left: 0.5vw;
-        font-size: 3vw;
+        font-size: 2.5vw;
         font-weight: 200; }
     .quiz > .row:nth-child(2) #age-slider {
       display: block;
@@ -1190,7 +1190,7 @@ footer {
       align-items: center; }
       .quiz > .row:nth-child(3) .row h3 {
         padding-left: 0.5vw;
-        font-size: 3vw;
+        font-size: 2.5vw;
         font-weight: 200; }
     .quiz > .row:nth-child(3) #loan-slider {
       display: block;
@@ -1239,17 +1239,17 @@ footer {
         .quiz > .row:nth-child(3) #term-slider::-webkit-slider-thumb:active {
           transform: scale(1.6); }
   .quiz > .row:nth-child(4) {
-    margin-top: 3vw;
+    margin-top: 2vw;
     align-items: center;
     justify-content: space-between; }
     .quiz > .row:nth-child(4) p {
-      font-size: 2vw; }
+      font-size: 1.5vw; }
     .quiz > .row:nth-child(4) > .row {
       width: 40vw;
       align-items: center; }
     .quiz > .row:nth-child(4) .toggle-yellow {
       position: relative;
-      width: 6vw;
+      width: 5vw;
       height: 3vw;
       margin-right: 2vw;
       border-radius: 100px;
@@ -1311,13 +1311,13 @@ footer {
     justify-content: space-around;
     margin-top: 2vw; }
     .quiz > .row:nth-child(5) button {
-      width: 25vw;
+      width: 20vw;
       margin: 1vw auto 0 auto;
       display: block;
       border: none;
       border-radius: 4px;
-      font-size: 2vw;
-      padding: 1vw 1.5vw;
+      font-size: 1.5vw;
+      padding: 0.7vw 1vw;
       cursor: pointer; }
       @media (max-width: 639px) {
         .quiz > .row:nth-child(5) button {
