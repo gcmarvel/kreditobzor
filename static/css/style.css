@@ -1062,20 +1062,21 @@ footer {
   background: white;
   border: 0.5vw solid #fab309;
   width: 88vw;
-  padding: 3vw; }
+  padding: 1.5vw;
+  max-height: 90vh; }
   .quiz > .row:nth-child(1) {
     justify-content: space-between;
     align-items: center; }
     .quiz > .row:nth-child(1) h2 {
-      font-size: 2.6vw;
+      font-size: 2vw;
       margin: 0;
-      width: 40vw; }
+      width: 35vw; }
       .quiz > .row:nth-child(1) h2 span {
         font-family: "Prosto Bold", sans-serif;
         width: 35vw;
         background: #fab309; }
     .quiz > .row:nth-child(1) p {
-      font-size: 1.8vw;
+      font-size: 1.4vw;
       width: 35vw; }
       .quiz > .row:nth-child(1) p span {
         color: #fab309;

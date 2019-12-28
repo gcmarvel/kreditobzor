@@ -1685,7 +1685,8 @@ footer {
   background: white;
   border: 0.5vw solid $btn-yellow;
   width: 88vw;
-  padding: 3vw;
+  padding: 1.5vw;
+  max-height: 90vh;
 
   >.row {
 
@@ -1694,9 +1695,9 @@ footer {
       align-items: center;
 
       h2 {
-        font-size: 2.6vw;
+        font-size: 2vw;
         margin: 0;
-        width:40vw;
+        width:35vw;
 
         span {
           font-family: $prosto_bold;
@@ -1706,7 +1707,7 @@ footer {
       }
 
       p {
-        font-size: 1.8vw;
+        font-size: 1.4vw;
         width: 35vw;
 
         span {
