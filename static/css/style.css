@@ -1061,7 +1061,7 @@ footer {
 .quiz {
   background: white;
   border: 0.5vw solid #fab309;
-  width: 88vw;
+  width: 91vw;
   padding: 1.5vw;
   max-height: 90vh; }
   .quiz > .row:nth-child(1) {
@@ -1392,15 +1392,15 @@ footer {
   z-index: 12;
   display: none; }
   .quiz-results h2 {
-    font-size: 3vw;
+    font-size: 2vw;
     text-align: center;
     margin-top: 0; }
   .quiz-results h3 {
-    font-size: 2vw;
+    font-size: 1.8vw;
     text-align: center; }
   .quiz-results .results-grid {
     display: grid;
-    margin-top: 2vw;
+    margin-top: 1vw;
     grid-template-columns: 30vw 30vw 30vw;
     grid-template-rows: 12vw 12vw;
     grid-row-gap: 3vw; }
@@ -1411,8 +1411,8 @@ footer {
       justify-content: center;
       align-items: center; }
       .quiz-results .results-grid .results-box img {
-        max-height: 7vw;
-        max-width: 24vw; }
+        max-height: 6vw;
+        max-width: 20vw; }
       .quiz-results .results-grid .results-box a {
         margin-top: auto; }
       .quiz-results .results-grid .results-box button {
