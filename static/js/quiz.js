@@ -107,6 +107,7 @@ var closeQuiz = function() {
     quizRows.forEach(function(row) {
         row.style.animation = 'none';
         row.style.webkitAnimation = 'none';
+        row.style.display = 'flex';
     });
 };
 
