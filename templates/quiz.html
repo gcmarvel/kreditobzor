@@ -59,70 +59,69 @@
             <button id="quiz-back">Вернуться на сайт</button>
             <button id="quiz-proceed">Подобрать</button>
         </div>
-    </div>
-
-    <div class="quiz-loading">
-        <img class="quiz-logo" src="{% static 'img/kreditobzor-logo.png' %}" alt="КредитОбзор - отзывы о займах на карту">
-        <div class="progress-block">
-            <h3>Система подбирает варианты</h3>
-            <div class="progress-bar-container">
-                <div class="progress-bar stripes animated reverse slower">
-                    <span class="progress-bar-inner"></span>
+        <div class="quiz-loading">
+            <img class="quiz-logo" src="{% static 'img/kreditobzor-logo.png' %}" alt="КредитОбзор - отзывы о займах на карту">
+            <div class="progress-block">
+                <h3>Система подбирает варианты</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar stripes animated reverse slower">
+                        <span class="progress-bar-inner"></span>
+                    </div>
+                </div>
+                <p>Подождите несколько секунд</p>
+            </div>
+        </div>
+        <div class="quiz-results">
+            <h2>С вероятностью 95%<br>вам одобрят займ в следующих организациях:</h2>
+            <h3>Мы рекомендуем заполнить заявки <span>минимум в 3 организациях</span>, чтобы получить займ со 100% вероятностью</h3>
+            <div class="results-grid">
+                <div class="results-box zero-percent other-offers">
+                    <a href="{% url 'ref_count' 'мфо' 19 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/джоймани.png' %}" alt="заполнить заявку Джоймани"></a>
+                    <a href="{% url 'ref_count' 'мфо' 19 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
+                </div>
+                <div class="results-box bad-history other-offers">
+                    <a href="{% url 'ref_count' 'мфо' 4 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/займер.png' %}" alt="заполнить заявку Займер"></a>
+                    <a href="{% url 'ref_count' 'мфо' 4 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
+                </div>
+                <div class="results-box bad-history zero-percent other-offers">
+                    <a href="{% url 'ref_count' 'мфо' 3 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/веббанкир.png' %}" alt="заполнить заявку Веббанкир"></a>
+                    <a href="{% url 'ref_count' 'мфо' 3 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
+                </div>
+                <div class="results-box bad-history other-offers">
+                    <a href="{% url 'ref_count' 'мфо' 13 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/екапуста.png' %}" alt="заполнить заявку Ёкапуста"></a>
+                    <a href="{% url 'ref_count' 'мфо' 13 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
+                </div>
+                <div class="results-box zero-percent">
+                    <a href="{% url 'ref_count' 'мфо' 2 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/быстроденьги.png' %}" alt="заполнить заявку Быстроденьги"></a>
+                    <a href="{% url 'ref_count' 'мфо' 2 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
+                </div>
+                <div class="results-box zero-percent other-offers">
+                    <a href="{% url 'ref_count' 'мфо' 7 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/манимен.png' %}" alt="заполнить заявку Манимен"></a>
+                    <a href="{% url 'ref_count' 'мфо' 7 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
+                </div>
+                <div class="results-box other-offers">
+                    <a href="{% url 'ref_count' 'мфо' 1 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/турбозайм.png' %}" alt="заполнить заявку Турбозайм"></a>
+                    <a href="{% url 'ref_count' 'мфо' 1 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
+                </div>
+                <div class="results-box bad-history zero-percent">
+                    <a href="{% url 'ref_count' 'мфо' 10 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/лайм.png' %}" alt="заполнить заявку Лайм"></a>
+                    <a href="{% url 'ref_count' 'мфо' 10 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
+                </div>
+                <div class="results-box bad-history">
+                    <a href="{% url 'ref_count' 'мфо' 8 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/займиго.png' %}" alt="заполнить заявку Займиго"></a>
+                    <a href="{% url 'ref_count' 'мфо' 8 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
+                </div>
+                <div class="results-box bad-history">
+                    <a href="{% url 'ref_count' 'мфо' 14 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/кредит_плюс.png' %}" alt="заполнить заявку Кредит Плюс"></a>
+                    <a href="{% url 'ref_count' 'мфо' 14 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
+                </div>
+                <div class="results-box zero-percent">
+                    <a href="{% url 'ref_count' 'мфо' 22 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/отличные_наличные.png' %}" alt="заполнить заявку Отличные наличные"></a>
+                    <a href="{% url 'ref_count' 'мфо' 22 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
                 </div>
             </div>
-            <p>Подождите несколько секунд</p>
+            <p id="quiz-close">Закрыть</p>
         </div>
-    </div>
-    <div class="quiz-results">
-        <h2>С вероятностью 95%<br>вам одобрят займ в следующих организациях:</h2>
-        <h3>Мы рекомендуем заполнить заявки <span>минимум в 3 организациях</span>, чтобы получить займ со 100% вероятностью</h3>
-        <div class="results-grid">
-            <div class="results-box zero-percent other-offers">
-                <a href="{% url 'ref_count' 'мфо' 19 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/джоймани.png' %}" alt="заполнить заявку Джоймани"></a>
-                <a href="{% url 'ref_count' 'мфо' 19 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
-            </div>
-            <div class="results-box bad-history other-offers">
-                <a href="{% url 'ref_count' 'мфо' 4 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/займер.png' %}" alt="заполнить заявку Займер"></a>
-                <a href="{% url 'ref_count' 'мфо' 4 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
-            </div>
-            <div class="results-box bad-history zero-percent other-offers">
-                <a href="{% url 'ref_count' 'мфо' 3 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/веббанкир.png' %}" alt="заполнить заявку Веббанкир"></a>
-                <a href="{% url 'ref_count' 'мфо' 3 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
-            </div>
-            <div class="results-box bad-history other-offers">
-                <a href="{% url 'ref_count' 'мфо' 13 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/екапуста.png' %}" alt="заполнить заявку Ёкапуста"></a>
-                <a href="{% url 'ref_count' 'мфо' 13 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
-            </div>
-            <div class="results-box zero-percent">
-                <a href="{% url 'ref_count' 'мфо' 2 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/быстроденьги.png' %}" alt="заполнить заявку Быстроденьги"></a>
-                <a href="{% url 'ref_count' 'мфо' 2 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
-            </div>
-            <div class="results-box zero-percent other-offers">
-                <a href="{% url 'ref_count' 'мфо' 7 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/манимен.png' %}" alt="заполнить заявку Манимен"></a>
-                <a href="{% url 'ref_count' 'мфо' 7 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
-            </div>
-            <div class="results-box other-offers">
-                <a href="{% url 'ref_count' 'мфо' 1 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/турбозайм.png' %}" alt="заполнить заявку Турбозайм"></a>
-                <a href="{% url 'ref_count' 'мфо' 1 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
-            </div>
-            <div class="results-box bad-history zero-percent">
-                <a href="{% url 'ref_count' 'мфо' 10 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/лайм.png' %}" alt="заполнить заявку Лайм"></a>
-                <a href="{% url 'ref_count' 'мфо' 10 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
-            </div>
-            <div class="results-box bad-history">
-                <a href="{% url 'ref_count' 'мфо' 8 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/займиго.png' %}" alt="заполнить заявку Займиго"></a>
-                <a href="{% url 'ref_count' 'мфо' 8 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
-            </div>
-            <div class="results-box bad-history">
-                <a href="{% url 'ref_count' 'мфо' 14 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/кредит_плюс.png' %}" alt="заполнить заявку Кредит Плюс"></a>
-                <a href="{% url 'ref_count' 'мфо' 14 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
-            </div>
-            <div class="results-box zero-percent">
-                <a href="{% url 'ref_count' 'мфо' 22 %}" target="_blank" rel="nofollow"><img src="{% static 'img/offers/отличные_наличные.png' %}" alt="заполнить заявку Отличные наличные"></a>
-                <a href="{% url 'ref_count' 'мфо' 22 %}" target="_blank" rel="nofollow"><button>Получить займ</button></a>
-            </div>
-        </div>
-        <p id="quiz-close">Закрыть</p>
     </div>
 </div>
 <script type="application/javascript" src="{% static 'js/quiz.js'  %}"></script>

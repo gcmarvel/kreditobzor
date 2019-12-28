@@ -67,6 +67,9 @@ var proceedButton = function() {
         row.style.webkitAnimation = 'fadeout 0.5s linear forwards';
     });
     setTimeout(function() {
+        quizRows.forEach(function(row) {
+        row.style.display = 'none';
+    });
         quizLoading.style.display = "block";
     }, 500);
     setTimeout(function() {
