@@ -1053,17 +1053,19 @@ footer {
   width: 100vw;
   height: 100vh;
   background-color: rgba(11, 74, 63, 0.51);
-  padding: 2vw;
   z-index: 10;
   animation: fadein 0.5s linear forwards;
   -webkit-animation: fadein 0.5s linear forwards; }
 
 .quiz {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: white;
   border: 0.5vw solid #fab309;
-  width: 91vw;
-  padding: 1.5vw;
-  max-height: 90vh; }
+  width: 90vw;
+  padding: 1.5vw; }
   .quiz > .row:nth-child(1) {
     justify-content: space-between;
     align-items: center; }
