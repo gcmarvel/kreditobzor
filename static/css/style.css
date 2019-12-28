@@ -1346,12 +1346,11 @@ footer {
     font-size: 3vw; }
   .quiz-loading p {
     font-size: 2vw; }
-  .quiz-loading .quiz-logo {
+  .quiz-loading > img {
     position: relative;
     top: 2vw;
-    left: 2vw; }
-    .quiz-loading .quiz-logo img {
-      width: 15vw; }
+    left: 2vw;
+    width: 20vw; }
   .quiz-loading .progress-block {
     position: absolute;
     top: 50%;
