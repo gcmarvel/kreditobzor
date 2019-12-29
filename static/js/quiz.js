@@ -16,6 +16,7 @@ const toggleZero = document.querySelector('#zero');
 const toggleHistory = document.querySelector('#history');
 const quizClose = document.querySelector('#quiz-close');
 const quizOpen = document.querySelector('#open-quiz');
+const quizOpenMenu = document.querySelector('#open-quiz-menu');
 
 var yellowRangeValue = function(){
   var newValue = ageSlider.value;
@@ -107,7 +108,12 @@ var closeQuiz = function() {
     quizRows.forEach(function(row) {
         row.style.animation = 'none';
         row.style.webkitAnimation = 'none';
-        row.style.display = 'flex';
+        if (window.screen.width < 640) {
+            row.style.display = 'block';
+        }
+        else {
+            row.style.display = 'flex';
+        }
     });
 };
 
@@ -127,4 +133,5 @@ quizBack.addEventListener('click', backButton);
 quizProceed.addEventListener('click', proceedButton);
 quizClose.addEventListener('click', closeQuiz);
 quizOpen.addEventListener('click', openQuiz);
+quizOpenMenu.addEventListener('click', openQuiz);
 
