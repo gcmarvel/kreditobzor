@@ -1076,7 +1076,7 @@ footer {
       left: 0;
       transform: none;
       border: 1vw solid #fab309;
-      width: 92vw;
+      width: 94vw;
       padding: 5vw 3vw; } }
   @media (max-width: 639px) {
     .quiz > .row {
@@ -1452,7 +1452,7 @@ footer {
   display: none; }
   @media (max-width: 639px) {
     .quiz-loading {
-      height: 200vh; } }
+      height: 160vh; } }
   .quiz-loading h3 {
     font-size: 3vw; }
     @media (max-width: 639px) {
