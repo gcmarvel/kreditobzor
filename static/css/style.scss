@@ -1701,7 +1701,7 @@ footer {
     left:0;
     transform: none;
     border: 1vw solid $btn-yellow;
-    width: 89vw;
+    width: 100%;
     padding: 5vw 3vw;
   }
 
@@ -2215,7 +2215,7 @@ footer {
   display: none;
 
   @include breakpoint {
-    height: 250vh;
+    height: 200vh;
   }
 
   h3 {
