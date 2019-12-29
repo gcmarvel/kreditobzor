@@ -17,6 +17,7 @@ const toggleHistory = document.querySelector('#history');
 const quizClose = document.querySelector('#quiz-close');
 const quizOpen = document.querySelector('#open-quiz');
 const quizOpenMenu = document.querySelector('#open-quiz-menu');
+const quizOpenStripe = document.querySelector('#quiz-open-stripe');
 
 var yellowRangeValue = function(){
   var newValue = ageSlider.value;
@@ -105,6 +106,7 @@ var closeQuiz = function() {
     });
     quizResults.style.display = 'none';
     quizWrapper.style.display = 'none';
+    navModal.style.display = "none";
     quizRows.forEach(function(row) {
         row.style.animation = 'none';
         row.style.webkitAnimation = 'none';
@@ -128,10 +130,10 @@ ageSlider.addEventListener("input", yellowRangeValue);
 loanSlider.addEventListener("input", blueRangeValue);
 termSlider.addEventListener("input", greenRangeValue);
 salary.addEventListener("change", salaryCheckbox);
-
 quizBack.addEventListener('click', backButton);
 quizProceed.addEventListener('click', proceedButton);
 quizClose.addEventListener('click', closeQuiz);
 quizOpen.addEventListener('click', openQuiz);
 quizOpenMenu.addEventListener('click', openQuiz);
+quizOpenStripe.addEventListener('click', openQuiz);
 

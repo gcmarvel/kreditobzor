@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main %}
+    {% if app_name == 'Займы' %}
+        <div id="quiz-open-stripe">
+            <img src="{% static 'img/quiz-md.jpg' %}" alt="заполнить анкету на займ">
+        </div>
+    {% endif %}
     <div class="main">
     {% if app_name == 'Займы' %}
         {% for offer in offers %}

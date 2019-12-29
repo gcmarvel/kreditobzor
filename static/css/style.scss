@@ -223,7 +223,7 @@ body {
 
       @include breakpoint {
       font-size: 3vw;
-      width: 48vw;
+      width: 40vw;
       }
     }
   }
@@ -371,14 +371,29 @@ body {
   padding: 1vw 8vw;
 
   @include breakpoint {
-    padding: 2vw 4vw;
+    padding: 0;
+    display: block;
+  }
+
+  #quiz-open-stripe {
+    display: none;
+
+    @include  breakpoint {
+      display: block;
+      cursor: pointer;
+
+      img {
+        width: 100%;
+      }
+    }
   }
 
   .main {
     width: 80%;
 
     @include breakpoint {
-      width: 100%;
+      width: 88vw;
+      padding: 0 4vw;
     }
 
     .card {
@@ -1686,6 +1701,23 @@ footer {
   }
 }
 
+.quiz-veil {
+  display:none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100vw;
+  height: 100vh;
+  background-color: rgba(11, 74, 63, 0.51);
+  z-index: -1;
+  animation: fadein 0.5s linear forwards;
+  -webkit-animation: fadein 0.5s linear forwards;
+
+  @include breakpoint {
+    display: block;
+  }
+}
+
 .quiz {
   position: relative;
   top:50%;
@@ -1702,7 +1734,7 @@ footer {
     transform: none;
     border: 1vw solid $btn-yellow;
     width: 92vw;
-    padding: 5vw 3vw;
+    padding: 5vw 3vw 14vw 3vw;
   }
 
   >.row {
