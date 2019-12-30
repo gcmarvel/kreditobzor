@@ -1,11 +1,14 @@
 import datetime
 import smtplib
 import ssl
+import os
 from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+absolute_path = os.path.dirname(os.path.abspath(__file__))
+db_path = absolute_path + '/frodo666/kreditobzor/db.sqlite3'
 
 today = datetime.date.today()
 weekday = today.weekday()
@@ -26,7 +29,7 @@ if weekday == 0:
 
     context = ssl.create_default_context()
 
-    with open('db.sqlite3', 'rb') as attachment:
+    with open(db_path, 'rb') as attachment:
         part = MIMEBase("application", "octet-stream")
         part.set_payload(attachment.read())
 
