@@ -1761,7 +1761,7 @@ footer {
   top: 0;
   left: 0;
   width:100vw;
-  height: 120vh;
+  height: 100vh;
   background-color: rgba(11, 74, 63, 0.51);
   z-index: 10;
   animation: fadein 0.5s linear forwards;
@@ -1779,7 +1779,7 @@ footer {
   top: 0;
   left: 0;
   width:100vw;
-  height: 100vh;
+  height: 120vh;
   background-color: rgba(11, 74, 63, 0.51);
   z-index: -1;
   animation: fadein 0.5s linear forwards;
@@ -1792,7 +1792,7 @@ footer {
 
 .quiz {
   position: relative;
-  top:40%;
+  top:50%;
   left:50%;
   transform: translate(-50%, -50%);
   background: white;
