@@ -7,8 +7,7 @@ from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-absolute_path = os.path.dirname(os.path.abspath(__file__))
-db_path = absolute_path + '/frodo666/kreditobzor/db.sqlite3'
+db_path = os.path.dirname(os.path.abspath(__file__)) + '/db.sqlite3'
 
 today = datetime.date.today()
 weekday = today.weekday()
