@@ -33,6 +33,8 @@ class CreditHomeView (ListView):
 
         referrer(self)
 
+        quizonstart = 'n'
+
         filter_list = {'народный_выбор': 'народный выбор', 'высокое_одобрение': 'высокий % одобрения', 'процентная_ставка': 'по процентной ставке',
                        'цена_обслуживания': 'по цене обслуживания', 'кредитный_лимит': 'по кредитному лимиту', 'кэшбэк': 'по величине кэшбэка'}
         context = super().get_context_data(**kwargs)
@@ -46,6 +48,7 @@ class CreditHomeView (ListView):
         context['app_name'] = 'Кредитные карты'
         context['app_slug'] = 'credit'
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
+        context['qz'] = quizonstart
         return context
 
     def get_queryset(self):
@@ -80,6 +83,8 @@ class CreditOfferView (DetailView):
 
         referrer(self)
 
+        quizonstart = 'n'
+
         page = self.request.GET.get('page')
 
         try:
@@ -96,6 +101,7 @@ class CreditOfferView (DetailView):
         context['app_slug'] = 'credit'
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
         context['promoted_offers'] = Offer.objects.filter(active=True, promoted=True)
+        context['qz'] = quizonstart
         return context
 
     def post(self, request, **kwargs):
