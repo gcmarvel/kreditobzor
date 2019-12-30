@@ -36,7 +36,6 @@ class MFOHomeView (ListView):
         referrer(self)
 
         quizonstart = ''
-
         if 'qz' not in self.request.session:
             self.request.session['qz'] = 'y'
         else:
@@ -53,6 +52,7 @@ class MFOHomeView (ListView):
             context['filter'] = 'Сортировать по ...'
         context['filter_list'] = filter_list
         context['app_name'] = 'Займы'
+        context['app_slug'] = 'mfo'
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
         context['qz'] = quizonstart
         return context
@@ -89,6 +89,12 @@ class MFOOfferView (DetailView):
 
         referrer(self)
 
+        quizonstart = ''
+        if 'qz' not in self.request.session:
+            self.request.session['qz'] = 'y'
+        else:
+            quizonstart = 'n'
+
         page = self.request.GET.get('page')
 
         try:
@@ -102,8 +108,10 @@ class MFOOfferView (DetailView):
         context['page_obj'] = comments
         context['form'] = CommentForm
         context['app_name'] = 'Займы'
+        context['app_slug'] = 'mfo'
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
         context['promoted_offers'] = Offer.objects.filter(active=True, promoted=True)
+        context['qz'] = quizonstart
         return context
 
     def post(self, request, **kwargs):

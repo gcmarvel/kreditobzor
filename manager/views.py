@@ -2,13 +2,18 @@ from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django.utils import timezone
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.conf import settings
 from manager.utils import get_rating, get_count
-from mfo.models import Comment as MFOComments
-from mfo.models import UnverifiedComment as MFOUnverifiedComments
-from credit.models import Comment as CreditComments
-from credit.models import UnverifiedComment as CreditUnverifiedComments
+from mfo.models import Offer as MFOOffer
+from mfo.models import Comment as MFOComment
+from mfo.models import UnverifiedComment as MFOUnverifiedComment
+from mfo.models import StashedComment as MFOStashedComment
+from credit.models import Offer as CreditOffer
+from credit.models import Comment as CreditComment
+from credit.models import UnverifiedComment as CreditUnverifiedComment
+from credit.models import StashedComment as CreditStashedComment
 from .models import TeaserClick, TeaserLead
 
 from django.views.decorators.csrf import csrf_exempt
@@ -18,14 +23,15 @@ from push_notifications.models import WebPushDevice
 from push_notifications.webpush import WebPushError
 
 import datetime
+import random
 from urllib.parse import urlparse
 from collections import Counter
 
 
 def manager(request):
     if request.user.is_authenticated:
-        mfo_comments = MFOUnverifiedComments.objects.all()
-        credit_comments = CreditUnverifiedComments.objects.all()
+        mfo_comments = MFOUnverifiedComment.objects.all()
+        credit_comments = CreditUnverifiedComment.objects.all()
         webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
         context = {
             'mfo_comments': mfo_comments,
@@ -41,11 +47,11 @@ def manager(request):
 def accept_comment(request, comment_id, app):
     if request.user.is_authenticated:
         if app == 'mfo':
-            comment = MFOUnverifiedComments.objects.get(id=comment_id)
-            new_comment = MFOComments(offer=comment.offer, author=comment.author, text=comment.text, rating=comment.rating, date_created=comment.date_created)
+            comment = MFOUnverifiedComment.objects.get(id=comment_id)
+            new_comment = MFOComment(offer=comment.offer, author=comment.author, text=comment.text, rating=comment.rating, date_created=comment.date_created)
         elif app == 'credit':
-            comment = CreditUnverifiedComments.objects.get(id=comment_id)
-            new_comment = CreditComments(offer=comment.offer, author=comment.author, text=comment.text, rating=comment.rating, date_created=comment.date_created)
+            comment = CreditUnverifiedComment.objects.get(id=comment_id)
+            new_comment = CreditComment(offer=comment.offer, author=comment.author, text=comment.text, rating=comment.rating, date_created=comment.date_created)
         comment.delete()
         new_comment.save()
         comment.offer.rating = get_rating(comment.offer)
@@ -59,10 +65,33 @@ def accept_comment(request, comment_id, app):
 def delete_comment(request, comment_id, app):
     if request.user.is_authenticated:
         if app == 'mfo':
-            comment = MFOUnverifiedComments.objects.get(id=comment_id)
+            comment = MFOUnverifiedComment.objects.get(id=comment_id)
+            comment.delete()
+        elif app == 'mfo_verified':
+            comment = MFOComment.objects.get(id=comment_id)
+            comment.delete()
+            comment.offer.rating = get_rating(comment.offer)
+            comment.offer.count = get_count(comment.offer)
+            comment.offer.save()
+            return redirect('mfo:offer', comment.offer.slug)
+        elif app == 'mfo_stashed':
+            comment = MFOStashedComment.objects.get(id=comment_id)
+            comment.delete()
+            return redirect('comments')
         elif app == 'credit':
-            comment = CreditUnverifiedComments.objects.get(id=comment_id)
-        comment.delete()
+            comment = CreditUnverifiedComment.objects.get(id=comment_id)
+            comment.delete()
+        elif app == 'credit_verified':
+            comment = CreditComment.objects.get(id=comment_id)
+            comment.delete()
+            comment.offer.rating = get_rating(comment.offer)
+            comment.offer.count = get_count(comment.offer)
+            comment.offer.save()
+            return redirect('credit:offer', comment.offer.slug)
+        elif app == 'credit_stashed':
+            comment = CreditStashedComment.objects.get(id=comment_id)
+            comment.delete()
+            return redirect('comments')
         return manager(request)
     else:
         return redirect('home')
@@ -71,9 +100,17 @@ def delete_comment(request, comment_id, app):
 def edit_comment(request, comment_id, app):
     if request.user.is_authenticated:
         if app == 'mfo':
-            comment = MFOUnverifiedComments.objects.get(id=comment_id)
+            comment = MFOUnverifiedComment.objects.get(id=comment_id)
+        elif app == 'mfo_verified':
+            comment = MFOComment.objects.get(id=comment_id)
+        elif app == 'mfo_stashed':
+            comment = MFOStashedComment.objects.get(id=comment_id)
         elif app == 'credit':
-            comment = CreditUnverifiedComments.objects.get(id=comment_id)
+            comment = CreditUnverifiedComment.objects.get(id=comment_id)
+        elif app == 'credit_verified':
+            comment = CreditComment.objects.get(id=comment_id)
+        elif app == 'credit_stashed':
+            comment = CreditStashedComment.objects.get(id=comment_id)
         if request.method == "POST":
             author = request.POST['author']
             text = request.POST['text']
@@ -84,6 +121,15 @@ def edit_comment(request, comment_id, app):
             comment.rating = rating
             comment.date_created = date
             comment.save()
+            if app == 'mfo_stashed' or app == 'credit_stashed':
+                return redirect('comments')
+            if app == 'mfo_verified' or app == 'credit_verified':
+                comment.offer.rating = get_rating(comment.offer)
+                comment.offer.save()
+                if app == 'mfo_verified':
+                    return redirect('mfo:offer', comment.offer.slug)
+                if app == 'credit_verified':
+                    return redirect('credit:offer', comment.offer.slug)
             return manager(request)
         else:
             isodate = comment.date_created.astimezone(timezone.get_current_timezone()).strftime("%Y-%m-%dT%H:%M")
@@ -135,9 +181,8 @@ def referals(request):
         if 'r_m_d' in request.GET:
             request.session['r_m_d'] = request.GET['r_m_d']
 
-        referals_date = TeaserClick.objects.filter(timestamp__lte=datetime.datetime.now(), timestamp__gt=datetime.datetime.now() - datetime.timedelta(days=int(request.session['r_m_d'])))
-        referals_lead = TeaserLead.objects.filter(timestamp__lte=datetime.datetime.now(), timestamp__gt=datetime.datetime.now() - datetime.timedelta(days=int(request.session['r_m_d'])))
-
+        referals_date = TeaserClick.objects.filter(timestamp__gt=datetime.datetime.now() - datetime.timedelta(days=int(request.session['r_m_d'])))
+        referals_lead = TeaserLead.objects.filter(timestamp__gt=datetime.datetime.now() - datetime.timedelta(days=int(request.session['r_m_d'])))
 
         if 's' in request.GET:
             if request.GET['s'] == 'ip':
@@ -195,6 +240,96 @@ def referals(request):
             'referals_page': referals_page,
         }
         return render(request, 'referals.html', context)
+    else:
+        return redirect('home')
+
+
+def comments(request):
+    if request.user.is_authenticated:
+        mfo_list = MFOOffer.objects.filter(active=True).exclude(comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3))
+        mfo_dict = {}
+        credit_list = CreditOffer.objects.filter(active=True).exclude(comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3))
+        credit_dict = {}
+        mfo_stashed = MFOStashedComment.objects.all()
+        credit_stashed = CreditStashedComment.objects.all()
+        for offer in mfo_list:
+            try:
+                mfo_dict[offer.title] = offer.comments.latest('date_created').date_created.strftime("%Y-%m-%d %H:%M:%S")
+            except ObjectDoesNotExist:
+                mfo_dict[offer.title] = 'Нет комментариев'
+        for offer in credit_list:
+            try:
+                credit_dict[offer.title] = offer.comments.latest('date_created').date_created.strftime("%Y-%m-%d %H:%M:%S")
+            except ObjectDoesNotExist:
+                credit_dict[offer.title] = 'Нет комментариев'
+
+        if request.method == 'POST':
+            if request.POST['app_name'] == 'mfo':
+                if request.POST['offer'] == "Пул":
+                    stashed_comment = MFOStashedComment(author=request.POST['author'], text=request.POST['text'], rating=request.POST['rating'])
+                    stashed_comment.save()
+                else:
+                    new_comment = MFOComment(offer=MFOOffer.objects.get(title=request.POST['offer']), author=request.POST['author'], text=request.POST['text'], rating=request.POST['rating'])
+                    new_comment.save()
+                    new_comment.offer.rating = get_rating(new_comment.offer)
+                    new_comment.offer.count = get_count(new_comment.offer)
+                    new_comment.offer.save()
+            elif request.POST['app_name'] == 'credit':
+                if request.POST['offer'] == "Пул":
+                    stashed_comment = CreditStashedComment(author=request.POST['author'], text=request.POST['text'], rating=request.POST['rating'])
+                    stashed_comment.save()
+                else:
+                    new_comment = CreditComment(offer=CreditOffer.objects.get(title=request.POST['offer']), author=request.POST['author'], text=request.POST['text'], rating=request.POST['rating'])
+                    new_comment.save()
+                    new_comment.offer.rating = get_rating(new_comment.offer)
+                    new_comment.offer.count = get_count(new_comment.offer)
+                    new_comment.offer.save()
+
+        context = {
+            'mfo_list': mfo_list,
+            'mfo_dict': mfo_dict,
+            'credit_list': credit_list,
+            'credit_dict': credit_dict,
+            'mfo_stashed': mfo_stashed,
+            'credit_stashed': credit_stashed,
+        }
+        return render(request, 'comments.html', context)
+    else:
+        return redirect('home')
+
+
+def distribute_stashed(request, app):
+    if request.user.is_authenticated:
+        if app == 'mfo':
+            offer_list = MFOOffer.objects.filter(active=True).exclude(comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3))
+            stashed_comments = MFOStashedComment.objects.all()
+            offers_and_comments = zip(offer_list, stashed_comments)
+            for offer, comment in offers_and_comments:
+                try:
+                    new_comment = MFOComment(offer=offer, author=comment.author, text=comment.text, rating=comment.rating, date_created=datetime.datetime.now() - datetime.timedelta(seconds=random.randrange(1, 86401)))
+                    new_comment.save()
+                    offer.rating = get_rating(offer)
+                    offer.count = get_count(offer)
+                    offer.save()
+                    comment.delete()
+                except ObjectDoesNotExist:
+                    return redirect('comments')
+            return redirect('comments')
+        if app == 'credit':
+            offer_list = CreditOffer.objects.filter(active=True).exclude(comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3))
+            stashed_comments = CreditStashedComment.objects.all()
+            offers_and_comments = zip(offer_list, stashed_comments)
+            for offer, comment in offers_and_comments:
+                try:
+                    new_comment = MFOComment(offer=offer, author=comment.author, text=comment.text, rating=comment.rating, date_created=datetime.datetime.now() - datetime.timedelta(seconds=random.randrange(1, 86401)))
+                    new_comment.save()
+                    offer.rating = get_rating(offer)
+                    offer.count = get_count(offer)
+                    offer.save()
+                    comment.delete()
+                except ObjectDoesNotExist:
+                    return redirect('comments')
+            return redirect('comments')
     else:
         return redirect('home')
 

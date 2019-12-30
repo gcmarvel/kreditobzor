@@ -8,5 +8,7 @@ urlpatterns = [
     path('mfo/edit/<int:comment_id>-<str:app>', views.edit_comment, name='edit-comment'),
     path('send_push/', views.send_push, name='push'),
     path('subscribe', views.subscription, name='subscription'),
-    path('referals', views.referals, name='referals')
+    path('referals', views.referals, name='referals'),
+    path('comments', views.comments, name='comments'),
+    path('distribute-stashed/<str:app>', views.distribute_stashed, name='distribute-stashed')
 ]

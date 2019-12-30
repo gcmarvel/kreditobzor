@@ -79,3 +79,18 @@ class UnverifiedComment(models.Model):
         return self.offer.title + ' - ' + self.author
 
 
+class StashedComment(models.Model):
+    author = models.CharField(max_length=50, verbose_name='Автор')
+    date_created = models.DateTimeField(default=timezone.now, verbose_name='Дата написания')
+    text = models.TextField(max_length=4000, verbose_name='Комментарий')
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], verbose_name='Оценка')
+
+    class Meta:
+        ordering = ('-date_created',)
+        verbose_name = 'Комментарий из пула'
+        verbose_name_plural = 'Комментарии из пула'
+
+    def __str__(self):
+        return self.date_created.strftime("%Y-%m-%d %H:%M:%S") + ' - ' + self.author
+
+

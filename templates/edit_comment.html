@@ -6,7 +6,7 @@
 {% block main %}
 <div class="main-full">
     <div class="comment-form">
-        <h3>Редактировать комментарий</h3>
+        <h3>Редактировать комментарий {{ app }}</h3>
         <form method="post" action="{% url 'edit-comment' comment.pk app %}">
             {% csrf_token %}
             <label>Автор: </label>

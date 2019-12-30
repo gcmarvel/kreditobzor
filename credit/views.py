@@ -44,6 +44,7 @@ class CreditHomeView (ListView):
             context['filter'] = 'Сортировать по ...'
         context['filter_list'] = filter_list
         context['app_name'] = 'Кредитные карты'
+        context['app_slug'] = 'credit'
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
         return context
 
@@ -92,6 +93,7 @@ class CreditOfferView (DetailView):
         context['page_obj'] = comments
         context['form'] = CommentForm
         context['app_name'] = 'Кредитные карты'
+        context['app_slug'] = 'credit'
         context['sidebanners'] = SidebarBanner.objects.filter(reference_app=app_name).filter(enabled=True)
         context['promoted_offers'] = Offer.objects.filter(active=True, promoted=True)
         return context

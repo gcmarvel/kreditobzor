@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block filters %}
+    <div class="filters">
+        <div class="filter-placeholder"></div>
+    </div>
+{% endblock %}
+{% block main %}
+<div class="main-full">
+    <div class='comment-manager'>
+        <h1>МФО</h1>
+        <div class="comment-form">
+            <h3>Добавить комментарий</h3>
+            <form method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="app_name" value="mfo">
+                <label>Оффер: </label>
+                <select name="offer">
+                    <option value="Пул" selected>В пул</option>
+                    {% for mfo in mfo_list %}
+                        <option value="{{ mfo }}">{{ mfo }}</option>
+                    {% endfor %}
+                </select>
+                <label>Автор: </label>
+                <input name="author" value="{{ comment.author }}">
+                <label>Комментарий: </label>
+                <textarea name="text">{{ comment.text }}</textarea>
+                <label>Оценка: </label>
+                <input type="number" name="rating" value="{{ comment.rating }}">
+                <button type="submit" id="form-button">Отправить</button>
+            </form>
+        </div>
+        <h1>МФО Оферы со старыми отзывами</h1>
+        <div class="offers-grid">
+            {% for key, value in mfo_dict.items %}
+                <h3>{{ key }}: {{ value }}</h3>
+            {% endfor %}
+        </div>
+        <h1>МФО Отзывы в пуле</h1>
+        <div class="comment-grid">
+            {% for comment in mfo_stashed %}
+                <div class="manager-box">
+                    <div>
+                        <div class="row row-1">
+                            <h4>{{ comment.author }}</h4>
+                            <p>{{ comment.date_created }}</p>
+                        </div>
+                        <p>{{ comment.text }}</p>
+                        <br>
+                    </div>
+                    <div class="row row-2">
+                        <div class="row">
+                            <a href="{% url 'delete-comment' comment.pk 'mfo_stashed' %}"><img src="{% static 'img/decline.png' %}"></a>
+                            <a href="{% url 'edit-comment' comment.pk 'mfo_stashed' %}"><img src="{% static 'img/edit.png' %}"></a>
+                        </div>
+                        <p>Оценка: {{ comment.rating }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="stashed-comments">
+            <a href="{% url 'distribute-stashed' 'mfo' %}">Распределить пул</a>
+        </div>
+
+        <h1>Кредитные карты</h1>
+        <div class="comment-form">
+            <h3>Добавить комментарий</h3>
+            <form method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="app_name" value="credit">
+                <label>Оффер: </label>
+                <select name="offer">
+                    <option value="Пул" selected>В пул</option>
+                    {% for credit in credit_list %}
+                        <option value="{{ credit }}">{{ credit }}</option>
+                    {% endfor %}
+                </select>
+                <label>Автор: </label>
+                <input name="author" value="{{ comment.author }}">
+                <label>Комментарий: </label>
+                <textarea name="text">{{ comment.text }}</textarea>
+                <label>Оценка: </label>
+                <input type="number" name="rating" value="{{ comment.rating }}">
+                <button type="submit" id="form-button">Отправить</button>
+            </form>
+        </div>
+        <h1>Кредитные карты Оферы со старыми отзывами</h1>
+        <div class="offers-grid">
+            {% for key, value in credi_dict.items %}
+                <h3>{{ key }}: {{ value }}</h3>
+            {% endfor %}
+        </div>
+        <h1>Кредитные карты Отзывы в пуле</h1>
+        <div class="comment-grid">
+            {% for comment in credit_stashed %}
+                <div class="manager-box">
+                    <div>
+                        <div class="row row-1">
+                            <h4>{{ comment.author }}</h4>
+                        </div>
+                        <p>{{ comment.text }}</p>
+                        <br>
+                    </div>
+                    <div class="row row-2">
+                        <div class="row">
+                            <a href="{% url 'delete-comment' comment.pk 'credit_stashed' %}"><img src="{% static 'img/decline.png' %}"></a>
+                            <a href="{% url 'edit-comment' comment.pk 'credit_stashed' %}"><img src="{% static 'img/edit.png' %}"></a>
+                        </div>
+                        <p>Оценка: {{ comment.rating }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="stashed-comments">
+            <a href="{% url 'distribute-stashed' 'credit' %}">Распределить пул</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block sidebar %}
+{% endblock %}

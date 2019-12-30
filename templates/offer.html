@@ -53,23 +53,29 @@
             <div class="row">
                 <p>{{ comment.text }}</p>
             </div>
+           {% if user.is_authenticated %}
+            <div class="row">
+                <a href="{% url 'delete-comment' comment.pk app_slug|add:'_verified' %}"><img src="{% static 'img/decline.png' %}"></a>
+                <a href="{% url 'edit-comment' comment.pk app_slug|add:'_verified' %}"><img src="{% static 'img/edit.png' %}"></a>
+            </div>
+            {% endif %}
         </div>
         {% endfor %}
-            <div class="pagination">
-                {% if page_obj.has_previous %}
-                    <a href="?page=1"><<</a>
-                    <a href="?page={{ page_obj.previous_page_number }}"><</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
-                {% endif %}
-                <span class="page-current">
-                    {{ page_obj.number }}
-                </span>
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
-                    <a href="?page={{ page_obj.next_page_number }}">></a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">>></a>
-                {% endif %}
-            </div>
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page=1"><<</a>
+                <a href="?page={{ page_obj.previous_page_number }}"><</a>
+                <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+            {% endif %}
+            <span class="page-current">
+                {{ page_obj.number }}
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                <a href="?page={{ page_obj.next_page_number }}">></a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">>></a>
+            {% endif %}
+        </div>
         <div class="comment-form">
             <h3>Оставить комментарий</h3>
             <form method="post" action="{% if app_name == 'Займы' %} {% url 'mfo:offer' offer.slug %} {% elif app_name == 'Кредитные карты' %} {% url 'credit:offer' offer.slug %} {% endif %}">
@@ -152,4 +158,7 @@
         modalOverlay.classList.add("closed");
         });
     </script>
+{% endblock %}
+{% block extra_js %}
+    {% include 'quiz.html' %}
 {% endblock %}
