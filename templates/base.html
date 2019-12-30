@@ -67,6 +67,8 @@
             </div>
         </div>
     </div>
+    {% block quiz %}
+    {% endblock %}
     <section class="header">
         <nav>
             <a href="{% url 'home' %}"><img src="{% static 'img/kreditobzor-logo.png' %}" alt="КредитОбзор - отзывы о займах на карту"></a>
@@ -135,23 +137,8 @@
     <footer>
     {% block footer %}
     {% endblock %}
+        <script type="application/javascript" src="{% static 'js/main.js' %}"></script>
         <script>
-            var navModal = document.getElementById("nav-mobile");
-            var navBtn = document.getElementById("nav-menu");
-            var navClose = document.getElementById("nav-close");
-
-            navBtn.onclick = function() {
-              navModal.style.display = "block";};
-
-            navClose.onclick = function() {
-              navModal.style.display = "none";};
-
-            window.onclick = function(event) {
-              if (event.target === navModal) {
-                navModal.style.display = "none";
-              }
-            };
-
             // Utils functions:
             function urlBase64ToUint8Array (base64String) {
                     var padding = '='.repeat((4 - base64String.length % 4) % 4)

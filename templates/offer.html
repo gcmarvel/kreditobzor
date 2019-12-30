@@ -2,6 +2,9 @@
 {% load static %}
 {% block description %}{{ app_name }} {{ offer.title }}: отзывы, условия обслуживания, юридическая информация.{% endblock %}
 {% block title %}КредитОбзор | Отзывы о компании {{ offer.title }}{% endblock %}
+{% block quiz %}
+    {% include 'quiz.html' %}
+{% endblock %}
 {% block filters %}
     <div class="filters">
         <div class="back-button">
@@ -160,5 +163,4 @@
     </script>
 {% endblock %}
 {% block extra_js %}
-    {% include 'quiz.html' %}
 {% endblock %}
