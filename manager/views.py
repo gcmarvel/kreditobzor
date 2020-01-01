@@ -302,7 +302,7 @@ def comments(request):
 def distribute_stashed(request, app):
     if request.user.is_authenticated:
         if app == 'mfo':
-            offer_list = MFOOffer.objects.filter(active=True).exclude(Q(default_position__lt=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3)) | Q(default_position__lt=10, default_position__gte=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=5))) | Q(default_position__lt=10, default_position__gte=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=5)) | Q(default_position__gt=10, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=57))
+            offer_list = MFOOffer.objects.filter(active=True).exclude(Q(default_position__lt=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3)) | Q(default_position__lt=10, default_position__gte=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=5)) | Q(default_position__gt=10, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=7)))
 
             stashed_comments = MFOStashedComment.objects.all()
             offers_and_comments = zip(offer_list, stashed_comments)
@@ -318,7 +318,7 @@ def distribute_stashed(request, app):
                     return redirect('comments')
             return redirect('comments')
         if app == 'credit':
-            offer_list = CreditOffer.objects.filter(active=True).exclude(Q(default_position__lt=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3)) | Q(default_position__lt=10, default_position__gte=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=5))) | Q(default_position__lt=10, default_position__gte=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=5)) | Q(default_position__gt=10, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=57))
+            offer_list = CreditOffer.objects.filter(active=True).exclude(Q(default_position__lt=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3)) | Q(default_position__lt=10, default_position__gte=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=5)) | Q(default_position__gt=10, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=7)))
             stashed_comments = CreditStashedComment.objects.all()
             offers_and_comments = zip(offer_list, stashed_comments)
             for offer, comment in offers_and_comments:
