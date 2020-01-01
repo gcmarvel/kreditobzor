@@ -17,7 +17,7 @@
                 <label>Оффер: </label>
                 <select name="offer">
                     <option value="Пул" selected>В пул</option>
-                    {% for mfo in mfo_list %}
+                    {% for mfo in mfo_options %}
                         <option value="{{ mfo }}">{{ mfo }}</option>
                     {% endfor %}
                 </select>
@@ -71,7 +71,7 @@
                 <label>Оффер: </label>
                 <select name="offer">
                     <option value="Пул" selected>В пул</option>
-                    {% for credit in credit_list %}
+                    {% for credit in credit_option %}
                         <option value="{{ credit }}">{{ credit }}</option>
                     {% endfor %}
                 </select>

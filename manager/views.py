@@ -286,9 +286,7 @@ def comments(request):
                     new_comment.offer.save()
 
         context = {
-            'mfo_list': mfo_list,
             'mfo_dict': mfo_dict,
-            'credit_list': credit_list,
             'credit_dict': credit_dict,
             'mfo_stashed': mfo_stashed,
             'credit_stashed': credit_stashed,
