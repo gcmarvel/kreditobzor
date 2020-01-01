@@ -292,6 +292,8 @@ def comments(request):
             'credit_dict': credit_dict,
             'mfo_stashed': mfo_stashed,
             'credit_stashed': credit_stashed,
+            'mfo_options': MFOOffer.objects.filter(active=True),
+            'credit_options': CreditOffer.objects.filter(active=True),
         }
         return render(request, 'comments.html', context)
     else:
