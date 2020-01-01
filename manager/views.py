@@ -249,7 +249,7 @@ def comments(request):
     if request.user.is_authenticated:
         mfo_list = MFOOffer.objects.filter(active=True)
         mfo_dict = {}
-        credit_list = CreditOffer.objects
+        credit_list = CreditOffer.objects.filter(active=True)
         credit_dict = {}
         mfo_stashed = MFOStashedComment.objects.all()
         credit_stashed = CreditStashedComment.objects.all()
