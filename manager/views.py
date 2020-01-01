@@ -3,6 +3,7 @@ from django.http.response import HttpResponse
 from django.utils import timezone
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 
 from django.conf import settings
 from manager.utils import get_rating, get_count
@@ -246,9 +247,9 @@ def referals(request):
 
 def comments(request):
     if request.user.is_authenticated:
-        mfo_list = MFOOffer.objects.filter(active=True).exclude(comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3))
+        mfo_list = MFOOffer.objects.filter(active=True)
         mfo_dict = {}
-        credit_list = CreditOffer.objects.filter(active=True).exclude(comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3))
+        credit_list = CreditOffer.objects
         credit_dict = {}
         mfo_stashed = MFOStashedComment.objects.all()
         credit_stashed = CreditStashedComment.objects.all()
@@ -301,7 +302,8 @@ def comments(request):
 def distribute_stashed(request, app):
     if request.user.is_authenticated:
         if app == 'mfo':
-            offer_list = MFOOffer.objects.filter(active=True).exclude(comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3))
+            offer_list = MFOOffer.objects.filter(active=True).exclude(Q(default_position__lt=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3)) | Q(default_position__lt=10, default_position__gte=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=5))) | Q(default_position__lt=10, default_position__gte=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=5)) | Q(default_position__gt=10, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=57))
+
             stashed_comments = MFOStashedComment.objects.all()
             offers_and_comments = zip(offer_list, stashed_comments)
             for offer, comment in offers_and_comments:
@@ -316,7 +318,7 @@ def distribute_stashed(request, app):
                     return redirect('comments')
             return redirect('comments')
         if app == 'credit':
-            offer_list = CreditOffer.objects.filter(active=True).exclude(comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3))
+            offer_list = CreditOffer.objects.filter(active=True).exclude(Q(default_position__lt=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3)) | Q(default_position__lt=10, default_position__gte=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=5))) | Q(default_position__lt=10, default_position__gte=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=5)) | Q(default_position__gt=10, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=57))
             stashed_comments = CreditStashedComment.objects.all()
             offers_and_comments = zip(offer_list, stashed_comments)
             for offer, comment in offers_and_comments:
