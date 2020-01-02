@@ -4,8 +4,16 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import Offer, Comment, UnverifiedComment
 
 
+class CommentInline(admin.TabularInline):
+    model = Comment
+
+
 class OfferAdmin(admin.ModelAdmin):
     model = Offer
+    inlines = [
+        CommentInline
+    ]
+
 
     def save_model(self, request, obj, form, change):
         pos = form.instance.default_position
