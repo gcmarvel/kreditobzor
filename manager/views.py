@@ -300,40 +300,37 @@ def comments(request):
 
 
 def distribute_stashed(request, app):
-    if request.user.is_authenticated:
-        if app == 'mfo':
-            offer_list = MFOOffer.objects.filter(active=True).exclude(Q(default_position__lt=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3)) | Q(default_position__lt=10, default_position__gte=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=5)) | Q(default_position__gt=10, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=7)))
+    if app == 'mfo':
+        offer_list = MFOOffer.objects.filter(active=True).exclude(Q(default_position__lt=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3)) | Q(default_position__lt=10, default_position__gte=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=5)) | Q(default_position__gt=10, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=7)))
 
-            stashed_comments = MFOStashedComment.objects.all()
-            offers_and_comments = zip(offer_list, stashed_comments)
-            for offer, comment in offers_and_comments:
-                try:
-                    new_comment = MFOComment(offer=offer, author=comment.author, text=comment.text, rating=comment.rating, date_created=datetime.datetime.now() - datetime.timedelta(seconds=random.randrange(1, 86401)))
-                    new_comment.save()
-                    offer.rating = get_rating(offer)
-                    offer.count = get_count(offer)
-                    offer.save()
-                    comment.delete()
-                except ObjectDoesNotExist:
-                    return redirect('comments')
-            return redirect('comments')
-        if app == 'credit':
-            offer_list = CreditOffer.objects.filter(active=True).exclude(Q(default_position__lt=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3)) | Q(default_position__lt=10, default_position__gte=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=5)) | Q(default_position__gt=10, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=7)))
-            stashed_comments = CreditStashedComment.objects.all()
-            offers_and_comments = zip(offer_list, stashed_comments)
-            for offer, comment in offers_and_comments:
-                try:
-                    new_comment = MFOComment(offer=offer, author=comment.author, text=comment.text, rating=comment.rating, date_created=datetime.datetime.now() - datetime.timedelta(seconds=random.randrange(1, 86401)))
-                    new_comment.save()
-                    offer.rating = get_rating(offer)
-                    offer.count = get_count(offer)
-                    offer.save()
-                    comment.delete()
-                except ObjectDoesNotExist:
-                    return redirect('comments')
-            return redirect('comments')
-    else:
-        return redirect('home')
+        stashed_comments = MFOStashedComment.objects.all()
+        offers_and_comments = zip(offer_list, stashed_comments)
+        for offer, comment in offers_and_comments:
+            try:
+                new_comment = MFOComment(offer=offer, author=comment.author, text=comment.text, rating=comment.rating, date_created=datetime.datetime.now() - datetime.timedelta(seconds=random.randrange(1, 86401)))
+                new_comment.save()
+                offer.rating = get_rating(offer)
+                offer.count = get_count(offer)
+                offer.save()
+                comment.delete()
+            except ObjectDoesNotExist:
+                return redirect('comments')
+        return redirect('comments')
+    if app == 'credit':
+        offer_list = CreditOffer.objects.filter(active=True).exclude(Q(default_position__lt=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=3)) | Q(default_position__lt=10, default_position__gte=5, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=5)) | Q(default_position__gt=10, comments__date_created__gt=datetime.datetime.now() - datetime.timedelta(days=7)))
+        stashed_comments = CreditStashedComment.objects.all()
+        offers_and_comments = zip(offer_list, stashed_comments)
+        for offer, comment in offers_and_comments:
+            try:
+                new_comment = MFOComment(offer=offer, author=comment.author, text=comment.text, rating=comment.rating, date_created=datetime.datetime.now() - datetime.timedelta(seconds=random.randrange(1, 86401)))
+                new_comment.save()
+                offer.rating = get_rating(offer)
+                offer.count = get_count(offer)
+                offer.save()
+                comment.delete()
+            except ObjectDoesNotExist:
+                return redirect('comments')
+        return redirect('comments')
 
 
 @csrf_exempt
