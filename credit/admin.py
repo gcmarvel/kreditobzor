@@ -5,6 +5,7 @@ from .models import Offer, Comment, UnverifiedComment
 
 from manager.views import get_rating, get_count
 
+
 class CommentInline(admin.TabularInline):
     model = Comment
 
