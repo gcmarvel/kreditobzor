@@ -205,7 +205,7 @@ def referals(request):
                 referals_list = {}
                 for referal in referals_date:
                     id_list.append(referal.banner)
-                    referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.useragent})
+                    referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.banner})
                 referals_stat = dict(Counter(id_list).most_common())
             else:
                 netloc_list = []
