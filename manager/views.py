@@ -175,7 +175,7 @@ def send_push(request):
 def referals(request):
     if request.user.is_authenticated:
         referals = TeaserClick.objects.all()
-        filter_list = {'netloc': 'Площадки', 'ip': 'IP', 'ua': 'Юзер агент'}
+        filter_list = {'netloc': 'Площадки', 'ip': 'IP', 'ua': 'Юзер агент', 'id': 'Идентификатор'}
 
         if 'r_m_d' not in request.session:
             request.session['r_m_d'] = '7'
@@ -200,6 +200,13 @@ def referals(request):
                     ua_list.append(referal.useragent)
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.useragent})
                 referals_stat = dict(Counter(ua_list).most_common())
+            elif request.GET['s'] == 'id':
+                id_list = []
+                referals_list = {}
+                for referal in referals_date:
+                    id_list.append(referal.banner)
+                    referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.useragent})
+                referals_stat = dict(Counter(id_list).most_common())
             else:
                 netloc_list = []
                 referals_list = {}
