@@ -10,7 +10,7 @@ class TeaserClick (models.Model):
     ip = models.GenericIPAddressField(verbose_name='IP')
     useragent = models.CharField(max_length=250, verbose_name='User agent')
     timestamp = models.DateTimeField(default=timezone.now, verbose_name='Время')
-    referer = models.CharField(max_length=500, verbose_name='Реферер')
+    referer = models.CharField(max_length=500, default='Нет реферера', verbose_name='Реферер')
     cookie_counter = models.IntegerField(verbose_name='Переходов по куки')
     geo = models.CharField(max_length=100, default='Нет информации', verbose_name='ГЕО')
     age = models.CharField(max_length=100, default='Нет информации', verbose_name='Возраст')
@@ -23,7 +23,7 @@ class TeaserClick (models.Model):
         verbose_name_plural = 'Тизерные клики'
 
     def __str__(self):
-        return self.timestamp.strftime("%Y-%m-%d %H:%M:%S") + ' ' + urlparse(self.referer)[1]
+        return self.timestamp.strftime("%Y-%m-%d %H:%M:%S") + ' ' + urlparse(self.banner)[1]
 
 
 class TeaserLead (models.Model):
@@ -31,6 +31,11 @@ class TeaserLead (models.Model):
     offer = models.CharField(max_length=100, verbose_name='Оффер')
     banner = models.CharField(max_length=1000, verbose_name='Идентификатор')
     ip = models.GenericIPAddressField(verbose_name='IP')
+    geo = models.CharField(max_length=100, default='Нет информации', verbose_name='ГЕО')
+    age = models.CharField(max_length=100, default='Нет информации', verbose_name='Возраст')
+    gender = models.CharField(max_length=100, default='Нет информации ', verbose_name='Пол')
+    search = models.CharField(max_length=1000, default='Нет информации ', verbose_name='Поисковая фраза')
+    cookie_counter = models.IntegerField(default=0, verbose_name='Переходов по офферам')
 
     class Meta:
         ordering = ('-timestamp',)

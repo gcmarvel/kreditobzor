@@ -249,7 +249,9 @@ def referals(request):
             netloc_list = []
             referals_list = {}
             for referal in referals_date:
-                if urlparse(referal.referer)[1] not in ('', 'clickscloud.net', 'cloudfastads.ru', 'clients.clickscloud.net'):
+                if urlparse(referal.referer)[1] == '':
+                    netloc_list.append('Нет реферрера')
+                else:
                     netloc_list.append(urlparse(referal.referer)[1])
                 if urlparse(referal.referer)[1] == '':
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): 'Нет реферера'})
