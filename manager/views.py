@@ -175,7 +175,7 @@ def send_push(request):
 def referals(request):
     if request.user.is_authenticated:
         referals = TeaserClick.objects.all()
-        filter_list = {'netloc': 'Площадки', 'ip': 'IP', 'ua': 'Юзер агент', 'id': 'Идентификатор', 'sex': 'Пол', 'age': 'Возраст', 'geo': 'Гео', 'search': 'Поисковая фраза'}
+        filter_list = {'netloc': 'Площадки', 'ip': 'IP', 'ua': 'Юзер агент', 'id': 'Идентификатор', 'gender': 'Пол', 'age': 'Возраст', 'geo': 'Гео', 'search': 'Поисковая фраза'}
 
         if 'r_m_d' not in request.session:
             request.session['r_m_d'] = '7'
@@ -208,12 +208,12 @@ def referals(request):
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.banner})
                 referals_stat = dict(Counter(id_list).most_common())
             elif request.GET['s'] == 'sex':
-                sex_list = []
+                gender_list = []
                 referals_list = {}
                 for referal in referals_date:
-                    sex_list.append(referal.banner)
-                    referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.sex})
-                referals_stat = dict(Counter(sex_list).most_common())
+                    gender_list.append(referal.banner)
+                    referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.gender})
+                referals_stat = dict(Counter(gender_list).most_common())
             elif request.GET['s'] == 'age':
                 age_list = []
                 referals_list = {}
