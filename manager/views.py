@@ -207,32 +207,32 @@ def referals(request):
                     id_list.append(referal.banner)
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.banner})
                 referals_stat = dict(Counter(id_list).most_common())
-            elif request.GET['s'] == 'sex':
+            elif request.GET['s'] == 'gender':
                 gender_list = []
                 referals_list = {}
                 for referal in referals_date:
-                    gender_list.append(referal.banner)
+                    gender_list.append(referal.gender)
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.gender})
                 referals_stat = dict(Counter(gender_list).most_common())
             elif request.GET['s'] == 'age':
                 age_list = []
                 referals_list = {}
                 for referal in referals_date:
-                    age_list.append(referal.banner)
+                    age_list.append(referal.age)
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.age})
                 referals_stat = dict(Counter(age_list).most_common())
             elif request.GET['s'] == 'geo':
                 geo_list = []
                 referals_list = {}
                 for referal in referals_date:
-                    geo_list.append(referal.banner)
+                    geo_list.append(referal.geo)
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.geo})
                 referals_stat = dict(Counter(geo_list).most_common())
             elif request.GET['s'] == 'search':
                 geo_list = []
                 referals_list = {}
                 for referal in referals_date:
-                    geo_list.append(referal.banner)
+                    geo_list.append(referal.search)
                     referals_list.update({referal.timestamp.strftime("%Y-%m-%d %H:%M:%S"): referal.search})
                 referals_stat = dict(Counter(geo_list).most_common())
             else:
