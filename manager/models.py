@@ -33,8 +33,8 @@ class TeaserLead (models.Model):
     ip = models.GenericIPAddressField(verbose_name='IP')
     geo = models.CharField(max_length=100, default='Нет информации', verbose_name='ГЕО')
     age = models.CharField(max_length=100, default='Нет информации', verbose_name='Возраст')
-    gender = models.CharField(max_length=100, default='Нет информации ', verbose_name='Пол')
-    search = models.CharField(max_length=1000, default='Нет информации ', verbose_name='Поисковая фраза')
+    gender = models.CharField(max_length=100, default='Нет информации', verbose_name='Пол')
+    search = models.CharField(max_length=1000, default='Нет информации', verbose_name='Поисковая фраза')
     cookie_counter = models.IntegerField(default=0, verbose_name='Переходов по офферам')
 
     class Meta:
