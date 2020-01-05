@@ -116,7 +116,13 @@ def referrer_count(request, app_name, pk):
         if 'gender' not in request.session:
             lead.gender = 'Нет информации'
         else:
-            lead.gender = request.session['gender']
+            if request.session['gender'] == 'f':
+                gender = 'Женский'
+            elif request.session['gender'] == 'm':
+                gender = 'Мужской'
+            else:
+                gender = 'Нет информации'
+            lead.gender = gender
         if 'search' not in request.session:
             lead.search = 'Нет информации'
         else:
