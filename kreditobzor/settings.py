@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ux(li)*tegqx7#w2mc2!5qrth*)7l435d1gtm)9!39dz-k9az6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['127.0.0.1',
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'credit.apps.CreditConfig',
     'ads.apps.AdsConfig',
     'news.apps.NewsConfig',
+    'debug_toolbar',
 ]
 
 APP_LIST = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 SITE_ID = 1
@@ -147,3 +149,9 @@ STATICFILES_FINDERS = [
 ]
 
 SASS_PROCESSOR_ROOT = 'static/'
+
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
+]

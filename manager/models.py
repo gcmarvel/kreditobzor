@@ -23,7 +23,7 @@ class TeaserClick (models.Model):
         verbose_name_plural = 'Тизерные клики'
 
     def __str__(self):
-        return self.timestamp.strftime("%Y-%m-%d %H:%M:%S") + ' ' + urlparse(self.banner)[1]
+        return self.timestamp.strftime("%Y-%m-%d %H:%M:%S") + ' ' + self.banner
 
 
 class TeaserLead (models.Model):
