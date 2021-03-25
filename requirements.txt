@@ -21,7 +21,7 @@ pycparser==2.19
 PyJWT==1.7.1
 pytz==2019.3
 pywebpush==1.10.0
-PyYAML==5.1.2
+PyYAML==5.4
 rcssmin==1.0.6
 requests==2.22.0
 rjsmin==1.1.0
