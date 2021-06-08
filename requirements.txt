@@ -15,7 +15,7 @@ hyper==0.7.0
 hyperframe==3.2.0
 idna==2.8
 libsass==0.19.4
-Pillow==6.2.1
+Pillow==8.2.0
 py-vapid==1.7.0
 pycparser==2.19
 PyJWT==1.7.1
