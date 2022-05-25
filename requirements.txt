@@ -18,7 +18,7 @@ libsass==0.19.4
 Pillow==6.2.1
 py-vapid==1.7.0
 pycparser==2.19
-PyJWT==1.7.1
+PyJWT==2.4.0
 pytz==2019.3
 pywebpush==1.10.0
 PyYAML==5.1.2
